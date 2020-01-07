@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "443694478147",
+    "firebase_url": "https://commerce-cf84a.firebaseio.com",
+    "project_id": "commerce-cf84a",
+    "storage_bucket": "commerce-cf84a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443694478147:android:89bcec0afec94ea8b435f6",
+        "android_client_info": {
+          "package_name": "com.gaurav.commerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443694478147-5l3nesich27n7hnrod4ecof101hc02dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMDbELLuwkj3-Xz_ZoOfgXbSi7Eefdy0E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443694478147-5l3nesich27n7hnrod4ecof101hc02dg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
