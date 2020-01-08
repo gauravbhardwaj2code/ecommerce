@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.gaurav.commerce.models.GenericProductModel;
 import com.gaurav.commerce.models.SingleProductModel;
 import com.gaurav.commerce.networksync.CheckInternetConnection;

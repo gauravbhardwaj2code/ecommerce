@@ -3,10 +3,14 @@ package com.gaurav.commerce.prodcutscategory;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,16 +18,24 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.gaurav.commerce.Cart;
+import com.gaurav.commerce.IndividualProduct;
 import com.gaurav.commerce.NotificationActivity;
 import com.gaurav.commerce.R;
 import com.gaurav.commerce.models.GenericProductModel;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class Tshirts extends AppCompatActivity {
@@ -37,13 +49,25 @@ public class Tshirts extends AppCompatActivity {
 
     //Getting reference to Firebase Database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference mDatabaseReference = database.getReference();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cards);
+
+        DatabaseReference myRef = database.getReference();
+
+        Map<String,Object> productModelMap=new HashMap<>();
+        productModelMap.put("1",new GenericProductModel(1,"cardname","cardname","cardname",44));
+        productModelMap.put("2",new GenericProductModel(2,"cardname","cardname","cardname",44));
+        productModelMap.put("3",new GenericProductModel(3,"cardname","cardname","cardname",44));
+        productModelMap.put("4",new GenericProductModel(4,"cardname","cardname","cardname",44));
+        productModelMap.put("5",new GenericProductModel(5,"cardname","cardname","cardname",44));
+        productModelMap.put("6",new GenericProductModel(6,"cardname","cardname","cardname",44));
+
+        myRef.child("tshirts").updateChildren(productModelMap);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -68,37 +92,9 @@ public class Tshirts extends AppCompatActivity {
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        /*//Say Hello to our new FirebaseUI android Element, i.e., FirebaseRecyclerAdapter
-        final FirebaseRecyclerAdapter<GenericProductModel,Cards.MovieViewHolder> adapter = new FirebaseRecyclerAdapter<GenericProductModel, Cards.MovieViewHolder>(
-                GenericProductModel.class,
-                R.layout.cards_cardview_layout,
-                Cards.MovieViewHolder.class,
-                //referencing the node where we want the database to store the data from our Object
-                mDatabaseReference.child("Products").child("Tshirt").getRef()
-        ) {
-            @Override
-            protected void populateViewHolder(final Cards.MovieViewHolder viewHolder, final GenericProductModel model, final int position) {
-                if(tv_no_item.getVisibility()== View.VISIBLE){
-                    tv_no_item.setVisibility(View.GONE);
-                }
-                viewHolder.cardname.setText(model.getCardname());
-                viewHolder.cardprice.setText("₹ "+ Float.toString(model.getCardprice()));
-                Picasso.with(Tshirts.this).load(model.getCardimage()).into(viewHolder.cardimage);
 
-                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Tshirts.this,IndividualProduct.class);
-                        intent.putExtra("product",getItem(position));
-                        startActivity(intent);
-                    }
-                });
-            }
-        };
-
-
-
-        mRecyclerView.setAdapter(adapter);*/
+       mRecyclerView.setAdapter(new Recycler_View_Adapter(database));
+        tv_no_item.setVisibility(View.GONE);
 
     }
 
@@ -143,4 +139,58 @@ public class Tshirts extends AppCompatActivity {
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
     }
+
+
+     class Recycler_View_Adapter extends RecyclerView.Adapter<MovieViewHolder> {
+
+         List<GenericProductModel> list=new ArrayList<>();
+         DatabaseReference databaseReference;
+
+         public Recycler_View_Adapter( FirebaseDatabase database){
+            this.databaseReference=database.getReference().child("tshirts");
+
+             databaseReference.addValueEventListener(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     list.clear();
+                     for(DataSnapshot data:dataSnapshot.getChildren()){
+                         list.add(data.getValue(GenericProductModel.class));
+                     }
+                     notifyDataSetChanged();
+
+                 }
+
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                 }
+
+             });
+         }
+
+
+         @NonNull
+         @Override
+         public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cards_cardview_layout, parent, false);
+             MovieViewHolder holder = new MovieViewHolder(v);
+             return holder;
+         }
+
+         @Override
+         public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+
+             holder.cardname.setText(list.get(position).getCardname());
+             //holder.cardprice.setText(list.get(position).description);
+            // holder.imageView.setImageResource(list.get(position).imageId);
+
+         }
+
+         @Override
+         public int getItemCount() {
+             return list.size();
+         }
+     }
+
 }
