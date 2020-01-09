@@ -1,10 +1,7 @@
 package com.gaurav.commerce;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -19,8 +16,6 @@ import com.gaurav.commerce.prodcutscategory.Tshirts;
 import com.gaurav.commerce.usersession.UserSession;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
@@ -66,6 +61,7 @@ import es.dmoral.toasty.Toasty;
 public class MainActivity extends AppCompatActivity {
 
     private SliderLayout sliderShow;
+    private SliderLayout sliderShow1;
     private Drawer result;
     private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
 
@@ -201,10 +197,10 @@ public class MainActivity extends AppCompatActivity {
 
         //populating Image slider
         ArrayList<String> sliderImages = new ArrayList<>();
-        sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/Business_stationery_home_banner.jpg");
-        sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/calendar-diaries-home-banner.jpg");
-        sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/calendar-diaries-banner.jpg");
-        sliderImages.add("https://www.printstop.co.in/images/flashgallary/large/free-visiting-cards-home-banner.JPG");
+        sliderImages.add("https://www.examonline.org/estatic/homeimages/cma-final-b.webp");
+        sliderImages.add("https://www.examonline.org/estatic/homeimages/cfr.webp");
+        sliderImages.add("https://www.examonline.org/estatic/homeimages/mcq.webp");
+        sliderImages.add("https://www.examonline.org/estatic/homeimages/blue-cma-inter.webp");
 
         for (String s : sliderImages) {
             DefaultSliderView sliderView = new DefaultSliderView(this);
@@ -213,6 +209,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
+
+
+
+        sliderShow1= findViewById(R.id.slider2);
+
+        for (String s : sliderImages) {
+            DefaultSliderView sliderView = new DefaultSliderView(this);
+            sliderView.image(s);
+            sliderShow1.addSlider(sliderView);
+        }
+
+        sliderShow1.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
 
     }
 
@@ -317,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 9:
                                 new EasyFeedback.Builder(MainActivity.this)
-                                        .withEmail("beingdevofficial@gmail.com")
+                                        .withEmail("gaurav@gmail.com")
                                         .withSystemInfo()
                                         .build()
                                         .start();
@@ -389,6 +397,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         sliderShow.stopAutoCycle();
+        sliderShow1.startAutoCycle();
         super.onStop();
 
     }
@@ -416,6 +425,7 @@ public class MainActivity extends AppCompatActivity {
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
         sliderShow.startAutoCycle();
+        sliderShow1.startAutoCycle();
         super.onResume();
     }
 

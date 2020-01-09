@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class RegisterRequest  extends StringRequest {
 
-    private static final String REGISTER_URL = "http://magic-print.000webhostapp.com/register.php";
+    private static final String REGISTER_URL = "http://xxxxxxx/register.php";
     private Map<String, String> parameters;
     public RegisterRequest(String name, String password, String mobile, String email, String photo, Response.Listener<String> listener) {
         super(Method.POST, REGISTER_URL, listener, null);

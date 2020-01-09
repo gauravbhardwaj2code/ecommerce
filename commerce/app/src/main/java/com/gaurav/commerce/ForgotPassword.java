@@ -153,13 +153,13 @@ public class ForgotPassword extends AppCompatActivity {
                 .withPassword("Singh@30")
                 .withMailto(sessionemail)
                 .withType(BackgroundMail.TYPE_PLAIN)
-                .withSubject("Magic Print Password")
+                .withSubject("xxx Password")
                 .withBody("Hello Mr/Miss " + sessionname + "\n " + getString(R.string.send_password1) + sessionpassword + getString(R.string.send_password2))
                 .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
                     @Override
                     public void onSuccess() {
 
-                        //do some magic
+                        //To Do
 
                         Toasty.success(ForgotPassword.this, "Password sent to Email Account", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(ForgotPassword.this, LoginActivity.class));

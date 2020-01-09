@@ -123,7 +123,7 @@
 
                             <TextView
                                 android:layout_below="@id/visitingcards"
-                                android:text="Visiting Cards"
+                                android:text="Video Courses"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -142,11 +142,11 @@
                             <ImageView
                                 android:id="@+id/tshirts"
                                 style="@style/homegridimage"
-                                android:src="@drawable/tshirt" />
+                                android:src="@drawable/visitingcard" />
 
                             <TextView
                                 android:layout_below="@id/tshirts"
-                                android:text="T-Shirts"
+                                android:text="Teachers"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -176,7 +176,7 @@
 
                             <TextView
                                 android:layout_below="@id/bags"
-                                android:text="Bags"
+                                android:text="Online Classes"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -199,7 +199,7 @@
 
                             <TextView
                                 android:layout_below="@id/Stationary"
-                                android:text="Stationary"
+                                android:text="Articles"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -251,7 +251,7 @@
 
                             <TextView
                                 android:layout_below="@id/keychain"
-                                android:text="Keychains"
+                                android:text="Mock Tests With keys"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -293,7 +293,13 @@
 
             </LinearLayout>
 
-
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider2"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:auto_cycle="true"
+                app:pager_animation="Default"
+                app:pager_animation_span="1100" />
 
         </LinearLayout>
     </ScrollView>

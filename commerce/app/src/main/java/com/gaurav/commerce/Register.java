@@ -215,11 +215,11 @@ public class Register extends AppCompatActivity {
                         .withSendingMessage("Sending Welcome Greetings to Your Email !")
                         .withSendingMessageSuccess("Kindly Check Your Email now !")
                         .withSendingMessageError("Failed to send password ! Try Again !")
-                        .withUsername("beingdevofficial@gmail.com")
-                        .withPassword("Singh@30")
+                        .withUsername("gaurav@gmail.com")
+                        .withPassword("yhoooooo")
                         .withMailto(emails)
                         .withType(BackgroundMail.TYPE_PLAIN)
-                        .withSubject("Greetings from Magic Print")
+                        .withSubject("Greetings from xxxx")
                         .withBody("Hello Mr/Miss, "+ name + "\n " + getString(R.string.registermail1))
                         .send();
 
