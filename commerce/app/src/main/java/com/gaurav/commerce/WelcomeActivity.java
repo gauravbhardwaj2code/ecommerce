@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.gaurav.commerce.activities.MobileNoWithOtp;
+import com.gaurav.commerce.routehandler.security.RouteHandler;
 import com.gaurav.commerce.usersession.UserSession;
+
+import static com.gaurav.commerce.usersession.UserSession.KEY_MOBiLE;
 
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -125,15 +128,20 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
-        if(prefManager.isLoggedIn()) {
+        RouteHandler.launchHomeScreen(WelcomeActivity.this);
+        /*prefManager.setFirstTimeLaunch(false);
+        if(prefManager.isLoggedIn() && prefManager.getUserDetails().get(KEY_MOBiLE)==null){
+            Intent i = new Intent(WelcomeActivity.this, MobileNoWithOtp.class);
+            startActivity(i);
+        }
+        else if(prefManager.isLoggedIn()) {
             Intent i = new Intent(WelcomeActivity.this, MainActivity.class);
             startActivity(i);
         }else{
             Intent i = new Intent(WelcomeActivity.this, LoginActivity.class);
             startActivity(i);
         }
-        finish();
+        finish();*/
     }
 
     //  viewpager change listener

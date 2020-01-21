@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.gaurav.commerce.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.HashMap;
 
@@ -151,6 +155,9 @@ public class UserSession {
         // Staring Login Activity
         context.startActivity(i);
     }
+
+
+
 
     /**
      * Quick check for login

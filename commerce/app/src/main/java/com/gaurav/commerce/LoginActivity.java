@@ -2,38 +2,35 @@ package com.gaurav.commerce;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import com.android.volley.NetworkError;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-
 import com.gaurav.commerce.networksync.CheckInternetConnection;
-import com.gaurav.commerce.networksync.LoginRequest;
+import com.gaurav.commerce.routehandler.security.GoogleSecurity;
+import com.gaurav.commerce.routehandler.security.RouteHandler;
 import com.gaurav.commerce.usersession.UserSession;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.kaopiz.kprogresshud.KProgressHUD;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -49,6 +46,11 @@ public class LoginActivity extends AppCompatActivity {
     //Getting reference to Firebase Database
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference mDatabaseReference = database.getReference();
+
+
+    SignInButton signInButton;
+    GoogleSignInClient mGoogleSignInClient;
+    int RC_SIGN_IN=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,28 @@ public class LoginActivity extends AppCompatActivity {
         //Validating login details
         Button button=findViewById(R.id.login_button);
 
+
+        signInButton=findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, GoogleSecurity.gso);
+
+        signInButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.sign_in_button:
+                        signIn();
+                        break;
+                    // ...
+                }
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     //Passing all received data from server to next activity
                     String sessionname = "gaurav";
-                    sessionmobile = "999999999";
+                    sessionmobile = null;
                     String sessionemail = "bhardwajagag@haha.com";
                     String sessionphoto = "https://iconorbit.com/icons/256-watermark/2203201617274056402-Rounded%20Book%20Clip%20Art.jpg";
 
@@ -119,11 +143,10 @@ public class LoginActivity extends AppCompatActivity {
                     session.createLoginSession(sessionname, sessionemail, sessionmobile, sessionphoto);
 
                     //count value of firebase cart and wishlist
-                    countFirebaseValues();
+                    //countFirebaseValues();
 
-                    Intent loginSuccess = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(loginSuccess);
-                    finish();
+                    RouteHandler.launchHomeScreen(LoginActivity.this);
+
 
                     return;
 
@@ -137,33 +160,64 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void countFirebaseValues() {
 
-        mDatabaseReference.child("cart").child(sessionmobile).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    Log.e(dataSnapshot.getKey(),dataSnapshot.getChildrenCount() + "");
-                    session.setCartValue((int)dataSnapshot.getChildrenCount());
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount acct = completedTask.getResult(ApiException.class);
+
+            if (acct != null) {
+                String personName = acct.getDisplayName();
+                String personGivenName = acct.getGivenName();
+                String personFamilyName = acct.getFamilyName();
+                String personEmail = acct.getEmail();
+                String personId = acct.getId();
+                Uri personPhoto = acct.getPhotoUrl();
+                Log.i("Google SignIn",acct.getPhotoUrl().toString());
+                sessionmobile = null;
+
+                //create shared preference and store data
+                session.createLoginSession(personGivenName, personEmail, sessionmobile, acct.getPhotoUrl().toString());
+
+                //count value of firebase cart and wishlist
+                //countFirebaseValues();
+
+                RouteHandler.launchHomeScreen(LoginActivity.this);
             }
+            // Signed in successfully, show authenticated UI.
+            // updateUI(account);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("Google SignIn", "signInResult:failed code=" + e.getStatusCode());
+            //updateUI(null);
+        }
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
 
-            }
-        });
-
-        mDatabaseReference.child("wishlist").child(sessionmobile).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e(dataSnapshot.getKey(),dataSnapshot.getChildrenCount() + "");
-                session.setWishlistValue((int)dataSnapshot.getChildrenCount());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Check for an existing signed-in user
+        // GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        // updateUI(account);
     }
 
     private boolean validatePassword(String pass) {

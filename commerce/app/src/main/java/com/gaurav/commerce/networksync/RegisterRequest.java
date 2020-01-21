@@ -20,6 +20,7 @@ public class RegisterRequest  extends StringRequest {
         parameters.put("email", email);
         parameters.put("image", photo);
 
+
     }
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {

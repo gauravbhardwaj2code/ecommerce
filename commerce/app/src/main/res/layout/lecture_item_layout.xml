@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+
+
+
+    <TextView
+        android:id="@+id/cardcategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textColor="#424242"
+        android:padding="5dp"
+        android:text="Product"
+        android:layout_weight="0.5"/>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/cardprice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:textColor="#424242"
+            android:layout_marginRight="5dp"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:text="Video - 5:00 mins"
+            android:layout_weight="0.5"/>
+
+        <TextView
+            android:id="@+id/download"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:textColor="#424242"
+            android:layout_marginRight="5dp"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:text="T"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
+
+</LinearLayout>

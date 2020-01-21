@@ -7,10 +7,8 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.activeandroid.ActiveAndroid;
-
 import com.bumptech.glide.Glide;
 import com.gaurav.commerce.R;
-
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;

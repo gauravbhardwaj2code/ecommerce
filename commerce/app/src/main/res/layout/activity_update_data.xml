@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     tools:context=".UpdateData">
 
     <com.google.android.material.appbar.AppBarLayout

@@ -199,7 +199,7 @@
 
                             <TextView
                                 android:layout_below="@id/Stationary"
-                                android:text="Articles"
+                                android:text="Coming Soon!"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -229,7 +229,7 @@
 
                             <TextView
                                 android:layout_below="@id/calendars"
-                                android:text="Calendars"
+                                android:text="Coming Soon!"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -251,7 +251,7 @@
 
                             <TextView
                                 android:layout_below="@id/keychain"
-                                android:text="Mock Tests With keys"
+                                android:text="Coming Soon!"
                                 style="@style/homegridtext"/>
 
                         </RelativeLayout>
@@ -301,7 +301,15 @@
                 app:pager_animation="Default"
                 app:pager_animation_span="1100" />
 
+            <VideoView
+                android:id="@+id/myVideo"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true" />
+
         </LinearLayout>
+
+
     </ScrollView>
 
 </RelativeLayout>

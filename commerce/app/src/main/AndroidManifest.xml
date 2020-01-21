@@ -15,6 +15,15 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.VideoLanding"
+            android:label="@string/title_activity_video_landing"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.MobileNoWithOtp"
+            android:label="@string/title_activity_mobile_no_with_otp"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="AA_DB_NAME"
             android:value="MyDatabase.db" />
@@ -95,16 +104,8 @@
             android:name=".prodcutscategory.Bags"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".prodcutscategory.Calendars"
-            android:theme="@style/WhiteTheme" />
-        <activity
-            android:name=".prodcutscategory.Keychains"
-            android:theme="@style/WhiteTheme" />
-        <activity
-            android:name=".prodcutscategory.Stationary"
-            android:theme="@style/WhiteTheme" />
-        <activity android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".WelcomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

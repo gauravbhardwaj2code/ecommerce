@@ -14,7 +14,6 @@ import com.gaurav.commerce.adapters.NotificationPojo;
 import com.gaurav.commerce.db.Notification;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

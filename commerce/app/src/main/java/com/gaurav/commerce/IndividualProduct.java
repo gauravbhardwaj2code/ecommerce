@@ -2,7 +2,6 @@ package com.gaurav.commerce;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.airbnb.lottie.LottieAnimationView;
-
 import com.gaurav.commerce.models.GenericProductModel;
 import com.gaurav.commerce.models.SingleProductModel;
 import com.gaurav.commerce.networksync.CheckInternetConnection;

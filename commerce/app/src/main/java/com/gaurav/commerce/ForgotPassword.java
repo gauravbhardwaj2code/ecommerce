@@ -3,7 +3,6 @@ package com.gaurav.commerce;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +20,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.networksync.PasswordRequest;

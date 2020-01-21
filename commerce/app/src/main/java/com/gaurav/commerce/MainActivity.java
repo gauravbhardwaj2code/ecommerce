@@ -2,20 +2,32 @@ package com.gaurav.commerce;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.MediaController;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.VideoView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.GravityCompat;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.gaurav.commerce.activities.VideoLanding;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.prodcutscategory.Bags;
-import com.gaurav.commerce.prodcutscategory.Calendars;
 import com.gaurav.commerce.prodcutscategory.Cards;
-import com.gaurav.commerce.prodcutscategory.Keychains;
-import com.gaurav.commerce.prodcutscategory.Stationary;
 import com.gaurav.commerce.prodcutscategory.Tshirts;
+import com.gaurav.commerce.routehandler.security.GoogleSecurity;
 import com.gaurav.commerce.usersession.UserSession;
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
@@ -34,24 +46,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.mikepenz.materialize.util.UIUtils;
 import com.webianks.easy_feedback.EasyFeedback;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.view.GravityCompat;
-
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
 
         //ImageSLider
         inflateImageSlider();
+
+        MediaController vidControl = new MediaController(this);
+        VideoView vidView = (VideoView)findViewById(R.id.myVideo);
+        String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+        Uri vidUri = Uri.parse(vidAddress);
+        vidView.setVideoURI(vidUri);
+        vidControl.setAnchorView(vidView);
+        vidView.setMediaController(vidControl);
+        vidView.start();
 
         if (session.getFirstTime()) {
             //tap target view
@@ -243,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
                 .withHeaderBackground(R.color.gradient_background)
                 .addProfiles(profile)
                 .withCompactStyle(true)
+
                 .build();
 
         //Adding nav drawer items ------------------------------------------------------------------
@@ -269,7 +273,8 @@ public class MainActivity extends AppCompatActivity {
                 .withDrawerLayout(R.layout.crossfade_drawer)
                 .withAccountHeader(headerResult)
                 .withDrawerWidthDp(72)
-                .withGenerateMiniDrawer(true)
+                .withGenerateMiniDrawer(false)
+                .withFullscreen(true)
                 .withTranslucentStatusBar(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
@@ -297,6 +302,8 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case 5:
                                 session.logoutUser();
+                                GoogleSecurity.googleLogout(GoogleSignIn.getClient(MainActivity.this,GoogleSecurity.gso),
+                                        MainActivity.this);
                                 finish();
                                 break;
 
@@ -449,16 +456,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void stationaryAcitivity(View view) {
 
-        startActivity(new Intent(MainActivity.this, Stationary.class));
+        startActivity(new Intent(MainActivity.this, VideoLanding.class));
     }
 
     public void calendarsActivity(View view) {
 
-        startActivity(new Intent(MainActivity.this, Calendars.class));
+        startActivity(new Intent(MainActivity.this, VideoLanding.class));
     }
 
     public void keychainsActivity(View view) {
 
-        startActivity(new Intent(MainActivity.this, Keychains.class));
+        startActivity(new Intent(MainActivity.this, VideoLanding.class));
     }
 }

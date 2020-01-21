@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -25,7 +24,6 @@ import androidx.core.content.res.ResourcesCompat;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-
 import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.networksync.RegisterRequest;

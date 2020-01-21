@@ -23,7 +23,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-
 import com.bumptech.glide.Glide;
 import com.gaurav.commerce.networksync.ChangePhotoRequest;
 import com.gaurav.commerce.networksync.CheckInternetConnection;

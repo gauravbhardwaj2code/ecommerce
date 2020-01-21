@@ -25,77 +25,54 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.google.firebase:firebase-database:16.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-
     implementation 'com.squareup.picasso:picasso:2.3.2'
     implementation 'com.daimajia.slider:library:1.1.5@aar'
-
     implementation('com.mikepenz:aboutlibraries:6.0.9@aar') {
         transitive = true
     }
-    implementation("com.mikepenz:materialdrawer:6.0.9@aar") {
+    implementation('com.mikepenz:materialdrawer:6.0.9@aar') {
         transitive = true
     }
-
-    implementation('com.mikepenz:crossfadedrawerlayout:1.0.1@aar')
-
+    implementation 'com.mikepenz:crossfadedrawerlayout:1.0.1@aar'
     implementation 'com.geniusforapp.fancydialog:FancyDialog:0.1.4'
-
     implementation 'com.android.volley:volley:1.1.1'
-
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
-
     implementation 'com.github.GrenderG:Toasty:1.4.2'
-
     implementation 'de.hdodenhof:circleimageview:3.0.1'
-
-    implementation "androidx.annotation:annotation:1.1.0"
-    implementation "com.android.support:support-annotations:27.+"
-
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'com.android.support:support-annotations:27.+'
     implementation 'com.airbnb.android:lottie:3.3.1'
-
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
-
     //radiogroup
     implementation 'com.github.Gavras:MultiLineRadioGroup:v1.0.0.6'
-
     //Stylish edittextbox
     implementation 'com.github.florent37:materialtextfield:1.0.7'
-
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
-
     implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
-
     // Dexter runtime permissions
     implementation 'com.karumi:dexter:6.0.1'
-
     implementation 'com.kaopiz:kprogresshud:1.2.0'
-
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
-
     implementation 'com.daimajia.easing:library:2.0@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
-
     implementation 'com.github.yesidlazaro:GmailBackground:1.2.0'
-
     implementation 'com.webianks.library:easy-feedback:1.0.5'
-
     //ticker textview
     implementation 'com.tomer:fadingtextview:2.5'
-
     implementation 'com.squareup.okhttp:okhttp:1.6.0'
-
     implementation 'com.squareup.okhttp:okhttp-urlconnection:1.6.0'
-
-
+    implementation 'com.chaos.view:pinview:1.4.3'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }

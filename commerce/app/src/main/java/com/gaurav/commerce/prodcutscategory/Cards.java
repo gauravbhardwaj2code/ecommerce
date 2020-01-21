@@ -3,29 +3,22 @@ package com.gaurav.commerce.prodcutscategory;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-
 import com.gaurav.commerce.Cart;
-import com.gaurav.commerce.IndividualProduct;
 import com.gaurav.commerce.NotificationActivity;
 import com.gaurav.commerce.R;
-import com.gaurav.commerce.models.GenericProductModel;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 public class Cards extends AppCompatActivity {
 
