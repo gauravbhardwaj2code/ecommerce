@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //Validating login details
-        Button button=findViewById(R.id.login_button);
+       // Button button=findViewById(R.id.login_button);
 
 
         signInButton=findViewById(R.id.sign_in_button);
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        /*button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
 
 
     }
@@ -186,11 +186,16 @@ public class LoginActivity extends AppCompatActivity {
                 String personEmail = acct.getEmail();
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
-                Log.i("Google SignIn",acct.getPhotoUrl().toString());
+                String photoUrl="https://iconorbit.com/icons/256-watermark/2203201617274056402-Rounded%20Book%20Clip%20Art.jpg";
+                if(personPhoto!=null){
+                    Log.i("Google SignIn",acct.getPhotoUrl().toString());
+                    photoUrl=acct.getPhotoUrl().toString();
+                }
+
                 sessionmobile = null;
 
                 //create shared preference and store data
-                session.createLoginSession(personGivenName, personEmail, sessionmobile, acct.getPhotoUrl().toString());
+                session.createLoginSession(personGivenName, personEmail, sessionmobile, photoUrl);
 
                 //count value of firebase cart and wishlist
                 //countFirebaseValues();

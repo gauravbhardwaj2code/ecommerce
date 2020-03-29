@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:name=".init.CustomApplication"
@@ -14,11 +16,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.CategoryCourse"
+            android:label="@string/title_activity_category_course"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.AppWebView"
+            android:label="@string/title_activity_web_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.course.detail.BuyCourse"
+            android:label="@string/title_activity_buy_course"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.course.detail.CourseDetail"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:label="@string/title_activity_course_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.HomePageWithBottomNavigation"
+            android:label="@string/title_activity_home_page_with_bottom_navigation" />
         <activity
             android:name=".activities.VideoLanding"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:label="@string/title_activity_video_landing"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.MobileNoWithOtp"
             android:label="@string/title_activity_mobile_no_with_otp"

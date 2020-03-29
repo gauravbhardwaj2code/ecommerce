@@ -8,6 +8,7 @@
     android:background="@color/gradient_background"
     tools:context=".LoginActivity">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,17 +79,16 @@
                 android:orientation="horizontal">
 
 
-                    <Button
+                    <!--<Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/login_button"
                         android:text="@string/login"
-                        style="@style/AppTheme.RoundedCornerMaterialButton" />
-
+                        style="@style/AppTheme.RoundedCornerMaterialButton" />-->
                 <com.google.android.gms.common.SignInButton
                     android:id="@+id/sign_in_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
 
@@ -124,7 +124,34 @@
 
             </LinearLayout>
 
+
+
         </LinearLayout>
+
+        <!--<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_above="@id/cardview">
+                <androidx.viewpager.widget.ViewPager android:id="@id/viewpager" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+                <me.relex.circleindicator.CircleIndicator android:layout_gravity="bottom" android:id="@id/indicator" android:layout_width="fill_parent" android:layout_height="48.0dip" android:layout_below="@id/view" app:ci_drawable="@drawable/ic_circular_shape" app:ci_drawable_unselected="@drawable/ic_circular_red_light" />
+            </FrameLayout>
+            <androidx.cardview.widget.CardView android:id="@id/cardview" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="26.299988dip" android:layout_marginTop="10.0dip" android:layout_marginRight="26.299988dip" android:layout_above="@id/bottom_txt" app:cardBackgroundColor="@color/white" app:cardCornerRadius="3.0dip">
+
+
+                <LinearLayout android:gravity="center" android:orientation="horizontal"  android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+                    &lt;!&ndash;<com.google.android.gms.common.SignInButton
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />&ndash;&gt;
+
+                    &lt;!&ndash;
+                                    <ImageView android:layout_gravity="center" android:layout_width="18.0dip" android:layout_height="18.0dip" android:layout_marginRight="15.0dip" android:src="@drawable/googleicon" />
+                                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textColor="@color/txt_color" android:gravity="center" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/connect_with_google" />
+                    &ndash;&gt;
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <com.gaurav.commerce.fonts.MyTextView_Roboto_Light android:textSize="13.299988sp" android:textColor="@color/txt_color" android:gravity="center" android:id="@id/bottom_txt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="15.0sp" android:text="@string/by_clicking_i_agree_to_terms_and_service" android:layout_alignParentBottom="true" />
+        </RelativeLayout>-->
+
 
     </ScrollView>
 

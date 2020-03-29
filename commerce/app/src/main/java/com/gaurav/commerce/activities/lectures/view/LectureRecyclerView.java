@@ -87,25 +87,12 @@ public class LectureRecyclerView extends RecyclerView.Adapter<MovieViewHolder> {
         DatabaseReference myRef = database.getReference();
 
         Map<String,Object> productModelMap=new HashMap<>();
-        productModelMap.put("1",new GenericProductModel(1,"Lecture 1","cardname","cardname",44));
-        productModelMap.put("2",new GenericProductModel(2,"Lecture 2","cardname","cardname",44));
-        productModelMap.put("3",new GenericProductModel(3,"Lecture 3","cardname","cardname",44));
-        productModelMap.put("4",new GenericProductModel(4,"Lecture 4","cardname","cardname",44));
-        productModelMap.put("5",new GenericProductModel(5,"Lecture 4","cardname","cardname",44));
-        productModelMap.put("6",new GenericProductModel(6,"Lecture 5","cardname","cardname",44));
-
-        productModelMap.put("7",new GenericProductModel(7,"Lecture 1","cardname","cardname",44));
-        productModelMap.put("8",new GenericProductModel(8,"Lecture 2","cardname","cardname",44));
-        productModelMap.put("9",new GenericProductModel(9,"Lecture 3","cardname","cardname",44));
-        productModelMap.put("10",new GenericProductModel(10,"Lecture 4","cardname","cardname",44));
-        productModelMap.put("11",new GenericProductModel(11,"Lecture 4","cardname","cardname",44));
-        productModelMap.put("61",new GenericProductModel(12,"Lecture 5","cardname","cardname",44));
-        productModelMap.put("111",new GenericProductModel(13,"Lecture 1","cardname","cardname",44));
-        productModelMap.put("21",new GenericProductModel(24,"Lecture 2","cardname","cardname",44));
-        productModelMap.put("31",new GenericProductModel(34,"Lecture 3","cardname","cardname",44));
-        productModelMap.put("41",new GenericProductModel(44,"Lecture 4","cardname","cardname",44));
-        productModelMap.put("51",new GenericProductModel(54,"Lecture 4","cardname","cardname",44));
-        productModelMap.put("61",new GenericProductModel(64,"Lecture 5","cardname","cardname",44));
+        productModelMap.put("1",new GenericProductModel(1,"Resource 1","cardname","cardname",44));
+        productModelMap.put("2",new GenericProductModel(2,"Resource 1 2","cardname","cardname",44));
+        productModelMap.put("3",new GenericProductModel(3,"Resource 1 3","cardname","cardname",44));
+        productModelMap.put("4",new GenericProductModel(4,"Resource 1 4","cardname","cardname",44));
+        productModelMap.put("5",new GenericProductModel(5,"Resource 1 4","cardname","cardname",44));
+        productModelMap.put("6",new GenericProductModel(6,"Resource 1 5","cardname","cardname",44));
         myRef.child(LECTURES_DATABASE).updateChildren(productModelMap);
 
     }

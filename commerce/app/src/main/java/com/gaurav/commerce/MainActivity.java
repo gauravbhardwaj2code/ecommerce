@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.gaurav.commerce.activities.HomePageWithBottomNavigation;
 import com.gaurav.commerce.activities.VideoLanding;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.prodcutscategory.Bags;
@@ -466,6 +467,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void keychainsActivity(View view) {
 
-        startActivity(new Intent(MainActivity.this, VideoLanding.class));
+        startActivity(new Intent(MainActivity.this, HomePageWithBottomNavigation.class));
     }
 }

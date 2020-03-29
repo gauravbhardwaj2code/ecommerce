@@ -8,7 +8,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.activeandroid.query.Select;
 import com.airbnb.lottie.LottieAnimationView;
 import com.gaurav.commerce.adapters.NotificationPojo;
 import com.gaurav.commerce.db.Notification;
@@ -50,10 +49,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     private List<Notification> getAll() {
         //Getting all items stored in Inventory table
-        return new Select()
-                .from(Notification.class)
-                .limit(10)
-                .execute();
+        return new ArrayList<>();
     }
 
     private void showNotifications() {
@@ -86,18 +82,6 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     public void markAsRead(View view) {
-
-        List<Notification> listtodel= new Select()
-                .from(Notification.class)
-                .limit(10)
-                .execute();
-
-        for (int i=listtodel.size()-1;i>=0;i--){
-            Notification.delete(Notification.class,i);
-        }
-        Intent refresh = new Intent(this, NotificationActivity.class);
-        startActivity(refresh);//Start the same Activity
-        finish(); //finish Activity.
     }
 
     @Override

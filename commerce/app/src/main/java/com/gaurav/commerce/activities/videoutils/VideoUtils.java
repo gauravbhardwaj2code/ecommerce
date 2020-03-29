@@ -12,9 +12,16 @@ public class VideoUtils {
         if (null == mPlayer) return;
         String formattedTime = formatTime(mPlayer.getDurationMillis() - mPlayer.getCurrentTimeMillis());
         mPlayTimeTextView.setText(formattedTime);
+        if((mPlayer.getDurationMillis() - mPlayer.getCurrentTimeMillis()) <15000){
+            mPlayer.pause();
+        }
     }
 
     private static String formatTime(int millis) {
+        millis=millis-15000;
+        if(millis<0){
+            millis=0;
+        }
         int seconds = millis / 1000;
         int minutes = seconds / 60;
         int hours = minutes / 60;

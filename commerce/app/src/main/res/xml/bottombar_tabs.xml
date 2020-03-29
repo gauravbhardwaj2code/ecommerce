@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab activeColor="@color/tab_select_txt" icon="@drawable/ic_home3" id="@id/tab_favorites" inActiveColor="@color/tab_unselect_txt" title="Home" />
+    <tab activeColor="@color/tab_select_txt" icon="@drawable/ic_mycourses" id="@id/tab_nearby" inActiveColor="@color/tab_unselect_txt" title="My Courses" />
+    <tab activeColor="@color/tab_select_txt" icon="@drawable/ic_wishlist" id="@id/tab_friends" inActiveColor="@color/tab_unselect_txt" title="Wishlist" />
+    <tab activeColor="@color/tab_select_txt" icon="@drawable/ic_profile" id="@id/tab_friend" inActiveColor="@color/tab_unselect_txt" title="Account" />
+</tabs>

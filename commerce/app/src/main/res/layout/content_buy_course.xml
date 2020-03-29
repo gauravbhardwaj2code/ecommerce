@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.course.detail.BuyCourse"
+    tools:showIn="@layout/activity_buy_course">
+
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <include layout="@layout/toolbarcoursedetail1" />
+
+        <bg.devlabs.fullscreenvideoview.FullscreenVideoView
+            android:id="@+id/fullscreenVideoView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_gravity="center_horizontal"
+            android:id="@id/tab_layout"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2.0dip"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/red"
+            app:tabIndicatorHeight="3.0dip"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/txt_color"
+            app:tabTextAppearance="@style/MyMenuTextAppearance1"
+            app:tabTextColor="@color/tab_txt_color" >
+
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+
+
+
+        </androidx.viewpager.widget.ViewPager>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

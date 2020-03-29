@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.course.detail.BuyCourse">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/content_buy_course" />
+
+    <LinearLayout android:orientation="horizontal" android:id="@id/linear" android:background="#ff43494d" android:layout_width="fill_parent" android:layout_height="60.0sp" android:layout_alignParentBottom="true">
+        <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_weight="1.0">
+            <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip">
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Medium
+                        android:textSize="28.299988sp"
+                        android:id="@id/selling_price"
+                        android:textColor="@color/white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$49" />
+                </LinearLayout>
+                <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+                    android:textSize="15.0sp"
+                    android:id="@id/cost_price"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5.0dip"
+                    android:text="@string/strike_line" />
+            </LinearLayout>
+        </LinearLayout>
+        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+            android:textSize="15.0sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:background="@drawable/red1_rect"
+            android:paddingLeft="30.0dip"
+            android:paddingTop="10.0dip"
+            android:paddingRight="30.0dip"
+            android:paddingBottom="10.0dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginRight="20.0dip" android:text="BUY NOW" />
+    </LinearLayout>
+
+</RelativeLayout>

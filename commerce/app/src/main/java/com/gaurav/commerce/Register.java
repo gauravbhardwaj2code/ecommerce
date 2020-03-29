@@ -29,11 +29,6 @@ import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.networksync.RegisterRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.MultiplePermissionsReport;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -169,39 +164,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(final View view) {
 
-                Dexter.withActivity(Register.this)
-                        .withPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .withListener(new MultiplePermissionsListener() {
-                            @Override
-                            public void onPermissionsChecked(MultiplePermissionsReport report) {
-                                // check if all permissions are granted
-                                if (report.areAllPermissionsGranted()) {
-                                    // do you work now
-                                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                                    intent.setType("image/*");
-                                    startActivityForResult(intent, 1000);
-                                }
+                System.out.println("Clieck on upload");
 
-                                // check for permanent denial of any permission
-                                if (report.isAnyPermissionPermanentlyDenied()) {
-                                    // permission is denied permenantly, navigate user to app settings
-                                    Snackbar.make(view, "Kindly grant Required Permission", Snackbar.LENGTH_LONG)
-                                            .setAction("Allow", null).show();
-                                }
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                                token.continuePermissionRequest();
-                            }
-                        })
-                        .onSameThread()
-                        .check();
-
-
-
-                //result will be available in onActivityResult which is overridden
             }
         });
     }

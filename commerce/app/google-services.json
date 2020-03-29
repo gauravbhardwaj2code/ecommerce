@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "943537107863",
-    "firebase_url": "https://commercedemo-8eddc.firebaseio.com",
-    "project_id": "commercedemo-8eddc",
-    "storage_bucket": "commercedemo-8eddc.appspot.com"
+    "project_number": "239671581172",
+    "firebase_url": "https://examapp2020-228c9.firebaseio.com",
+    "project_id": "examapp2020-228c9",
+    "storage_bucket": "examapp2020-228c9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:943537107863:android:b9d3620a753d33de4ccad2",
+        "mobilesdk_app_id": "1:239671581172:android:4d3878773689066f5241a1",
         "android_client_info": {
           "package_name": "com.gaurav.commerce"
         }
       },
       "oauth_client": [
         {
-          "client_id": "943537107863-g07b1tj4eneu24j01es7ms8atu503in2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.gaurav.commerce",
-            "certificate_hash": "acf5031bd1f220f29e56030a560983699086eb86"
-          }
-        },
-        {
-          "client_id": "943537107863-3v9maffcffsnevjuok1c3ih1kv34q84g.apps.googleusercontent.com",
+          "client_id": "239671581172-8jpgfm18eqh66kahaeqhoo848v4q573o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAIczHY9YwidTbEM7dc07PK6wyJzgWmM00"
+          "current_key": "AIzaSyBH_EymJGdkmKc1W1qemktK_nEvLRI0HWM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "943537107863-3v9maffcffsnevjuok1c3ih1kv34q84g.apps.googleusercontent.com",
+              "client_id": "239671581172-8jpgfm18eqh66kahaeqhoo848v4q573o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

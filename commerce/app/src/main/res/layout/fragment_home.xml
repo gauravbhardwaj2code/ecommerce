@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:background="#fff5f5f5" android:layout_width="fill_parent" android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" app:cardBackgroundColor="@color/white">
+            <include layout="@layout/toolbarhomepage" />
+        </androidx.cardview.widget.CardView>
+        <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:background="#fff5f5f5" android:paddingBottom="60.0dip" android:focusableInTouchMode="true" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="18.0dip">
+                <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.299988dip" app:cardCornerRadius="7.0dip">
+                        <androidx.viewpager.widget.ViewPager android:id="@id/viewpager" android:layout_width="fill_parent" android:layout_height="185.0dip" />
+                    </androidx.cardview.widget.CardView>
+                    <me.relex.circleindicator.CircleIndicator android:layout_gravity="bottom" android:id="@id/indicator" android:layout_width="fill_parent" android:layout_height="18.0dip" android:layout_marginBottom="5.0dip" android:layout_below="@id/view" app:ci_drawable="@drawable/ic_circular_shape_silhouette_1" app:ci_drawable_unselected="@drawable/ic_circular_shape_silhouette_1" app:ci_height="5.0dip" app:ci_width="5.0dip" />
+                </FrameLayout>
+                <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="8.299988dip" android:layout_marginTop="11.0dip" android:layout_marginBottom="11.0dip" android:text="Cateogries" />
+
+                <LinearLayout android:orientation="horizontal" android:background="#fff5f5f5" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@id/category_container"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+
+                <LinearLayout android:orientation="horizontal" android:background="@drawable/discountbg" android:layout_width="fill_parent" android:layout_height="38.0dip" android:layout_marginLeft="8.299988dip" android:layout_marginTop="8.699982dip" android:layout_marginRight="8.299988dip">
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Light
+                        android:id="@id/news"
+                        android:padding="8dp"
+                        android:textSize="15.0sp"
+                        android:textColor="#ffffffff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Click Here to get Latest News!" />
+                </LinearLayout>
+
+                <!--<LinearLayout android:orientation="horizontal" android:background="@drawable/discountbg" android:layout_width="fill_parent" android:layout_height="58.0dip" android:layout_marginLeft="8.299988dip" android:layout_marginTop="8.699982dip" android:layout_marginRight="8.299988dip">
+                    <ImageView android:layout_gravity="center" android:layout_width="28.0dip" android:layout_height="28.0dip" android:layout_marginLeft="15.0dip" android:src="@drawable/ic_discount" />
+                    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="13.0dip" android:layout_marginTop="10.0dip" android:layout_marginBottom="10.0dip">
+                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Light android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Courses Price as low as $49" />
+                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="#ffffffff" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hurry up, 22 Hours Left!" />
+                    </LinearLayout>
+                </LinearLayout>-->
+
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="20.299988dip">
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="#ff26282a" android:paddingLeft="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.299988dip" android:layout_marginBottom="11.699982dip" android:text="Popular Courses" />
+                    <androidx.recyclerview.widget.RecyclerView android:id="@id/recyclerview1" android:paddingLeft="8.299988dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="18.299988dip" android:elevation="10.0dip">
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="#ff26282a" android:paddingLeft="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.299988dip" android:text="Featured Courses" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@id/recyclerview2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Light android:textSize="15.0sp" android:textColor="#ffeb4335" android:gravity="center" android:background="#ffffffff" android:paddingTop="13.0dip" android:paddingBottom="13.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="20.0dip" android:text="View All" android:elevation="3.0dip" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <com.roughike.bottombar.BottomBar android:gravity="end|bottom|center" android:layout_gravity="bottom" android:id="@id/bottombar" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="52.599976dip" android:layout_alignParentBottom="true" android:elevation="8.0dip" app:bb_activeTabColor="#ffffffff" app:bb_badgesHideWhenActive="true" app:bb_inActiveTabColor="#ffa4ebfe" app:bb_showShadow="true" app:bb_tabXmlResource="@xml/bottombar_tabs" app:bb_titleTextAppearance="@style/botoombar_textchange" app:bb_titleTypeFace="fonts/Roboto-Regular.ttf" app:paddingStart="10.0dip" />
+
+    
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        xmlns:card_view="http://schemas.android.com/tools">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/toolbarwrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:titleTextColor="@color/colorAccent"
+                android:gravity="left"
+                style="@style/CustomTheme"
+                android:background="@color/colorAccent">
+
+                <TextView
+                    android:textColor="@color/primary"
+                    android:id="@+id/appname"
+                    android:textSize="28sp"
+                    android:gravity="start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:padding="5dp"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/notifintro"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:lottie_fileName="ripple.json"
+                        app:lottie_loop="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        app:lottie_autoPlay="true"/>
+
+                    <ImageView
+                        android:id="@+id/view_profile"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/profile"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/cart"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/cart"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"/>
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <ScrollView
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    app:auto_cycle="true"
+                    app:pager_animation="Default"
+                    app:pager_animation_span="1100" />
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:background="#34495e"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="10">
+
+                    <TextView
+                        style="@style/headingfonts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="Online Learning Paradigm"
+                        android:textColor="#bdc3c7" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10">
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/homegridcard"
+                            card_view:cardCornerRadius="@dimen/card_album_radius">
+
+                            <RelativeLayout
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/visitingcards"
+                                    style="@style/homegridimage"
+                                    android:src="@drawable/pa_video_classes" />
+
+                                <TextView
+                                    android:layout_below="@id/visitingcards"
+                                    android:text="Watch Video Classes"
+                                    style="@style/homegridtext"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/homegridcard"
+                            card_view:cardCornerRadius="@dimen/card_album_radius">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/tshirts"
+                                    style="@style/homegridimage"
+                                    android:src="@drawable/pa_printed_materials" />
+
+                                <TextView
+                                    android:layout_below="@id/tshirts"
+                                    android:text="Printed Study Material"
+                                    style="@style/homegridtext"/>
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10">
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/homegridcard"
+                            card_view:cardCornerRadius="@dimen/card_album_radius">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/bags"
+                                    android:src="@drawable/pa_ask_dbts"
+                                    style="@style/homegridimage" />
+
+                                <TextView
+                                    android:layout_below="@id/bags"
+                                    android:text="Ask Doubts"
+                                    style="@style/homegridtext"/>
+
+                            </RelativeLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            style="@style/homegridcard"
+                            card_view:cardCornerRadius="@dimen/card_album_radius">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:id="@+id/Stationary"
+                                    style="@style/homegridimage"
+                                    android:src="@drawable/pa_collaberative" />
+
+                                <TextView
+                                    android:layout_below="@id/Stationary"
+                                    android:text="Collaborative Learning!"
+                                    style="@style/homegridtext"/>
+
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:background="#34495e"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:padding="5dp"
+                        style="@style/headingfonts"
+                        android:textColor="#bdc3c7"
+                        android:text="We are best at"
+                        android:layout_weight="3"/>
+
+                    <com.tomer.fadingtextview.FadingTextView
+                        android:layout_width="wrap_content"
+                        android:textColor="#ecf0f1"
+                        app:timeout="500"
+                        style="@style/headingfonts"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        app:texts="@array/examples"
+                        android:layout_weight="7"/>
+
+                </LinearLayout>
+
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    app:auto_cycle="true"
+                    app:pager_animation="Default"
+                    app:pager_animation_span="1100" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>-->
+</RelativeLayout>
+

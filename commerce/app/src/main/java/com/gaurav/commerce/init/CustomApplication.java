@@ -2,13 +2,15 @@ package com.gaurav.commerce.init;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.Telephony;
 import android.widget.ImageView;
 
-import com.activeandroid.ActiveAndroid;
 import com.bumptech.glide.Glide;
 import com.gaurav.commerce.R;
+import com.gaurav.commerce.messagereader.MessageReceiver;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
@@ -22,16 +24,20 @@ public class CustomApplication extends Application {
         return context;
     }
 
+    private MessageReceiver smsBroadcastReceiver;
+
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-
-        //Database ORMhelper class
-        ActiveAndroid.initialize(this);
-
         context = getApplicationContext();
 
+
+        smsBroadcastReceiver = SingleTonClasses.smsBroadcastReceiver;
+        IntentFilter filter=new IntentFilter(Telephony.Sms.Intents.SMS_RECEIVED_ACTION);
+        filter.setPriority(999);
+        context.registerReceiver(smsBroadcastReceiver, filter);
 
         //initialize and create the image loader logic
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
@@ -65,4 +71,6 @@ public class CustomApplication extends Application {
             }
         });
     }
+
+
 }

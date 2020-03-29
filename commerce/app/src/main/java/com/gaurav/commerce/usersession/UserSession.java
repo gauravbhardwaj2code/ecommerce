@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.gaurav.commerce.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.util.JsonMapper;
+import com.google.gson.Gson;
 
 import java.util.HashMap;
 
@@ -61,6 +64,8 @@ public class UserSession {
     // check first time app launch
     public static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
+    public static final String KEY_USER_SUBJECT_INFO = "key_user_subject_info";
+
     // Constructor
     public UserSession(Context context){
         this.context = context;
@@ -87,6 +92,10 @@ public class UserSession {
         // Storing image url in pref
         editor.putString(KEY_PHOTO, photo);
 
+
+        Gson gson = new Gson();
+
+        editor.putString(KEY_USER_SUBJECT_INFO,gson.toJson(new UserSubjectInfo()));
         // commit changes
         editor.commit();
     }
@@ -114,6 +123,36 @@ public class UserSession {
     }
 
 
+    public void setMobileNo(String mobileNo){
+        editor.putString(KEY_MOBiLE, mobileNo);
+        editor.commit();
+    }
+
+
+    public UserSubjectInfo getUserSubjectInfo(){
+        Gson gson = new Gson();
+        UserSubjectInfo userSubjectInfo=null;
+        try{
+            userSubjectInfo=gson.fromJson(pref.getString(KEY_USER_SUBJECT_INFO,null),UserSubjectInfo.class);
+        }catch (Exception e){
+         e.printStackTrace();
+        }
+
+        if(userSubjectInfo==null){
+            userSubjectInfo=new UserSubjectInfo();
+            editor.putString(KEY_USER_SUBJECT_INFO,gson.toJson(userSubjectInfo));
+            editor.commit();
+        }
+        return userSubjectInfo;
+    }
+
+    public UserSubjectInfo setUserSubjectInfo(UserSubjectInfo userSubjectInfo){
+            Gson gson = new Gson();
+            editor.putString(KEY_USER_SUBJECT_INFO,gson.toJson(userSubjectInfo));
+            editor.commit();
+
+        return userSubjectInfo;
+    }
 
     /**
      * Get stored session data
@@ -231,4 +270,5 @@ public class UserSession {
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
+
 }
