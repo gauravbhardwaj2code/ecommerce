@@ -23,6 +23,7 @@ import com.gaurav.commerce.activities.course.dto.AllPlayersWrapper;
 import com.gaurav.commerce.activities.course.dto.DtoLectureContents;
 import com.gaurav.commerce.activities.course.dto.DtoLectures;
 import com.gaurav.commerce.activities.course.dto.LectureContentType;
+import com.gaurav.commerce.fonts.MyTextView_Roboto_Regular;
 import com.gaurav.commerce.usersession.UserSession;
 import com.gaurav.commerce.usersession.UserSubjectInfo;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -144,6 +145,38 @@ class CurriculamChildRecycleView extends RecyclerView.Adapter<CurriculamChildHol
             });
         }
 
+        if(!play_allowed &&
+                list.get(position).isFree()){
+            holder.freePreview.setVisibility(View.VISIBLE);
+            holder.mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url=list.get(position).getUrl();
+                    LectureContentType type=list.get(position).getLectureContentType();
+                    if(null==url || url.trim().isEmpty()){
+                        Toasty.error(inflater.getContext(), "No Resource Found!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        System.out.println(url);
+                        try{
+                            if(type.equals(LectureContentType.VIDEO)){
+                                if(currentLectureView!=null){
+                                    currentLectureView.setBackgroundColor(v.getResources().getColor(R.color.white,null));
+                                }
+                                currentLectureView=holder.mView;
+                                currentLectureView.setBackgroundColor(v.getResources().getColor(R.color.grey,null));
+                                mPlayer.play(url);
+                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                        // fullscreenVideoView.changeUrl(list.get(position).getUrl());
+                    }
+
+                };
+            });
+        }
+
     }
 
     @Override
@@ -158,6 +191,7 @@ class CurriculamChildHolder extends RecyclerView.ViewHolder{
     public TextView name;
     public TextView time;
     public TextView index;
+    public MyTextView_Roboto_Regular freePreview;
 
     public View mView;
 
@@ -167,6 +201,7 @@ class CurriculamChildHolder extends RecyclerView.ViewHolder{
         name = v.findViewById(R.id.lecture_content_name);
         time=v.findViewById(R.id.time);
         index=v.findViewById(R.id.index);
+        freePreview=v.findViewById(R.id.mark_free);
 
     }
 }

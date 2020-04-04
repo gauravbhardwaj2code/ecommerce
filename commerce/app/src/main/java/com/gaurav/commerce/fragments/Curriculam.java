@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.gaurav.commerce.R;
+import com.gaurav.commerce.activities.course.dto.AllPlayersWrapper;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
 import com.gaurav.commerce.activities.ui.home.CourcesViewHandler;
+import com.google.android.youtube.player.YouTubePlayer;
 import com.google.firebase.database.FirebaseDatabase;
 
 import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
@@ -35,6 +37,7 @@ public class Curriculam extends Fragment {
     private static final String ARG_PARAM2 = "play_allowed";
     public DtoSubjectInfo subjectInfo;
     public FullscreenVideoView fullscreenVideoView;
+    public AllPlayersWrapper youTubePlayer;
 
     // TODO: Rename and change types of parameters
     private Boolean PLAY_ALLOWED;
@@ -55,12 +58,14 @@ public class Curriculam extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static Curriculam newInstance(DtoSubjectInfo subjectInfo, Boolean playAllowed,
-                                         FullscreenVideoView fullscreenVideoView) {
+                                         FullscreenVideoView fullscreenVideoView,
+                                         AllPlayersWrapper youTubePlayer) {
         Curriculam fragment = new Curriculam();
         Bundle args = new Bundle();
         args.putBoolean(ARG_PARAM2, playAllowed);
         fragment.setArguments(args);
         fragment.subjectInfo=subjectInfo;
+        fragment.youTubePlayer=youTubePlayer;
         fragment.fullscreenVideoView=fullscreenVideoView;
         return fragment;
     }
@@ -81,7 +86,7 @@ public class Curriculam extends Fragment {
        // TextView lecture_hours=root.findViewById(R.id.lecture_hours);
       //  lecture_hours.setText(String.valueOf(subjectInfo.getTotalHours())+" Hours");
         new CurriculamRecycleViewHandler(root.findViewById(R.id.lectures_list),R.layout.recycleview_curriculam,
-                subjectInfo.getLectures(),inflater,PLAY_ALLOWED,fullscreenVideoView,null,subjectInfo.getId());
+                subjectInfo.getLectures(),inflater,PLAY_ALLOWED,fullscreenVideoView,youTubePlayer,subjectInfo.getId());
         return root;
     }
 

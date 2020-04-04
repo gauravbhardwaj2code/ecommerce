@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
-<LinearLayout android:orientation="horizontal" android:padding="10.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="4.0dip">
+
+<LinearLayout
+    android:orientation="horizontal"
+    android:padding="10.0sp"
+    android:layout_width="fill_parent"
+    android:id="@id/cardView"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4.0dip">
     <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
         android:textSize="11.699982sp"
         android:textColor="#ff828282"
@@ -10,9 +17,23 @@
         android:layout_height="wrap_content"
         android:text="Section 1: Where does it come from?"
         android:layout_weight="1.0" />
+
+    <Button
+        android:id="@+id/arrowBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/ic_keyboard_arrow_down_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view" />
+
 </LinearLayout>
 
-<androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/white">
+<androidx.cardview.widget.CardView
+    android:id="@id/lecturecontentcard"
+    android:layout_width="match_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/white">
+
 
 <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView

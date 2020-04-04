@@ -1,10 +1,12 @@
 package com.gaurav.commerce.activities.course.detail;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.gaurav.commerce.activities.course.dto.AllPlayersWrapper;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
 import com.gaurav.commerce.fragments.AbountCourse;
 import com.gaurav.commerce.fragments.Curriculam;
@@ -24,6 +26,10 @@ import android.widget.TextView;
 
 import com.gaurav.commerce.R;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import com.google.android.youtube.player.YouTubePlayerSupportFragmentX;
 
 import java.util.ArrayList;
 
@@ -35,6 +41,12 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
     private TabLayout tabLayout;
 
     private ViewPager viewPager;
+
+    private YouTubePlayerSupportFragmentX youTubePlayerFragment;
+
+    private AllPlayersWrapper playersWrapper=new AllPlayersWrapper();
+    //youtube player to play video when new video selected
+    private YouTubePlayer youTubePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,34 +81,51 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
         viewPager = (ViewPager) findViewById(R.id.pager);
 
         //Creating our pager adapter
-        BuyCoursePager adapter = new BuyCoursePager(getSupportFragmentManager(), tabLayout.getTabCount(),viewPager,subjectInfo);
+        BuyCoursePager adapter = new BuyCoursePager(getSupportFragmentManager(), tabLayout.getTabCount(),viewPager,subjectInfo,
+                playersWrapper);
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
 
         tabLayout.setOnTabSelectedListener(this);
 
+        initializeYoutubePlayer();
 
-        FullscreenVideoView fullscreenVideoView = findViewById(R.id.fullscreenVideoView);
-        String videoUrl = subjectInfo.getDemoVideoUrl();
-        ArrayList<Float> speeds=new ArrayList();
-        speeds.add(1.25f);
-        speeds.add(1.5f);
-        speeds.add(1.75f);
-        speeds.add(2.00f);
-        speeds.add(1f);
-        PlaybackSpeedOptions playbackOptions = new PlaybackSpeedOptions().addSpeeds(speeds);
-        fullscreenVideoView.videoUrl(videoUrl)
-                .addSeekBackwardButton()
-                .addPlaybackSpeedButton()
-                .addSeekForwardButton()
-                .fastForwardSeconds(5)
-                .rewindSeconds(5)
-                //.enableAutoStart()
-                .thumbnail(R.drawable.code_img)
-                .playbackSpeedOptions(playbackOptions);
+    }
+
+    private void initializeYoutubePlayer() {
+
+        youTubePlayerFragment = (YouTubePlayerSupportFragmentX) getSupportFragmentManager()
+                .findFragmentById(R.id.youtube_player_fragment);
 
 
+
+        if (youTubePlayerFragment == null)
+            return;
+
+        youTubePlayerFragment.initialize("AIzaSyBpXaw1BwRWfv4jYuSe8DWbpLV9bTLiU8w", new YouTubePlayer.OnInitializedListener() {
+
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                                boolean wasRestored) {
+                if (!wasRestored) {
+                    youTubePlayer = player;
+
+                    //set the player style default
+                    youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.MINIMAL);
+
+                    //cue the 1st video by default
+                    youTubePlayer.cueVideo("zGNQQfEjCQY");
+                    playersWrapper.initialise(youTubePlayer);
+                }
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+
+                //print or show error if initialization failed
+            }
+        });
 
     }
 
@@ -128,19 +157,19 @@ class BuyCoursePager extends FragmentStatePagerAdapter {
     ViewPager viewPager;
 
     private DtoSubjectInfo subjectInfo;
+    private AllPlayersWrapper youTubePlayer;
     //Constructor to the class
 
 
-    public BuyCoursePager(FragmentManager fm, int tabCount, ViewPager viewPager,DtoSubjectInfo subjectInfo) {
+    public BuyCoursePager(FragmentManager fm, int tabCount, ViewPager viewPager,DtoSubjectInfo subjectInfo,AllPlayersWrapper youTubePlayer) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
         this.viewPager=viewPager;
         this.subjectInfo=subjectInfo;
+        this.youTubePlayer=youTubePlayer;
 
     }
-
-
 
     //Overriding method getItem
     @Override
@@ -149,7 +178,7 @@ class BuyCoursePager extends FragmentStatePagerAdapter {
         switch (position) {
             case 0:
                 //viewPager.setCurrentItem(0);
-            return  Curriculam.newInstance(subjectInfo,false,null);
+            return  Curriculam.newInstance(subjectInfo,false,null,youTubePlayer);
             case 1:
                 //viewPager.setCurrentItem(1);
                 return AbountCourse.newInstance(subjectInfo,"");

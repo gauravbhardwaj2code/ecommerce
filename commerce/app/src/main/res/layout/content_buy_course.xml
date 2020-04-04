@@ -11,10 +11,16 @@
     <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
         <include layout="@layout/toolbarcoursedetail1" />
 
-        <bg.devlabs.fullscreenvideoview.FullscreenVideoView
+        <!--<bg.devlabs.fullscreenvideoview.FullscreenVideoView
             android:id="@+id/fullscreenVideoView"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />
+            android:layout_height="300dp" />-->
+
+        <fragment
+            android:id="@+id/youtube_player_fragment"
+            android:name="com.google.android.youtube.player.YouTubePlayerSupportFragmentX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
 

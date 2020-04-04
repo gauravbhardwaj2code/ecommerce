@@ -2,16 +2,21 @@ package com.gaurav.commerce.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -114,14 +119,34 @@ class CurriculamHolder extends RecyclerView.ViewHolder{
 
     public TextView name;
     public RecyclerView listView;
+    public Button arrowButton;
+    public CardView lecturecontentcard;
+    LinearLayout cardView;
 
     public View mView;
 
     public CurriculamHolder(View v) {
         super(v);
         mView =v;
+        lecturecontentcard=v.findViewById(R.id.lecturecontentcard);
+        arrowButton=v.findViewById(R.id.arrowBtn);
         name = v.findViewById(R.id.name);
         listView=v.findViewById(R.id.listView);
+        cardView = v.findViewById(R.id.cardView);
+        arrowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lecturecontentcard.getVisibility()==View.GONE){
+                    TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
+                    lecturecontentcard.setVisibility(View.VISIBLE);
+                    arrowButton.setBackgroundResource(R.drawable.ic_keyboard_arrow_up_black_24dp);
+                } else {
+                    TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
+                    lecturecontentcard.setVisibility(View.GONE);
+                    arrowButton.setBackgroundResource(R.drawable.ic_keyboard_arrow_down_black_24dp);
+                }
+            }
+        });
 
     }
 }

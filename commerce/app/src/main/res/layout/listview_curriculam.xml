@@ -29,7 +29,19 @@
                 android:layout_height="wrap_content"
                 android:text="4:20 mins" />
 
+
+
         </LinearLayout>
+
+        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+            android:textSize="11.699982sp"
+            android:id="@id/mark_free"
+            android:textColor="@color/green"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preview" />
 
 
     </LinearLayout>
@@ -40,7 +52,6 @@
         android:layout_marginLeft="10.0dip"
         android:layout_marginRight="10.0dip" />
 
-<!--
-    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="11.699982sp" android:textColor="@color/green" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View Preview" />
--->
+
+
 </LinearLayout>
