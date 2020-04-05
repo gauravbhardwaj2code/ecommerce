@@ -9,11 +9,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaurav.commerce.R;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
 import com.gaurav.commerce.database.util.MockDatabaseUtil;
+import com.github.siyamed.shapeimageview.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -88,7 +91,7 @@ public class AbountCourse extends Fragment {
         totalEnrolled.setText(String.valueOf(subjectInfo.getTotalEnrolled())+" enrolled");
 
         TextView totalHours=root.findViewById(R.id.totalHours);
-        totalHours.setText(String.valueOf(subjectInfo.getTotalHours())+" Hours");
+        totalHours.setText(String.valueOf(subjectInfo.getTotalHours()));
 
         TextView language=root.findViewById(R.id.language);
         language.setText(String.valueOf(subjectInfo.getLanguage()));
@@ -101,6 +104,9 @@ public class AbountCourse extends Fragment {
 
         TextView rating=root.findViewById(R.id.rating);
         rating.setText(String.valueOf(subjectInfo.getAverageRating()));
+
+        ImageView roundedImageView=root.findViewById(R.id.imageurl);
+        Picasso.with(getContext()).load(MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId()).getUrlImage()).into(roundedImageView);
 
         TextView teacher_description =root.findViewById(R.id.teacher_description);        ;
         teacher_description.setText(String.valueOf(MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId()).getDescription()));

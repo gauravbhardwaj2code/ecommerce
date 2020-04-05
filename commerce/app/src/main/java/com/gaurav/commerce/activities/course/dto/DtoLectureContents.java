@@ -6,23 +6,23 @@ public class DtoLectureContents  implements Serializable {
 
     private String title="No title";
 
-    private Double time=0.0;
+    private Object  time="0.0";
 
     private String url="";
 
     private LectureContentType lectureContentType=LectureContentType.VIDEO;
 
-    private boolean free=false;
+    private String free="false";
 
     public String getTitle() {
         return title;
     }
 
-    public Double getTime() {
+    public Object getTime() {
         return time;
     }
 
-    public void setTime(Double time) {
+    public void setTime(Object time) {
         this.time = time;
     }
 
@@ -46,11 +46,11 @@ public class DtoLectureContents  implements Serializable {
         this.url = url;
     }
 
-    public boolean isFree() {
+    public String getFree() {
         return free;
     }
 
-    public void setFree(boolean free) {
+    public void setFree(String free) {
         this.free = free;
     }
 }

@@ -211,7 +211,12 @@ public class CourseDetail extends YouTubeBaseActivity implements YouTubePlayer.O
 
         // Start buffering
         if (!wasRestored) {
-            player.cueVideo(subjectInfo.getLectures().get(0).getLectureContents().get(0).getUrl());
+            if(subjectInfo.getDemoVideoUrl()!=null &&
+                    subjectInfo.getDemoVideoUrl().size()>0){
+                player.cueVideo(subjectInfo.getDemoVideoUrl().get(0));
+            }
+
+
             /*if(subjectInfo!=null && subjectInfo.getLectures()!=null
             && subjectInfo.getLectures().size()>0
             && subjectInfo.getLectures().get(0).getLectureContents()!=null && subjectInfo.getLectures().get(0).getLectureContents().size()>0){

@@ -69,9 +69,10 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
         textView=findViewById(R.id.cost_price);
         textView.setText("₹"+subjectInfo.getCostPrice()+"");
         textView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        textView.setVisibility(View.INVISIBLE);
 
         textView=findViewById(R.id.selling_price);
-        textView.setText("₹"+subjectInfo.getSellingPrice()+"");
+        textView.setText("₹"+subjectInfo.getCostPrice()+"");
         //Adding the tabs using addTab() method
         tabLayout.addTab(tabLayout.newTab().setText("Lectures"),true);
         tabLayout.addTab(tabLayout.newTab().setText("More"));
@@ -89,11 +90,11 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
 
         tabLayout.setOnTabSelectedListener(this);
 
-        initializeYoutubePlayer();
+        initializeYoutubePlayer(subjectInfo);
 
     }
 
-    private void initializeYoutubePlayer() {
+    private void initializeYoutubePlayer(DtoSubjectInfo subjectInfo) {
 
         youTubePlayerFragment = (YouTubePlayerSupportFragmentX) getSupportFragmentManager()
                 .findFragmentById(R.id.youtube_player_fragment);
@@ -115,7 +116,11 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
                     youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.MINIMAL);
 
                     //cue the 1st video by default
-                    youTubePlayer.cueVideo("zGNQQfEjCQY");
+                    if(subjectInfo.getDemoVideoUrl()!=null &&
+                            subjectInfo.getDemoVideoUrl().size()>0){
+                        youTubePlayer.cueVideo(subjectInfo.getDemoVideoUrl().get(0));
+                    }
+
                     playersWrapper.initialise(youTubePlayer);
                 }
             }

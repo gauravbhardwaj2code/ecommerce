@@ -3,19 +3,23 @@ package com.gaurav.commerce.database.util;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaurav.commerce.activities.course.dto.DtoFaculty;
 import com.gaurav.commerce.activities.course.dto.DtoLectureContents;
 import com.gaurav.commerce.activities.course.dto.DtoLectures;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
 import com.gaurav.commerce.activities.ui.home.dto.DtoHomePageBanner;
+import com.gaurav.commerce.activities.ui.home.view.HomeCoursesRecyclerView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +38,10 @@ public class MockDatabaseUtil {
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     private static Map<String,DtoSubjectInfo> subjectInfoMap=new HashMap<>();
+
+    private static Map<String,List<Long>> inetrnalDatabaseIds=new HashMap<>();
+
+    public static Map<String, HomeCoursesRecyclerView> adapters=new HashMap<>();
 
     private static Map<String, DtoFaculty> facultyMap=new HashMap<>();
 
@@ -89,33 +97,33 @@ public class MockDatabaseUtil {
         subjectInfoMap.put("1",new DtoSubjectInfo().setId(1)
                 .setCourseId(1)
                 .setName("Subject 1")
-                .setDemoVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+                .setDemoVideoUrl(Arrays.asList("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
                 .setUrlImage("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg")
-                .setFacultyId(1)
+                .setFacultyId("1")
                 .setLectures(Arrays.asList(dtoLectures,dtoLectures))
                 .setExamName("CBSE XII"));
         subjectInfoMap.put("2",new DtoSubjectInfo().setId(2)
                 .setCourseId(1)
                 .setName("Subject 2")
-                .setDemoVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+                .setDemoVideoUrl(Arrays.asList("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
                 .setUrlImage("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg")
-                .setFacultyId(1)
+                .setFacultyId("1")
                 .setLectures(Arrays.asList(dtoLectures,dtoLectures))
                 .setExamName("CBSE XII"));
         subjectInfoMap.put("3",new DtoSubjectInfo().setId(3)
                 .setCourseId(1)
                 .setName("Subject 3")
-                .setDemoVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+                .setDemoVideoUrl(Arrays.asList("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
                 .setUrlImage("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg")
-                .setFacultyId(1)
+                .setFacultyId("1")
                 .setLectures(Arrays.asList(dtoLectures,dtoLectures))
                 .setExamName("CBSE XII"));
         subjectInfoMap.put("4",new DtoSubjectInfo().setId(4)
                 .setCourseId(1)
                 .setName("Subject 4")
-                .setDemoVideoUrl("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+                .setDemoVideoUrl(Arrays.asList("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
                 .setUrlImage("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg")
-                .setFacultyId(1)
+                .setFacultyId("1")
                 .setLectures(Arrays.asList(dtoLectures,dtoLectures))
                 .setExamName("CBSE XII"));
 
@@ -140,7 +148,15 @@ public class MockDatabaseUtil {
 
     public static void initDatabase() {
 
+        if(inetrnalDatabaseIds.size()>0){
+            return;
+        }
+
         initFaculty(FACULTY);
+
+        List<Long> allCourseId=new ArrayList<>();
+
+        List<Long> popularCourses=new ArrayList<>();
 
         DatabaseReference databaseReference=database.getReference().child(SUBJECT_DATA_BASE_NAME);
 
@@ -148,8 +164,36 @@ public class MockDatabaseUtil {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot data:dataSnapshot.getChildren()){
-                    DtoSubjectInfo subjectInfo=data.getValue(DtoSubjectInfo.class);
-                    subjectInfoMap.put(subjectInfo.getId().toString(),subjectInfo);
+                    try {
+                        DtoSubjectInfo subjectInfo = data.getValue(DtoSubjectInfo.class);
+                        subjectInfoMap.put(subjectInfo.getId().toString(), subjectInfo);
+                        allCourseId.add(subjectInfo.getId().longValue());
+                        if(subjectInfo.getCategory()!=null &&
+                                subjectInfo.getCategory().equalsIgnoreCase("popular")){
+                            popularCourses.add(subjectInfo.getId().longValue());
+                        }
+                    }catch (Exception e){
+                        System.out.println(data.getValue());
+                        e.printStackTrace();
+                    }
+                }
+
+                inetrnalDatabaseIds.put(ALL_LECTURES,allCourseId);
+                inetrnalDatabaseIds.put(H_LECTURES,popularCourses);
+
+
+                Collections.sort(allCourseId);
+                List<Long> latestCourses = new ArrayList<Long>(allCourseId.subList(allCourseId.size() -5, allCourseId.size()));
+                inetrnalDatabaseIds.put(V_LECTURES,latestCourses);
+
+                notifyDatabases(V_LECTURES);
+                notifyDatabases(H_LECTURES);
+                notifyDatabases(ALL_LECTURES);
+            }
+
+            private void notifyDatabases(String name) {
+                if(adapters.containsKey(name)){
+                    adapters.get(name).updateList();
                 }
 
             }
@@ -170,7 +214,7 @@ public class MockDatabaseUtil {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot data:dataSnapshot.getChildren()){
                     DtoFaculty dtoFaculty=data.getValue(DtoFaculty.class);
-                    facultyMap.put(dtoFaculty.getId().toString(),dtoFaculty);
+                    facultyMap.put(dtoFaculty.getName(),dtoFaculty);
                 }
 
             }
@@ -184,13 +228,11 @@ public class MockDatabaseUtil {
     }
 
 
-    public static DtoFaculty getFacultyById(Integer id) {
-        return facultyMap.get(id.toString());
+    public static DtoFaculty getFacultyById(String id) {
+        return facultyMap.get(id);
     }
 
     public static Map<Integer, DtoSubjectInfo> getAllSubjectByCourseId(Integer courseId){
-        System.out.println("#######jhsdvhs########"+courseId);
-        System.out.println("#######jhsdvhs########"+subjectInfoMap);
         Map<Integer,DtoSubjectInfo> map=new HashMap<>();
             for (String id:subjectInfoMap.keySet()){
                 DtoSubjectInfo dtoSubjectInfo=subjectInfoMap.get(id);
@@ -198,7 +240,6 @@ public class MockDatabaseUtil {
                     map.put(Integer.parseInt(id),dtoSubjectInfo);
                 }
             }
-        System.out.println("#######jhsdvhs########"+map);
         return map;
 
     }
@@ -211,5 +252,9 @@ public class MockDatabaseUtil {
             }
         }
         return map;
+    }
+
+    public static List<Long> getInternalDatabaseIds(String name){
+        return inetrnalDatabaseIds.get(name);
     }
 }

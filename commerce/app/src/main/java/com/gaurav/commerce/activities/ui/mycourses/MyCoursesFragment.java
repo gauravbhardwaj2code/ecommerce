@@ -20,6 +20,7 @@ import com.gaurav.commerce.activities.course.dto.DtoLectures;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
 import com.gaurav.commerce.activities.ui.home.view.HomeCoursesRecyclerView;
 import com.gaurav.commerce.activities.ui.home.view.SubjectViewHolder;
+import com.gaurav.commerce.database.util.FetchMySubjects;
 import com.gaurav.commerce.database.util.MockDatabaseUtil;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.usersession.UserSession;
@@ -30,13 +31,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import static com.gaurav.commerce.database.util.MockDatabaseUtil.PRODUCTS;
+import static com.gaurav.commerce.usersession.UserSession.KEY_EMAIL;
 import static com.gaurav.commerce.usersession.UserSession.KEY_MOBiLE;
 import static com.gaurav.commerce.usersession.UserSession.KEY_USER_SUBJECT_INFO;
 
@@ -60,6 +67,28 @@ public class MyCoursesFragment extends Fragment {
                 ViewModelProviders.of(this).get(MyCoursesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_mycourse, container, false);
 
+        FetchMySubjects fetchMySubjects=new FetchMySubjects();
+        List<Long> ids=new ArrayList<>();
+        String phone = userSession.getUserDetails().get(KEY_MOBiLE);
+        try {
+            String data=fetchMySubjects.execute(userSession.getUserDetails().get(KEY_EMAIL),phone).get();
+            System.out.println(data);
+            if(null!=data && !data.trim().isEmpty()){
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<HashMap<String, Object>>>(){}.getType();
+                List<HashMap<String, Object>> listOfSubject =
+                        gson.fromJson(data, listType);
+                for(HashMap<String, Object> map:listOfSubject){
+                    Double id=Double.parseDouble(String.valueOf(map.get("id")));
+                    ids.add(id.longValue());
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         /*CircularProgressBar circularProgressBar = root.findViewById(R.id.circle_progress);
 
 // or with animation
@@ -79,23 +108,27 @@ public class MyCoursesFragment extends Fragment {
         circularProgressBar.setRoundBorder(true);
         circularProgressBar.setStartAngle(180f);*/
 
-        String phone = userSession.getUserDetails().get(KEY_MOBiLE);
+        Map<Integer,DtoSubjectInfo> map=MockDatabaseUtil.getSubjectInfoMap(ids);
+        List<DtoSubjectInfo> list=new ArrayList<>(map.values());
 
-        renderList(inflater,root.findViewById(R.id.recyclerview2),database,R.layout.mycourse_list,phone, CourseDetail.class);
+
+
+        renderList(inflater,root.findViewById(R.id.recyclerview2),database,R.layout.mycourse_list,list, CourseDetail.class);
 
 
         return root;
     }
 
 
-    private void renderList(LayoutInflater inflater,RecyclerView lecturesRecyclerView, FirebaseDatabase database, int home_page_course_recycler_view, String lectureName,Class<?> nextActiviti) {
+    private void renderList(LayoutInflater inflater,RecyclerView lecturesRecyclerView, FirebaseDatabase database, int home_page_course_recycler_view,
+                            List<DtoSubjectInfo> list,Class<?> nextActiviti) {
 
         lecturesRecyclerView.setHasFixedSize(true);
         //using staggered grid pattern in recyclerview
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL,false);
         lecturesRecyclerView.setLayoutManager(mLayoutManager);
 
-        lecturesRecyclerView.setAdapter(new MyCourseCourseRecyclerView(database,home_page_course_recycler_view,lectureName,nextActiviti,this.userSession));
+        lecturesRecyclerView.setAdapter(new MyCourseCourseRecyclerView(database,home_page_course_recycler_view,list,nextActiviti,this.userSession));
     }
 
     @Override
@@ -119,64 +152,40 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
     Integer listItemView;
     private Class<?> nextActiviti;
 
-    String LECTURES_DATABASE="";
 
     private UserSession userSession;
 
     public MyCourseCourseRecyclerView(FirebaseDatabase database, int home_page_course_recycler_view,
-                                      String lectureName,Class<?> nextActiviti,
+                                      List<DtoSubjectInfo> list,Class<?> nextActiviti,
                                       UserSession userSession) {
         this.listItemView=home_page_course_recycler_view;
-        this.LECTURES_DATABASE=lectureName;
         this.nextActiviti=nextActiviti;
         this.userSession=userSession;
+        this.list=list;
 
-        //  MockDatabaseUtil.createHomePageBestSellingBanner(database,lectureName);
-
-        this.databaseReference=database.getReference().child(lectureName);
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list.clear();
-                for(DataSnapshot data:dataSnapshot.getChildren()){
-                    Map<String,List<Long>> idMap= (Map<String, List<Long>>) dataSnapshot.getValue();
-                    Map<Integer,DtoSubjectInfo> map= MockDatabaseUtil.getSubjectInfoMap(idMap.get(PRODUCTS));
-                    list=new ArrayList<>(map.values());
-                    if(null!=list && list.size()>0){
-                        for(DtoSubjectInfo subjectInfo:list){
-                            if(!userSession.getUserSubjectInfo().containSubject(subjectInfo.getId())){
-                                UserSubjectInfo userSubjectInfo=userSession.getUserSubjectInfo();
-                                UserSubjectProgress userSubjectProgress=new UserSubjectProgress();
-                                int totalLecture=0;
-                                if(subjectInfo.getLectures()!=null){
-                                    for(DtoLectures list: subjectInfo.getLectures()){
-                                        if(list.getLectureContents()!=null) {
-                                            totalLecture = totalLecture + list.getLectureContents().size();
-                                        }
-                                    }
-                                }
-
-                                userSubjectProgress.setTotalVideos(totalLecture);
-                                userSubjectInfo.setSubject(subjectInfo.getId().toString(),userSubjectProgress);
-                                userSession.setUserSubjectInfo(userSubjectInfo);
+        if(null!=list && list.size()>0){
+            for(DtoSubjectInfo subjectInfo:list){
+                if(!userSession.getUserSubjectInfo().containSubject(subjectInfo.getId())){
+                    UserSubjectInfo userSubjectInfo=userSession.getUserSubjectInfo();
+                    UserSubjectProgress userSubjectProgress=new UserSubjectProgress();
+                    int totalLecture=0;
+                    if(subjectInfo.getLectures()!=null){
+                        for(DtoLectures dtoLectures: subjectInfo.getLectures()){
+                            if(dtoLectures.getLectureContents()!=null) {
+                                totalLecture = totalLecture + dtoLectures.getLectureContents().size();
                             }
                         }
-
                     }
 
-
+                    userSubjectProgress.setTotalVideos(totalLecture);
+                    userSubjectInfo.setSubject(subjectInfo.getId().toString(),userSubjectProgress);
+                    userSession.setUserSubjectInfo(userSubjectInfo);
                 }
-                notifyDataSetChanged();
-
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+        }
+        notifyDataSetChanged();
 
-            }
-
-        });
     }
 
     @NonNull

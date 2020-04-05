@@ -12,7 +12,6 @@
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
-        <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content">
             <LinearLayout android:orientation="vertical" android:paddingBottom="60.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
                 <!--<androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.299988dip" app:cardBackgroundColor="@color/white">
                     <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
@@ -128,7 +127,6 @@
 -->
 
             </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
 </FrameLayout>

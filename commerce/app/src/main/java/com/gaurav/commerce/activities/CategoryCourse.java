@@ -117,8 +117,9 @@ class CategoryCourseRecyclerView extends RecyclerView.Adapter<SubjectViewHolder>
         holder.language.setText(String.valueOf(list.get(position).getLanguage()));
         holder.cost_price.setText("₹"+String.valueOf(list.get(position).getCostPrice()));
         holder.cost_price.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.cost_price.setVisibility(View.INVISIBLE);
         holder.teacherName.setText(String.valueOf(list.get(position).getFacultyId()));
-        holder.selling_price.setText("₹"+String.valueOf(list.get(position).getSellingPrice()));
+        holder.selling_price.setText("₹"+String.valueOf(list.get(position).getCostPrice()));
         holder.rating.setText(String.valueOf(list.get(position).getAverageRating()));
         Picasso.with(holder.url.getContext()).load(list.get(position).getUrlImage()).into(holder.url);
     }

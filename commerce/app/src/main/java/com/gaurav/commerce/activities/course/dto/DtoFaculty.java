@@ -8,7 +8,7 @@ public class DtoFaculty implements Serializable {
 
     private String name;
 
-    private String urlImage;
+    private String urlimage;
 
     private String description;
 
@@ -31,11 +31,11 @@ public class DtoFaculty implements Serializable {
     }
 
     public String getUrlImage() {
-        return urlImage;
+        return urlimage;
     }
 
     public DtoFaculty setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+        this.urlimage = urlImage;
         return this;
     }
 
@@ -53,7 +53,7 @@ public class DtoFaculty implements Serializable {
         return "DtoFaculty{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", urlImage='" + urlImage + '\'' +
+                ", urlImage='" + urlimage + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AbountCourse">
 
     <LinearLayout
@@ -224,8 +225,22 @@
                     android:background="@color/white"
                     card_view:cardCornerRadius="3.0dip">
                     <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Medium android:textSize="11.699982sp" android:textColor="@color/green" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="11.699982dip" android:layout_marginTop="11.699982dip" android:text="About Instructor" />
-                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="11.699982dip" android:layout_marginTop="3.0dip" android:layout_marginBottom="11.699982dip">
+                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Medium
+                            android:textSize="11.699982sp"
+                            android:textColor="@color/green"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="11.699982dip"
+                            android:layout_marginTop="11.699982dip"
+                            android:text="About Instructor" />
+                        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="11.699982dip" android:layout_marginTop="3.0dip" android:layout_marginBottom="11.699982dip">
+                            <com.github.siyamed.shapeimageview.RoundedImageView
+                                android:layout_width="77.69998dip"
+                                android:id="@id/imageurl"
+                                android:layout_height="77.69998dip"
+                                android:src="@drawable/code_img"
+                                app:siRadius="6.0dip"
+                                app:siSquare="true" />
                             <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
                                 android:textSize="15.0sp"
                                 android:textColor="@color/txt_color"

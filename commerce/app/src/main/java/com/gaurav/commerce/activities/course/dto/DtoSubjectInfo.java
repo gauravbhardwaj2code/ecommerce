@@ -15,7 +15,7 @@ public class DtoSubjectInfo  implements Serializable {
 
     private String urlImage;
 
-    private String demoVideoUrl;
+    private List<String> demoVideoUrl=new ArrayList<>();
 
     private String examName;
 
@@ -29,13 +29,15 @@ public class DtoSubjectInfo  implements Serializable {
 
     private String language="Hindi";
 
-    private Double totalHours=0.0;
+    private String  totalHours="0.0";
 
-    private Integer facultyId;
+    private String facultyId;
 
     private String description="description here";
 
-    private List<String> packageContent=Arrays.asList("Videos");
+    private String packageContent="";
+
+    private String category;
 
     private Integer totalRating=0;
 
@@ -89,20 +91,20 @@ public class DtoSubjectInfo  implements Serializable {
         return this;
     }
 
-    public Double getTotalHours() {
+    public String getTotalHours() {
         return totalHours;
     }
 
-    public DtoSubjectInfo setTotalHours(Double totalHours) {
+    public DtoSubjectInfo setTotalHours(String totalHours) {
         this.totalHours = totalHours;
         return this;
     }
 
-    public Integer getFacultyId() {
+    public String getFacultyId() {
         return facultyId;
     }
 
-    public DtoSubjectInfo setFacultyId(Integer facultyId) {
+    public DtoSubjectInfo setFacultyId(String facultyId) {
         this.facultyId = facultyId;
         return this;
     }
@@ -116,11 +118,11 @@ public class DtoSubjectInfo  implements Serializable {
         return this;
     }
 
-    public List<String> getPackageContent() {
+    public String getPackageContent() {
         return packageContent;
     }
 
-    public DtoSubjectInfo setPackageContent(List<String> packageContent) {
+    public DtoSubjectInfo setPackageContent(String packageContent) {
         this.packageContent = packageContent;
         return this;
     }
@@ -161,11 +163,11 @@ public class DtoSubjectInfo  implements Serializable {
         return this;
     }
 
-    public String getDemoVideoUrl() {
+    public List<String> getDemoVideoUrl() {
         return demoVideoUrl;
     }
 
-    public DtoSubjectInfo setDemoVideoUrl(String demoVideoUrl) {
+    public DtoSubjectInfo setDemoVideoUrl(List<String> demoVideoUrl) {
         this.demoVideoUrl = demoVideoUrl;
         return this;
     }
@@ -204,6 +206,14 @@ public class DtoSubjectInfo  implements Serializable {
     public DtoSubjectInfo setLectures(List<DtoLectures> lectures) {
         this.lectures = lectures;
         return this;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override

@@ -105,6 +105,10 @@ class CurriculamChildRecycleView extends RecyclerView.Adapter<CurriculamChildHol
 
         holder.name.setText(String.valueOf(list.get(position).getTitle()));
         holder.time.setText(String.valueOf(list.get(position).getTime()));
+        if(list.get(position).getLectureContentType().equals(LectureContentType.PDF)){
+            holder.time.setVisibility(View.INVISIBLE);
+            holder.resourceType.setVisibility(View.VISIBLE);
+        }
         holder.index.setText(String.valueOf(position+1));
         if(play_allowed){
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +150,7 @@ class CurriculamChildRecycleView extends RecyclerView.Adapter<CurriculamChildHol
         }
 
         if(!play_allowed &&
-                list.get(position).isFree()){
+                Boolean.getBoolean(list.get(position).getFree())){
             holder.freePreview.setVisibility(View.VISIBLE);
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -190,6 +194,7 @@ class CurriculamChildHolder extends RecyclerView.ViewHolder{
 
     public TextView name;
     public TextView time;
+    public TextView resourceType;
     public TextView index;
     public MyTextView_Roboto_Regular freePreview;
 
@@ -202,6 +207,7 @@ class CurriculamChildHolder extends RecyclerView.ViewHolder{
         time=v.findViewById(R.id.time);
         index=v.findViewById(R.id.index);
         freePreview=v.findViewById(R.id.mark_free);
+        resourceType=v.findViewById(R.id.resourcetype);
 
     }
 }

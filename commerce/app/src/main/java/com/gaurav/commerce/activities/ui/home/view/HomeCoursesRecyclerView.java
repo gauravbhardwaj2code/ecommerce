@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,11 @@ public class HomeCoursesRecyclerView extends RecyclerView.Adapter<SubjectViewHol
 
       //  MockDatabaseUtil.createHomePageBestSellingBanner(database,lectureName);
 
-        this.databaseReference=database.getReference().child(lectureName);
+        updateList();
+
+        MockDatabaseUtil.adapters.put(lectureName,this);
+
+        /*this.databaseReference=database.getReference().child(lectureName);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -51,7 +56,13 @@ public class HomeCoursesRecyclerView extends RecyclerView.Adapter<SubjectViewHol
                 list.clear();
                 for(DataSnapshot data:dataSnapshot.getChildren()){
                     Map<String,List<Long>> idMap= (Map<String, List<Long>>) dataSnapshot.getValue();
-                    Map<Integer,DtoSubjectInfo> map=MockDatabaseUtil.getSubjectInfoMap(idMap.get(PRODUCTS));
+                    List<Long> ids=new ArrayList<>();
+                    if(idMap.get(PRODUCTS) instanceof HashMap){
+                        ids=new ArrayList(((HashMap) idMap.get(PRODUCTS)).values());
+                    }else{
+                        ids=idMap.get(PRODUCTS);
+                    }
+                    Map<Integer,DtoSubjectInfo> map=MockDatabaseUtil.getSubjectInfoMap(ids);
                     list=new ArrayList<>(map.values());
                 }
                 notifyDataSetChanged();
@@ -63,7 +74,7 @@ public class HomeCoursesRecyclerView extends RecyclerView.Adapter<SubjectViewHol
 
             }
 
-        });
+        });*/
     }
 
     @NonNull
@@ -92,9 +103,10 @@ public class HomeCoursesRecyclerView extends RecyclerView.Adapter<SubjectViewHol
         holder.name.setText(String.valueOf(list.get(position).getName()));
         holder.language.setText(String.valueOf(list.get(position).getLanguage()));
         holder.cost_price.setText("₹"+String.valueOf(list.get(position).getCostPrice()));
+        holder.cost_price.setVisibility(View.INVISIBLE);
         holder.cost_price.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         holder.teacherName.setText(String.valueOf(list.get(position).getFacultyId()));
-        holder.selling_price.setText("₹"+String.valueOf(list.get(position).getSellingPrice()));
+        holder.selling_price.setText("₹"+String.valueOf(list.get(position).getCostPrice()));
         holder.rating.setText(String.valueOf(list.get(position).getAverageRating()));
         Picasso.with(holder.url.getContext()).load(list.get(position).getUrlImage()).into(holder.url);
     }
@@ -102,6 +114,13 @@ public class HomeCoursesRecyclerView extends RecyclerView.Adapter<SubjectViewHol
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+
+    public void updateList(){
+        Map<Integer,DtoSubjectInfo> map=MockDatabaseUtil.getSubjectInfoMap(MockDatabaseUtil.getInternalDatabaseIds(LECTURES_DATABASE));
+        list=new ArrayList<>(map.values());
+        notifyDataSetChanged();
     }
 
 }
