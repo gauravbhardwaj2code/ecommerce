@@ -2,25 +2,36 @@ package com.gaurav.commerce;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.gaurav.commerce.models.SingleProductModel;
+import com.gaurav.commerce.activities.course.dto.DtoCart;
+import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
+import com.gaurav.commerce.database.util.MockDatabaseUtil;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.usersession.UserSession;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
+import static com.gaurav.commerce.database.constants.DatabaseConstants.CART_ITEMS_KEY;
 
 public class Cart extends AppCompatActivity {
 
@@ -38,7 +49,7 @@ public class Cart extends AppCompatActivity {
     private LinearLayout activitycartlist;
     private LottieAnimationView emptycart;
 
-    private ArrayList<SingleProductModel> cartcollect;
+    private List<DtoCart> cartcollect;
     private float totalcost=0;
     private int totalproducts=0;
 
@@ -71,7 +82,7 @@ public class Cart extends AppCompatActivity {
         tv_no_item = findViewById(R.id.tv_no_cards);
         activitycartlist = findViewById(R.id.activity_cart_list);
         emptycart = findViewById(R.id.empty_cart);
-        cartcollect = new ArrayList<>();
+        cartcollect = new ArrayList<>(session.getCartWishlistItems(CART_ITEMS_KEY));
 
         if (mRecyclerView != null) {
             //to enable optimization of recyclerview
@@ -92,57 +103,55 @@ public class Cart extends AppCompatActivity {
 
     private void populateRecyclerView() {
 
-        /*//Say Hello to our new FirebaseUI android Element, i.e., FirebaseRecyclerAdapter
-        final FirebaseRecyclerAdapter<SingleProductModel,MovieViewHolder> adapter = new FirebaseRecyclerAdapter<SingleProductModel, MovieViewHolder>(
-                SingleProductModel.class,
-                R.layout.cart_item_layout,
-                MovieViewHolder.class,
-                //referencing the node where we want the database to store the data from our Object
-                mDatabaseReference.child("cart").child(mobile).getRef()
-        ) {
+
+        mRecyclerView.setAdapter(new RecyclerView.Adapter<MovieViewHolder>() {
             @NonNull
             @Override
             public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_layout, parent, false);
+                MovieViewHolder holder = new MovieViewHolder(v);
+                return holder;
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull MovieViewHolder viewHolder, int position, @NonNull SingleProductModel model) {
+            public void onBindViewHolder(@NonNull MovieViewHolder viewHolder, int position) {
                 if(tv_no_item.getVisibility()== View.VISIBLE){
                     tv_no_item.setVisibility(View.GONE);
                 }
-                viewHolder.cardname.setText(model.getPrname());
-                viewHolder.cardprice.setText("₹ "+model.getPrprice());
-                viewHolder.cardcount.setText("Quantity : "+model.getNo_of_items());
-                Picasso.with(Cart.this).load(model.getPrimage()).into(viewHolder.cardimage);
 
-                totalcost += model.getNo_of_items()* Float.parseFloat(model.getPrprice());
-                totalproducts += model.getNo_of_items();
-                cartcollect.add(model);
+                DtoSubjectInfo subjectInfo=MockDatabaseUtil.subjectInfoMap.get(String.valueOf(cartcollect.get(position).getSubjectId()));
 
-                viewHolder.carddelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(Cart.this,getItem(position).getPrname(), Toast.LENGTH_SHORT).show();
-                        getRef(position).removeValue();
-                        session.decreaseCartValue();
-                        startActivity(new Intent(Cart.this,Cart.class));
-                        finish();
-                    }
-                });
+                viewHolder.cardname.setText(subjectInfo.getName());
+                viewHolder.cardprice.setText("₹ "+cartcollect.get(position).getPrice());
+                viewHolder.cardcount.setText("Quantity : "+1);
+                Picasso.with(Cart.this).load(subjectInfo.getUrlImage()).into(viewHolder.cardimage);
+
+                if(cartcollect.get(position).getPrice()!=null){
+                    totalcost = totalcost+cartcollect.get(position).getPrice().floatValue();
+                }
+                totalproducts =totalproducts+1;
+                //cartcollect.add(model);
+
+
             }
 
-        };
-        mRecyclerView.setAdapter(adapter);*/
+            @Override
+            public int getItemCount() {
+                return cartcollect.size();
+            }
+
+        });
+
+
     }
 
     public void checkout(View view) {
         Intent intent = new Intent(Cart.this,OrderDetails.class);
         intent.putExtra("totalprice", Float.toString(totalcost));
         intent.putExtra("totalproducts", Integer.toString(totalproducts));
-        intent.putExtra("cartproducts",cartcollect);
+        //intent.putExtra("cartproducts",cartcollect);
         startActivity(intent);
-        finish();
+       // finish();
     }
 
     //viewHolder for our Firebase UI
@@ -210,3 +219,5 @@ public class Cart extends AppCompatActivity {
         finish();
     }
 }
+
+

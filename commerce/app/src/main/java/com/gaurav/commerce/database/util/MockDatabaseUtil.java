@@ -37,7 +37,7 @@ public class MockDatabaseUtil {
     public static final String PRODUCTS = "products";
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    private static Map<String,DtoSubjectInfo> subjectInfoMap=new HashMap<>();
+    public static Map<String,DtoSubjectInfo> subjectInfoMap=new HashMap<>();
 
     private static Map<String,List<Long>> inetrnalDatabaseIds=new HashMap<>();
 

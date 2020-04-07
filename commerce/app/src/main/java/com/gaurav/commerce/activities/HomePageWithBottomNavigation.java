@@ -89,12 +89,14 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
     }
 
 
-    protected void viewCart(View view){
-        Toast.makeText(HomePageWithBottomNavigation.this, "Comming Soon!", Toast.LENGTH_LONG).show();
+    public void viewCart(View view){
+        startActivity(new Intent(HomePageWithBottomNavigation.this, Cart.class));
+        finish();
     }
 
-    protected void viewProfile(View view){
+    public void viewProfile(View view){
         startActivity(new Intent(HomePageWithBottomNavigation.this, Profile.class));
+        finish();
     }
 
     private void getValues() {
@@ -150,8 +152,9 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
         SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.feedback).withIcon(R.drawable.feedback);
         SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName(R.string.helpcentre).withIcon(R.drawable.helpccenter);
 
-        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("App Tour").withIcon(R.drawable.tour);
+        SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Terms And Condtions");
         SecondaryDrawerItem item13 = new SecondaryDrawerItem().withIdentifier(13).withName("Explore").withIcon(R.drawable.explore);
+        SecondaryDrawerItem item14 = new SecondaryDrawerItem().withIdentifier(14).withName("Privacy Policy");
 
 
         //creating navbar and adding to the toolbar ------------------------------------------------
@@ -167,13 +170,16 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                 .withTranslucentStatusBar(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-                        item1, item2, item3, item4, item5, new DividerDrawerItem(), item8, item9, item10,new DividerDrawerItem(),item12,item13
+                        item1, item2, item3, item4, item5, new DividerDrawerItem(), item8, item9, item10,new DividerDrawerItem(),item12,item13,item14
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
-                        switch (position) {
+
+                        Integer value=new Long(drawerItem.getIdentifier()).intValue();
+
+                        switch (value) {
 
                             case 1:
                                 if (result != null && result.isDrawerOpen()) {
@@ -230,15 +236,24 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                                 startActivity(new Intent(HomePageWithBottomNavigation.this, HelpCenter.class));
                                 break;
                             case 12:
-                                session.setFirstTimeLaunch(true);
-                                startActivity(new Intent(HomePageWithBottomNavigation.this, WelcomeActivity.class));
-                                finish();
+                                Intent browserIntent = new Intent(HomePageWithBottomNavigation.this, AppWebView.class
+                                        //Uri.parse("https://www.examonline.org/events-news-list")
+                                );
+                                browserIntent.putExtra("url","https://www.examonline.org/cafoundationAPP/play-store-terms-conditions.php");
+                                HomePageWithBottomNavigation.this.startActivity(browserIntent);
                                 break;
                             case 13:
                                 if (result != null && result.isDrawerOpen()) {
                                     result.closeDrawer();
                                 }
                                 tapview();
+                                break;
+                            case 14:
+                                Intent policy = new Intent(HomePageWithBottomNavigation.this, AppWebView.class
+                                        //Uri.parse("https://www.examonline.org/events-news-list")
+                                );
+                                policy.putExtra("url","https://www.examonline.org/cafoundationAPP/play-store-privacy-policy.php");
+                                HomePageWithBottomNavigation.this.startActivity(policy);
                                 break;
                             default:
                                 Toast.makeText(HomePageWithBottomNavigation.this, "Default", Toast.LENGTH_LONG).show();

@@ -18,4 +18,9 @@ public interface DatabaseConstants {
 
     String SUBJECT_DATA_BASE_NAME="subjects";
 
+
+    String CART_ITEMS_KEY="carts";
+    String WISHLIST_ITEMS_KEY="wishlist";
+
+
 }

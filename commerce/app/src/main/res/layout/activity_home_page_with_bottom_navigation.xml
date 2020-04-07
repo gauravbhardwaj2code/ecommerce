@@ -64,7 +64,8 @@
                         android:layout_height="20dp"
                         android:src="@drawable/cart"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginRight="15dp"/>
+                        android:layout_marginRight="15dp"
+                        android:onClick="viewCart"/>
 
                 </LinearLayout>
 

@@ -26,7 +26,7 @@ public class AppWebView extends AppCompatActivity {
         mWebview.getSettings().setLoadsImagesAutomatically(true);
         mWebview.getSettings().setJavaScriptEnabled(true);
         mWebview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        mWebview.loadUrl("https://www.examonline.org/events-news-list");
+        mWebview.loadUrl(getIntent().getStringExtra("url"));
 
 
     }

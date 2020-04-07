@@ -10,58 +10,52 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.gaurav.commerce.R;
+import com.gaurav.commerce.activities.course.dto.DtoCart;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
+import com.gaurav.commerce.activities.course.dto.DtoVariantDetails;
+import com.gaurav.commerce.activities.course.dto.DtoVariants;
 import com.gaurav.commerce.database.util.MockDatabaseUtil;
-import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AbountCourse.OnFragmentInteractionListener} interface
+ * {@link ProductDetail.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AbountCourse#newInstance} factory method to
+ * Use the {@link ProductDetail#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AbountCourse extends Fragment {
+public class ProductDetail extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public DtoSubjectInfo subjectInfo;
+    public TextView priceView;
+    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public AbountCourse() {
+    public ProductDetail() {
         // Required empty public constructor
     }
 
-    public void init(DtoSubjectInfo subjectInfo){
-        this.subjectInfo=subjectInfo;
-    }
 
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AbountCourse.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AbountCourse newInstance(DtoSubjectInfo subjectInfo, String param2) {
-        AbountCourse fragment = new AbountCourse();
+    public static ProductDetail newInstance(DtoSubjectInfo subjectInfo, TextView priceView) {
+        ProductDetail fragment = new ProductDetail();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM2, param2);
+        //args.putString(ARG_PARAM2, priceView);
         fragment.setArguments(args);
+        fragment.priceView=priceView;
         fragment.subjectInfo=subjectInfo;
         return fragment;
     }
@@ -70,18 +64,16 @@ public class AbountCourse extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root =inflater.inflate(R.layout.fragment_abount_course, container, false);
+        View root= inflater.inflate(R.layout.fragment_product_detail, container, false);
+
         TextView examView=root.findViewById(R.id.examName);
         examView.setText(subjectInfo.getExamName());
 
@@ -116,9 +108,55 @@ public class AbountCourse extends Fragment {
         teacher_description.setText(String.valueOf(MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId()).getDescription()));
 
 
+
+        if(subjectInfo.getVarients()!=null && subjectInfo.getVarients().size()>0){
+            createVariantLook(root,subjectInfo.getVarients());
+        }
+
+
         return root;
     }
 
+    private void createVariantLook(View root, List<DtoVariants> variants) {
+        RadioGroup radioGroup=root.findViewById(R.id.radio_dates);
+        for(DtoVariants dtoVariant:variants){
+            RadioButton radioButton=new RadioButton(root.getContext());
+            radioButton.setText(dtoVariant.getName());
+            radioButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    generateVariantUi(root,dtoVariant.getDetails(),dtoVariant.getValidity());
+                }
+            });
+            radioGroup.addView(radioButton);
+        }
+    }
+
+
+    private void generateVariantUi(View root, List<DtoVariantDetails> details, String validity){
+        RadioGroup radioGroup=root.findViewById(R.id.product_variants);
+        radioGroup.removeAllViews();
+        for(DtoVariantDetails dtoVariantDetails:details){
+            RadioButton radioButton=new RadioButton(root.getContext());
+            radioButton.setText(dtoVariantDetails.getMode());
+            radioButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    priceView.setText("₹"+String.valueOf(dtoVariantDetails.getPrice()));
+                    DtoCart dtoCart=new DtoCart();
+                    dtoCart.setSubjectId(subjectInfo.getId());
+                    dtoCart.setMode(dtoVariantDetails.getMode());
+                    dtoCart.setPrice(dtoVariantDetails.getPrice());
+                    dtoCart.setValidity(validity);
+                    subjectInfo.setDtoCart(dtoCart);
+
+                }
+            });
+            radioGroup.addView(radioButton);
+        }
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);

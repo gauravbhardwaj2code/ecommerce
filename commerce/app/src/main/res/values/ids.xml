@@ -207,6 +207,7 @@
     <item name="cardView" type="id" />
     <item name="mark_free" type="id" />
     <item name="resourcetype" type="id" />
+    <item name="toolbarIdName" type="id" />
 
 
 </resources>

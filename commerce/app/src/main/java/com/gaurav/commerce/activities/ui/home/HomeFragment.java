@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
                 Intent browserIntent = new Intent(getContext(), AppWebView.class
                         //Uri.parse("https://www.examonline.org/events-news-list")
                 );
+                browserIntent.putExtra("url","https://www.examonline.org/events-news-list");
                 v.getContext().startActivity(browserIntent);
             }
         });

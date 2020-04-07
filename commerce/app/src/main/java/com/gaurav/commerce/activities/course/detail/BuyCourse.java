@@ -6,11 +6,16 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.gaurav.commerce.Wishlist;
 import com.gaurav.commerce.activities.course.dto.AllPlayersWrapper;
+import com.gaurav.commerce.activities.course.dto.DtoCart;
 import com.gaurav.commerce.activities.course.dto.DtoSubjectInfo;
+import com.gaurav.commerce.database.util.MockDatabaseUtil;
 import com.gaurav.commerce.fragments.AbountCourse;
 import com.gaurav.commerce.fragments.Curriculam;
 import com.gaurav.commerce.fragments.LectureList;
+import com.gaurav.commerce.fragments.ProductDetail;
+import com.gaurav.commerce.usersession.UserSession;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,7 +27,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gaurav.commerce.R;
 import com.google.android.material.tabs.TabLayout;
@@ -30,13 +37,23 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.google.android.youtube.player.YouTubePlayerSupportFragmentX;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import bg.devlabs.fullscreenvideoview.FullscreenVideoView;
 import bg.devlabs.fullscreenvideoview.playbackspeed.PlaybackSpeedOptions;
+import es.dmoral.toasty.Toasty;
 
-public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelectedListener,Curriculam.OnFragmentInteractionListener, AbountCourse.OnFragmentInteractionListener{
+import static com.gaurav.commerce.database.constants.DatabaseConstants.CART_ITEMS_KEY;
+import static com.gaurav.commerce.database.constants.DatabaseConstants.WISHLIST_ITEMS_KEY;
+
+public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelectedListener,
+        Curriculam.OnFragmentInteractionListener,
+        AbountCourse.OnFragmentInteractionListener,
+        ProductDetail.OnFragmentInteractionListener{
 
     private TabLayout tabLayout;
 
@@ -66,16 +83,16 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
         textView=findViewById(R.id.teacher_name);
         textView.setText(subjectInfo.getFacultyId()+"");
 
-        textView=findViewById(R.id.cost_price);
-        textView.setText("₹"+subjectInfo.getCostPrice()+"");
-        textView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
-        textView.setVisibility(View.INVISIBLE);
+//        textView=findViewById(R.id.cost_price);
+//        textView.setText("₹"+subjectInfo.getCostPrice()+"");
+  //      textView.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+    //    textView.setVisibility(View.INVISIBLE);
 
         textView=findViewById(R.id.selling_price);
         textView.setText("₹"+subjectInfo.getCostPrice()+"");
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("Lectures"),true);
-        tabLayout.addTab(tabLayout.newTab().setText("More"));
+        tabLayout.addTab(tabLayout.newTab().setText("Info"),true);
+        tabLayout.addTab(tabLayout.newTab().setText("Course Structure"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager
@@ -83,7 +100,7 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
 
         //Creating our pager adapter
         BuyCoursePager adapter = new BuyCoursePager(getSupportFragmentManager(), tabLayout.getTabCount(),viewPager,subjectInfo,
-                playersWrapper);
+                playersWrapper,textView);
 
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
@@ -92,7 +109,47 @@ public class BuyCourse extends AppCompatActivity implements TabLayout.OnTabSelec
 
         initializeYoutubePlayer(subjectInfo);
 
+        initCartAndWishlist(subjectInfo);
+
     }
+
+    private void initCartAndWishlist(DtoSubjectInfo subjectInfo) {
+        UserSession userSession=new UserSession(this);
+
+        TextView wishList=findViewById(R.id.add_to_wishlist);
+        wishList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(subjectInfo.getDtoCart()==null){
+                    Toasty.error(getBaseContext(),"Please Select Date And Mode!",Toast.LENGTH_LONG).show();
+                }else{
+                    Set<DtoCart> cartList=userSession.getCartWishlistItems(WISHLIST_ITEMS_KEY);
+                    cartList.add(subjectInfo.getDtoCart());
+                    userSession.setCartWishlistItems(WISHLIST_ITEMS_KEY,cartList);
+                    Toasty.success(getBaseContext(),"Item Added To wish LIst",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+
+        TextView cart=findViewById(R.id.add_to_cart);
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(subjectInfo.getDtoCart()==null){
+                    Toasty.error(getBaseContext(),"Please Select Date And Mode!",Toast.LENGTH_LONG).show();
+                }else {
+                    Set<DtoCart> cartList=userSession.getCartWishlistItems(CART_ITEMS_KEY);
+                    cartList.add(subjectInfo.getDtoCart());
+                    userSession.setCartWishlistItems(CART_ITEMS_KEY,cartList);
+                    Toasty.success(getBaseContext(), "Item Added To Cart ", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }
+
 
     private void initializeYoutubePlayer(DtoSubjectInfo subjectInfo) {
 
@@ -163,16 +220,19 @@ class BuyCoursePager extends FragmentStatePagerAdapter {
 
     private DtoSubjectInfo subjectInfo;
     private AllPlayersWrapper youTubePlayer;
+    private TextView priceView;
     //Constructor to the class
 
 
-    public BuyCoursePager(FragmentManager fm, int tabCount, ViewPager viewPager,DtoSubjectInfo subjectInfo,AllPlayersWrapper youTubePlayer) {
+    public BuyCoursePager(FragmentManager fm, int tabCount, ViewPager viewPager, DtoSubjectInfo subjectInfo,
+                          AllPlayersWrapper youTubePlayer, TextView priceView) {
         super(fm);
         //Initializing tab count
         this.tabCount= tabCount;
         this.viewPager=viewPager;
         this.subjectInfo=subjectInfo;
         this.youTubePlayer=youTubePlayer;
+        this.priceView=priceView;
 
     }
 
@@ -182,11 +242,11 @@ class BuyCoursePager extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
+                return ProductDetail.newInstance(subjectInfo,priceView);
+            case 1:
                 //viewPager.setCurrentItem(0);
             return  Curriculam.newInstance(subjectInfo,false,null,youTubePlayer);
-            case 1:
-                //viewPager.setCurrentItem(1);
-                return AbountCourse.newInstance(subjectInfo,"");
+
             default:
                 return null;
         }

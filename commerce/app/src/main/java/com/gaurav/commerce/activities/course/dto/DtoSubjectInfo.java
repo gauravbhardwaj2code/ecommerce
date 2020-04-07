@@ -45,6 +45,9 @@ public class DtoSubjectInfo  implements Serializable {
 
     private List<DtoLectures> lectures=new ArrayList<>();
 
+    private List<DtoVariants> varients=new ArrayList<>();
+
+    private DtoCart dtoCart;
 
     public Integer getId() {
         return id;
@@ -214,6 +217,22 @@ public class DtoSubjectInfo  implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public List<DtoVariants> getVarients() {
+        return varients;
+    }
+
+    public void setVarients(List<DtoVariants> varients) {
+        this.varients = varients;
+    }
+
+    public DtoCart getDtoCart() {
+        return dtoCart;
+    }
+
+    public void setDtoCart(DtoCart dtoCart) {
+        this.dtoCart = dtoCart;
     }
 
     @Override

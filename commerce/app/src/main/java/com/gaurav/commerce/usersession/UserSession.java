@@ -9,12 +9,22 @@ import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.gaurav.commerce.LoginActivity;
+import com.gaurav.commerce.activities.course.dto.DtoCart;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.util.JsonMapper;
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Set;
+
+import static com.gaurav.commerce.database.constants.DatabaseConstants.CART_ITEMS_KEY;
+import static com.gaurav.commerce.database.constants.DatabaseConstants.WISHLIST_ITEMS_KEY;
 
 /**
  * Created by kshitij on 12/18/17.
@@ -154,6 +164,57 @@ public class UserSession {
         return userSubjectInfo;
     }
 
+    public Set<DtoCart> getCartWishlistItems(String name){
+        Gson gson = new Gson();
+        Set<DtoCart> list=null;
+        try{
+            list=gson.fromJson(pref.getString(name,null),Set.class);
+
+            Set<DtoCart> newSet=new HashSet<>();
+            if(list!=null && list.size()>0){
+                for(Object o:list){
+                    if(o  instanceof LinkedTreeMap){
+                        LinkedTreeMap<String,Object> data= (LinkedTreeMap<String, Object>) o;
+                        DtoCart dtoCart=new DtoCart();
+                        dtoCart.setValidity(String.valueOf(data.get("validity")));
+                        dtoCart.setMode(String.valueOf(data.get("mode")));
+                        if(data.get("subjectId") instanceof Double){
+                            dtoCart.setSubjectId(new Double((Double) data.get("subjectId")).intValue());
+                        }else{
+                            dtoCart.setSubjectId(Integer.parseInt(String.valueOf(data.get("subjectId"))));
+                        }
+                        if(data.get("price") instanceof Double){
+                            dtoCart.setPrice(new Double((Double) data.get("price")));
+                        }else{
+                            dtoCart.setPrice(Double.parseDouble(String.valueOf(data.get("price"))));
+                        }
+                        newSet.add(dtoCart);
+                    }else{
+                        newSet.add((DtoCart) o);
+                    }
+                }
+                return newSet;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+        if(list==null){
+            list=new HashSet<>();
+            editor.putString(name,gson.toJson(list));
+            editor.commit();
+        }
+        return list;
+    }
+
+    public void setCartWishlistItems(String name,Set<DtoCart> list){
+        Gson gson = new Gson();
+        editor.putString(name,gson.toJson(list));
+        editor.commit();
+    }
+
     /**
      * Get stored session data
      * */
@@ -207,11 +268,11 @@ public class UserSession {
     }
 
     public int getCartValue(){
-        return pref.getInt(KEY_CART,0);
+        return pref.getInt(KEY_CART,getCartWishlistItems(CART_ITEMS_KEY).size());
     }
 
     public int getWishlistValue(){
-        return pref.getInt(KEY_WISHLIST,0);
+        return pref.getInt(KEY_WISHLIST,getCartWishlistItems(WISHLIST_ITEMS_KEY).size());
     }
 
     public Boolean getFirstTime() {
