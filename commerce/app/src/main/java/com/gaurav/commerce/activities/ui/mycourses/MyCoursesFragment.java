@@ -3,6 +3,7 @@ package com.gaurav.commerce.activities.ui.mycourses;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +48,7 @@ import static com.gaurav.commerce.usersession.UserSession.KEY_EMAIL;
 import static com.gaurav.commerce.usersession.UserSession.KEY_MOBiLE;
 import static com.gaurav.commerce.usersession.UserSession.KEY_USER_SUBJECT_INFO;
 
-public class MyCoursesFragment extends Fragment {
+public class MyCoursesFragment extends Fragment implements UpdateList{
 
 
     private MyCoursesViewModel myCoursesViewModel;
@@ -55,6 +56,8 @@ public class MyCoursesFragment extends Fragment {
     private UserSession userSession;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    private RecyclerView lecturesRecyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -67,68 +70,37 @@ public class MyCoursesFragment extends Fragment {
                 ViewModelProviders.of(this).get(MyCoursesViewModel.class);
         View root = inflater.inflate(R.layout.fragment_mycourse, container, false);
 
-        FetchMySubjects fetchMySubjects=new FetchMySubjects();
-        List<Long> ids=new ArrayList<>();
-        String phone = userSession.getUserDetails().get(KEY_MOBiLE);
-        try {
-            String data=fetchMySubjects.execute(userSession.getUserDetails().get(KEY_EMAIL),phone).get();
-            System.out.println(data);
-            if(null!=data && !data.trim().isEmpty()){
-                Gson gson = new Gson();
-                Type listType = new TypeToken<List<HashMap<String, Object>>>(){}.getType();
-                List<HashMap<String, Object>> listOfSubject =
-                        gson.fromJson(data, listType);
-                for(HashMap<String, Object> map:listOfSubject){
-                    Double id=Double.parseDouble(String.valueOf(map.get("id")));
-                    ids.add(id.longValue());
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
-        /*CircularProgressBar circularProgressBar = root.findViewById(R.id.circle_progress);
+        List<DtoSubjectInfo> list=new ArrayList<>();
+        this.lecturesRecyclerView=root.findViewById(R.id.recyclerview2);
 
-// or with animation
-        circularProgressBar.setProgressWithAnimation(65f, 3000l);
-        circularProgressBar.setProgressBarColor(Color.BLACK);
-        // Set Progress Max
-        circularProgressBar.setProgressMax(200f);
-// or with gradient
-        circularProgressBar.setProgressBarColorStart(Color.GRAY);
-        circularProgressBar.setProgressBarColorEnd(Color.GREEN);
+        renderList(inflater,lecturesRecyclerView,database,R.layout.mycourse_list,list, CourseDetail.class);
 
-        // Set Width
-        circularProgressBar.setProgressBarWidth(7f); // in DP
-        circularProgressBar.setBackgroundProgressBarWidth(3f); // in DP
-
-// Other
-        circularProgressBar.setRoundBorder(true);
-        circularProgressBar.setStartAngle(180f);*/
-
-        Map<Integer,DtoSubjectInfo> map=MockDatabaseUtil.getSubjectInfoMap(ids);
-        List<DtoSubjectInfo> list=new ArrayList<>(map.values());
-
-
-
-        renderList(inflater,root.findViewById(R.id.recyclerview2),database,R.layout.mycourse_list,list, CourseDetail.class);
 
 
         return root;
     }
 
 
+
+
+
+
     private void renderList(LayoutInflater inflater,RecyclerView lecturesRecyclerView, FirebaseDatabase database, int home_page_course_recycler_view,
                             List<DtoSubjectInfo> list,Class<?> nextActiviti) {
 
         lecturesRecyclerView.setHasFixedSize(true);
+
         //using staggered grid pattern in recyclerview
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(inflater.getContext(), LinearLayoutManager.VERTICAL,false);
         lecturesRecyclerView.setLayoutManager(mLayoutManager);
 
-        lecturesRecyclerView.setAdapter(new MyCourseCourseRecyclerView(database,home_page_course_recycler_view,list,nextActiviti,this.userSession));
+
+
+        lecturesRecyclerView.setAdapter(
+                new MyCourseCourseRecyclerView(database,home_page_course_recycler_view,list,nextActiviti,this.userSession)
+        );
     }
 
     @Override
@@ -140,10 +112,17 @@ public class MyCoursesFragment extends Fragment {
         super.onStop();
     }
 
+    @Override
+    public void updateData(List<DtoSubjectInfo> list) {
+        UpdateList updateList= (UpdateList) this.lecturesRecyclerView.getAdapter();
+        updateList.updateData(list);
+    }
 }
 
 
-class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder> {
+
+
+class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder> implements UpdateList {
 
 
 
@@ -184,7 +163,16 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
             }
 
         }
-        notifyDataSetChanged();
+
+
+        try {
+            FetchMySubjects fetchMySubjects=new FetchMySubjects(this);
+            String phone = userSession.getUserDetails().get(KEY_MOBiLE);
+            fetchMySubjects.execute(userSession.getUserDetails().get(KEY_EMAIL),phone).get();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -242,4 +230,9 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
         return list.size();
     }
 
+    @Override
+    public void updateData(List<DtoSubjectInfo> list) {
+        this.list=list;
+        notifyDataSetChanged();
+    }
 }

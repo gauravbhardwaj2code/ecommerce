@@ -254,6 +254,10 @@ public class MockDatabaseUtil {
         return map;
     }
 
+    public static DtoSubjectInfo getSubjectInfoById(Long id) {
+        return subjectInfoMap.get(id.toString());
+    }
+
     public static List<Long> getInternalDatabaseIds(String name){
         return inetrnalDatabaseIds.get(name);
     }

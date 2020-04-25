@@ -81,7 +81,8 @@ public class HomePagerBannerAdapter extends PagerAdapter {
     @NonNull @Override public Object instantiateItem(@NonNull ViewGroup view, int position) {
 
         ImageView imageView=new ImageView(view.getContext());
-        Picasso.with(view.getContext()).load(list.get(position).getUrl()).into(imageView);
+        Picasso.with(view.getContext()).load(list.get(position).getUrl())
+                .fit().into(imageView);
         view.addView(imageView,ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         return imageView;

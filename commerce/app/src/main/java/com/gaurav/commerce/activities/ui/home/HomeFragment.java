@@ -37,10 +37,6 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-    private SliderLayout sliderShow;
-    private SliderLayout sliderShow1;
-    private Drawer result;
-    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
@@ -55,15 +51,6 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
-      //  inflateImageSlider(root);
-       /* final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
 
         ViewPager viewpager = (ViewPager) root.findViewById(R.id.viewpager);
 
@@ -102,64 +89,6 @@ public class HomeFragment extends Fragment {
         new HomeHorizontalSubjectViewHandler(root.findViewById(R.id.recyclerview1),database,R.layout.home_page_course_recycler_view,h_lectures, BuyCourse.class);
     }
 
-
-    /*private void inflateImageSlider(View root) {
-
-        // Using Image Slider -----------------------------------------------------------------------
-        sliderShow = root.findViewById(R.id.slider);
-
-        //populating Image slider
-        ArrayList<String> sliderImages = new ArrayList<>();
-        sliderImages.add("https://www.examonline.org/estatic/homeimages/cma-final-b.webp");
-        sliderImages.add("https://www.examonline.org/estatic/homeimages/cfr.webp");
-        sliderImages.add("https://www.examonline.org/estatic/homeimages/mcq.webp");
-        sliderImages.add("https://www.examonline.org/estatic/homeimages/blue-cma-inter.webp");
-
-        for (String s : sliderImages) {
-            DefaultSliderView sliderView = new DefaultSliderView(getContext());
-            sliderView.image(s);
-            sliderShow.addSlider(sliderView);
-        }
-
-        sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
-
-        //
-        sliderShow1 =root.findViewById(R.id.slider2);
-
-        sliderImages = new ArrayList<>();
-        sliderImages.add("https://www.examonline.org/images/slider/cma-costing1.png");
-        sliderImages.add("https://www.examonline.org/images/slider/ipc-cma.webp");
-        sliderImages.add("https://www.examonline.org/images/slider/cainter-tax-sprao.webp");
-        sliderImages.add("https://www.examonline.org/images/slider/cmafinal-cfr.webp");
-
-        for (String s : sliderImages) {
-            DefaultSliderView sliderView = new DefaultSliderView(getContext());
-            sliderView.image(s);
-            sliderShow1.addSlider(sliderView);
-        }
-
-        sliderShow1.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom);
-
-    }
-
-
-    private void getValues() {
-
-        //create new session object by passing application context
-        session = new UserSession(getContext());
-
-        //validating session
-        session.isLoggedIn();
-
-        //get User details if logged in
-        user = session.getUserDetails();
-
-        name = user.get(UserSession.KEY_NAME);
-        email = user.get(UserSession.KEY_EMAIL);
-        mobile = user.get(UserSession.KEY_MOBiLE);
-        photo = user.get(UserSession.KEY_PHOTO);
-    }
-*/
 }
 
 
