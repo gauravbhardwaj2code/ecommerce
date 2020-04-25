@@ -31,8 +31,6 @@ import butterknife.ButterKnife;
 
 public class OrderDetails extends AppCompatActivity {
 
-    @BindView(R.id.delivery_date)
-    TextView deliveryDate;
     @BindView(R.id.no_of_items)
     TextView noOfItems;
     @BindView(R.id.total_amount)
@@ -55,7 +53,6 @@ public class OrderDetails extends AppCompatActivity {
     private String placed_user_name,getPlaced_user_email,getPlaced_user_mobile_no;
     private UserSession session;
     private HashMap<String, String> user;
-    private DatabaseReference mDatabaseReference;
     private String currdatetime;
 
     @Override
@@ -79,7 +76,10 @@ public class OrderDetails extends AppCompatActivity {
         //validating session
         session.isLoggedIn();
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        orderemail.setText(session.getUserDetails().get(UserSession.KEY_EMAIL));
+        ordernumber.setText(session.getUserDetails().get(UserSession.KEY_MOBiLE));
+        ordername.setText(session.getUserDetails().get(UserSession.KEY_NAME));
 
         productdetails();
 
@@ -101,8 +101,6 @@ public class OrderDetails extends AppCompatActivity {
         SimpleDateFormat formattedDate = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         c.add(Calendar.DATE, 7);  // number of days to add
-        String tomorrow = (formattedDate.format(c.getTime()));
-        deliveryDate.setText(tomorrow);
 
         mainActivityMultiLineRadioGroup.setOnCheckedChangeListener(new MultiLineRadioGroup.OnCheckedChangeListener() {
             @Override
@@ -133,21 +131,17 @@ public class OrderDetails extends AppCompatActivity {
 
             order_reference_id = getordernumber();
 
-            //adding user details to the database under orders table
-            mDatabaseReference.child("orders").child(getPlaced_user_mobile_no).child(currdatetime).push().setValue(getProductObject());
 
-            //adding products to the order
-            for(SingleProductModel model:cartcollect){
-                mDatabaseReference.child("orders").child(getPlaced_user_mobile_no).child(currdatetime).child("items").push().setValue(model);
-            }
+            Intent intent = new Intent(OrderDetails.this, InstaMojoPayment.class);
+            intent.putExtra("orderid",order_reference_id);
+            startActivity(intent);
 
-            mDatabaseReference.child("cart").child(getPlaced_user_mobile_no).removeValue();
-            session.setCartValue(0);
+            /*session.setCartValue(0);
 
             Intent intent = new Intent(OrderDetails.this, OrderPlaced.class);
             intent.putExtra("orderid",order_reference_id);
             startActivity(intent);
-            finish();
+            finish();*/
         }
     }
 
@@ -170,7 +164,7 @@ public class OrderDetails extends AppCompatActivity {
         } else if (ordernumber.getText().toString().length() < 4 || ordernumber.getText().toString().length() > 12) {
             ordernumber.setError("Number Must consist of 10 characters");
             return false;
-        } else if (orderpincode.getText().toString().length() < 6 || ordernumber.getText().toString().length() > 8){
+        } else if (orderpincode.getText().toString().length() < 6 || orderpincode.getText().toString().length() > 6){
             orderpincode.setError("Pincode must be of 6 digits");
             return false;
         }
@@ -179,7 +173,7 @@ public class OrderDetails extends AppCompatActivity {
     }
 
     public PlacedOrderModel getProductObject() {
-        return new PlacedOrderModel(order_reference_id,noOfItems.getText().toString(),totalAmount.getText().toString(),deliveryDate.getText().toString(),payment_mode,ordername.getText().toString(),orderemail.getText().toString(),ordernumber.getText().toString(),orderaddress.getText().toString(),orderpincode.getText().toString(),placed_user_name,getPlaced_user_email,getPlaced_user_mobile_no);
+        return new PlacedOrderModel(order_reference_id,noOfItems.getText().toString(),totalAmount.getText().toString(),payment_mode,ordername.getText().toString(),orderemail.getText().toString(),ordernumber.getText().toString(),orderaddress.getText().toString(),orderpincode.getText().toString(),placed_user_name,getPlaced_user_email,getPlaced_user_mobile_no);
     }
 
     public String getordernumber() {

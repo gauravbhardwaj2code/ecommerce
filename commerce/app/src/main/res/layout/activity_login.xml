@@ -37,6 +37,7 @@
 
             <com.github.florent37.materialtextfield.MaterialTextField
                 android:layout_width="300dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 app:mtf_cardCollapsedHeight="1dp"
                 app:mtf_labelColor="@color/colorAccent"
@@ -55,6 +56,7 @@
                 android:layout_width="300dp"
                 app:mtf_cardCollapsedHeight="1dp"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 app:mtf_labelColor="@color/colorAccent"
                 app:mtf_image="@drawable/password"
@@ -96,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
+                android:visibility="gone"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 

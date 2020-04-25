@@ -2,9 +2,7 @@
 <resources>
 
     <string-array name="radio_buttons">
-        <item>PayPal</item>
-        <item>Paytm</item>
-        <item>COD</item>
+        <item>InstaMojo</item>
     </string-array>
 
     <string-array name="examples">

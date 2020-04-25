@@ -1,12 +1,18 @@
 package com.gaurav.commerce;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gaurav.commerce.activities.HomePageWithBottomNavigation;
+import com.gaurav.commerce.activities.ui.mycourses.MyCoursesFragment;
+import com.gaurav.commerce.http.ConfirmOrder;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
+import com.gaurav.commerce.usersession.UserSession;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +32,31 @@ public class OrderPlaced extends AppCompatActivity {
         //check Internet Connection
         new CheckInternetConnection(this).checkConnection();
 
+        String paymentStatus=getIntent().getStringExtra("paymentStatus");
+        if(paymentStatus.equalsIgnoreCase("credit")){
+            try {
+                UserSession userSession=new UserSession(this);
+                new ConfirmOrder().execute(userSession.getOrderId(),getIntent().getStringExtra("transactionId"));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }else{
+            TextView textView=findViewById(R.id.message);
+            textView.setText("Payment Failed.");
+        }
+
+        Button button=findViewById(R.id.go_to_mycourse);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderPlaced.this, HomePageWithBottomNavigation.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+
         initialize();
     }
 
@@ -35,6 +66,8 @@ public class OrderPlaced extends AppCompatActivity {
     }
 
     public void finishActivity(View view) {
+        Intent intent = new Intent(this, HomePageWithBottomNavigation.class);
+        startActivity(intent);
         finish();
     }
 }

@@ -124,7 +124,16 @@ public class Cart extends AppCompatActivity {
                 viewHolder.cardname.setText(subjectInfo.getName());
                 viewHolder.cardprice.setText("₹ "+cartcollect.get(position).getPrice());
                 viewHolder.cardcount.setText("Quantity : "+1);
+                viewHolder.language.setText("Language: "+subjectInfo.getLanguage());
                 Picasso.with(Cart.this).load(subjectInfo.getUrlImage()).into(viewHolder.cardimage);
+                viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        session.deleteCartWishlistItems(CART_ITEMS_KEY,cartcollect.get(position));
+                        cartcollect = new ArrayList<>(session.getCartWishlistItems(CART_ITEMS_KEY));
+                        notifyDataSetChanged();
+                    }
+                });
 
                 if(cartcollect.get(position).getPrice()!=null){
                     totalcost = totalcost+cartcollect.get(position).getPrice().floatValue();
@@ -161,7 +170,9 @@ public class Cart extends AppCompatActivity {
         ImageView cardimage;
         TextView cardprice;
         TextView cardcount;
+        TextView language;
         ImageView carddelete;
+        ImageView delete;
 
         View mView;
         public MovieViewHolder(View v) {
@@ -172,6 +183,8 @@ public class Cart extends AppCompatActivity {
             cardprice = v.findViewById(R.id.cart_prprice);
             cardcount = v.findViewById(R.id.cart_prcount);
             carddelete = v.findViewById(R.id.deletecard);
+            language =v.findViewById(R.id.language);
+            delete=v.findViewById(R.id.deletecard);
         }
     }
 
@@ -201,7 +214,6 @@ public class Cart extends AppCompatActivity {
 
     public void viewProfile(View view) {
         startActivity(new Intent(Cart.this,Profile.class));
-        finish();
     }
 
     @Override
@@ -216,7 +228,6 @@ public class Cart extends AppCompatActivity {
     public void Notifications(View view) {
 
         startActivity(new Intent(Cart.this,NotificationActivity.class));
-        finish();
     }
 }
 

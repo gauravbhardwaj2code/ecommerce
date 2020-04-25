@@ -3,15 +3,14 @@ package com.gaurav.commerce.models;
 
 public class PlacedOrderModel {
 
-    private String orderid,no_of_items,total_amount,delivery_date,payment_mode,deleiveryname,deliveryemail,deliverymobile_no,deliveryaddress,deliverypincode;
+    private String orderid,no_of_items,total_amount,payment_mode,deleiveryname,deliveryemail,deliverymobile_no,deliveryaddress,deliverypincode;
     private String placed_user_name,Placed_user_email,Placed_user_mobile_no;
 
-    public PlacedOrderModel(String orderid, String no_of_items, String total_amount, String delivery_date, String payment_mode, String deleiveryname, String deliveryemail, String deliverymobile_no, String deliveryaddress, String deliverypincode, String placed_user_name, String getPlaced_user_email, String getPlaced_user_mobile_no) {
+    public PlacedOrderModel(String orderid, String no_of_items, String total_amount, String payment_mode, String deleiveryname, String deliveryemail, String deliverymobile_no, String deliveryaddress, String deliverypincode, String placed_user_name, String getPlaced_user_email, String getPlaced_user_mobile_no) {
 
         this.orderid = orderid;
         this.no_of_items = no_of_items;
         this.total_amount = total_amount;
-        this.delivery_date = delivery_date;
         this.payment_mode = payment_mode;
         this.deleiveryname = deleiveryname;
         this.deliveryemail = deliveryemail;
@@ -64,13 +63,6 @@ public class PlacedOrderModel {
         this.total_amount = total_amount;
     }
 
-    public String getDelivery_date() {
-        return delivery_date;
-    }
-
-    public void setDelivery_date(String delivery_date) {
-        this.delivery_date = delivery_date;
-    }
 
     public String getPayment_mode() {
         return payment_mode;

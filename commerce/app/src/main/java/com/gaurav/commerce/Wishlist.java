@@ -129,7 +129,17 @@ public class Wishlist extends AppCompatActivity {
                 viewHolder.cardname.setText(subjectInfo.getName());
                 viewHolder.cardprice.setText("₹ "+cartcollect.get(position).getPrice());
                 viewHolder.cardcount.setText("Quantity : "+1);
+                viewHolder.language.setText("Language: "+subjectInfo.getLanguage());
                 Picasso.with(Wishlist.this).load(subjectInfo.getUrlImage()).into(viewHolder.cardimage);
+
+                viewHolder.delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        session.deleteCartWishlistItems(WISHLIST_ITEMS_KEY,cartcollect.get(position));
+                        cartcollect = new ArrayList<>(session.getCartWishlistItems(WISHLIST_ITEMS_KEY));
+                        notifyDataSetChanged();
+                    }
+                });
 
                 if(cartcollect.get(position).getPrice()!=null){
                     totalcost = totalcost+cartcollect.get(position).getPrice().floatValue();

@@ -44,11 +44,6 @@ public class HomeFragment extends Fragment {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    //to get user session data
-    private UserSession session;
-    private HashMap<String, String> user;
-    private String name, email, photo, mobile;
-    private String  first_time;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.gaurav.commerce.R;
 import com.gaurav.commerce.messagereader.MessageReceiver;
+import com.instamojo.android.Instamojo;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
@@ -32,6 +33,8 @@ public class CustomApplication extends Application {
         super.onCreate();
 
         context = getApplicationContext();
+
+        Instamojo.getInstance().initialize(this, Instamojo.Environment.PRODUCTION);
 
 
         smsBroadcastReceiver = SingleTonClasses.smsBroadcastReceiver;

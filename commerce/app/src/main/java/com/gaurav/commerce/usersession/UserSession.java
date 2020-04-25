@@ -32,6 +32,7 @@ import static com.gaurav.commerce.database.constants.DatabaseConstants.WISHLIST_
 
 public class UserSession {
 
+    public static final String ORDER_ID_INSTA_MOJO = "order_id_Insta_mojo";
     // Shared Preferences
     SharedPreferences pref;
 
@@ -215,6 +216,14 @@ public class UserSession {
         editor.commit();
     }
 
+    public void deleteCartWishlistItems(String name,DtoCart dtoCart){
+        Gson gson = new Gson();
+        Set<DtoCart> setData=getCartWishlistItems(name);
+        setData.remove(dtoCart);
+        editor.putString(name,gson.toJson(setData));
+        editor.commit();
+    }
+
     /**
      * Get stored session data
      * */
@@ -316,6 +325,15 @@ public class UserSession {
     public void setCartValue(int count){
         editor.putInt(KEY_CART,count);
         editor.commit();
+    }
+
+    public void setOrderId(String id){
+        editor.putString(ORDER_ID_INSTA_MOJO,id);
+        editor.commit();
+    }
+
+    public String getOrderId(){
+        return pref.getString(ORDER_ID_INSTA_MOJO,null);
     }
 
     public void setWishlistValue(int count){
