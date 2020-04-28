@@ -13,7 +13,6 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.usersession.UserSession;
-import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.Drawer;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +24,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Profile extends AppCompatActivity {
 
     private Drawer result;
-    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private TextView tvemail,tvphone;
 
     private TextView namebutton;

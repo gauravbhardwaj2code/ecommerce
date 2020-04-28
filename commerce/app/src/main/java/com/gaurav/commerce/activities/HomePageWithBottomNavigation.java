@@ -24,24 +24,17 @@ import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetSequence;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mikepenz.aboutlibraries.Libs;
-import com.mikepenz.aboutlibraries.LibsBuilder;
-import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.MiniDrawer;
-import com.mikepenz.materialdrawer.interfaces.ICrossfader;
+
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.mikepenz.materialdrawer.util.DrawerUIUtils;
-import com.mikepenz.materialize.util.UIUtils;
-import com.webianks.easy_feedback.EasyFeedback;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -58,9 +51,6 @@ import es.dmoral.toasty.Toasty;
 public class HomePageWithBottomNavigation extends AppCompatActivity {
 
     private Drawer result;
-    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
-
-
     //to get user session data
     private UserSession session;
     private HashMap<String, String> user;
@@ -163,14 +153,14 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
         result = new DrawerBuilder()
                 .withActivity(this)
                 .withToolbar(toolbar)
-                .withHasStableIds(true)
-                .withDrawerLayout(R.layout.crossfade_drawer)
+                //.withHasStableIds(true)
+               // .withDrawerLayout(R.layout.crossfade_drawer)
                 .withAccountHeader(headerResult)
-                .withDrawerWidthDp(72)
-                .withGenerateMiniDrawer(false)
-                .withFullscreen(true)
-                .withTranslucentStatusBar(true)
-                .withActionBarDrawerToggleAnimated(true)
+                //.withDrawerWidthDp(72)
+               // .withGenerateMiniDrawer(false)
+                //.withFullscreen(true)
+                //.withTranslucentStatusBar(true)
+                //.withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
                         item1, item3, item4, item5, new DividerDrawerItem(), item10,new DividerDrawerItem(),item12,item13,item14
                 )
@@ -242,13 +232,11 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
 
         //Setting crossfader drawer------------------------------------------------------------
 
-        crossfadeDrawerLayout = (CrossfadeDrawerLayout) result.getDrawerLayout();
 
         //define maxDrawerWidth
-        crossfadeDrawerLayout.setMaxWidthPx(DrawerUIUtils.getOptimalDrawerWidth(this));
 
         //add second view (which is the miniDrawer)
-        final MiniDrawer miniResult = result.getMiniDrawer();
+        /*final MiniDrawer miniResult = result.getMiniDrawer();
 
         //build the view for the MiniDrawer
         View view = miniResult.build(this);
@@ -276,7 +264,7 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
             public boolean isCrossfaded() {
                 return crossfadeDrawerLayout.isCrossfaded();
             }
-        });
+        });*/
     }
 
     private void tapview() {

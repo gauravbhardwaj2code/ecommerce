@@ -26,7 +26,6 @@ import com.gaurav.commerce.UpdateData;
 import com.gaurav.commerce.Wishlist;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.usersession.UserSession;
-import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.Drawer;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +39,6 @@ public class NotificationsFragment extends Fragment {
     private NotificationsViewModel notificationsViewModel;
 
     private Drawer result;
-    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private TextView tvemail,tvphone;
 
     private TextView namebutton;

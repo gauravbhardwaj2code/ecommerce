@@ -30,7 +30,6 @@ import com.gaurav.commerce.networksync.UpdateRequest;
 import com.gaurav.commerce.usersession.UserSession;
 import com.google.android.material.snackbar.Snackbar;
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.Drawer;
 
 import org.json.JSONException;
@@ -48,7 +47,6 @@ import es.dmoral.toasty.Toasty;
 public class UpdateData extends AppCompatActivity {
 
     private Drawer result;
-    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
     private Button button;
     private EditText edtname,edtemail,edtmobile;
     CircleImageView primage;

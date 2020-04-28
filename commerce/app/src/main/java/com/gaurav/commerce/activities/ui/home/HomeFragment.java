@@ -20,7 +20,6 @@ import com.gaurav.commerce.activities.course.detail.BuyCourse;
 import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.usersession.UserSession;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.Drawer;
 
 import java.util.HashMap;

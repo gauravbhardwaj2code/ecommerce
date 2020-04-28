@@ -23,7 +23,6 @@ import com.gaurav.commerce.networksync.CheckInternetConnection;
 import com.gaurav.commerce.usersession.UserSession;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.mikepenz.crossfadedrawerlayout.view.CrossfadeDrawerLayout;
 import com.mikepenz.materialdrawer.Drawer;
 import com.squareup.picasso.Picasso;
 
@@ -38,7 +37,6 @@ import static com.gaurav.commerce.database.constants.DatabaseConstants.WISHLIST_
 public class Wishlist extends AppCompatActivity {
 
     private Drawer result;
-    private CrossfadeDrawerLayout crossfadeDrawerLayout = null;
 
     //to get user session data
     private UserSession session;
