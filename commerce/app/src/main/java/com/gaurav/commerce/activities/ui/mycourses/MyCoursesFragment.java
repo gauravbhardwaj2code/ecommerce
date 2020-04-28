@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,6 +45,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import es.dmoral.toasty.Toasty;
+
 import static com.gaurav.commerce.database.util.MockDatabaseUtil.PRODUCTS;
 import static com.gaurav.commerce.usersession.UserSession.KEY_EMAIL;
 import static com.gaurav.commerce.usersession.UserSession.KEY_MOBiLE;
@@ -59,6 +63,10 @@ public class MyCoursesFragment extends Fragment implements UpdateList{
 
     private RecyclerView lecturesRecyclerView;
 
+    private ProgressBar progressBar;
+
+    private CardView cardView;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -74,16 +82,28 @@ public class MyCoursesFragment extends Fragment implements UpdateList{
 
         List<DtoSubjectInfo> list=new ArrayList<>();
         this.lecturesRecyclerView=root.findViewById(R.id.recyclerview2);
-
+        this.progressBar=root.findViewById(R.id.progress_bar);
+        this.cardView=root.findViewById(R.id.mycoursesview);
         renderList(inflater,lecturesRecyclerView,database,R.layout.mycourse_list,list, CourseDetail.class);
 
+        try {
+            FetchMySubjects fetchMySubjects=new FetchMySubjects(this);
+            String phone = userSession.getUserDetails().get(KEY_MOBiLE);
+            fetchMySubjects.execute(userSession.getUserDetails().get(KEY_EMAIL),phone);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return root;
     }
 
 
 
+    public void toggleProgreeBar(){
+        progressBar.setVisibility(View.GONE);
+        cardView.setVisibility(View.VISIBLE);
+    }
 
 
 
@@ -114,8 +134,10 @@ public class MyCoursesFragment extends Fragment implements UpdateList{
 
     @Override
     public void updateData(List<DtoSubjectInfo> list) {
+        toggleProgreeBar();
         UpdateList updateList= (UpdateList) this.lecturesRecyclerView.getAdapter();
         updateList.updateData(list);
+
     }
 }
 
@@ -164,16 +186,6 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
 
         }
 
-
-        try {
-            FetchMySubjects fetchMySubjects=new FetchMySubjects(this);
-            String phone = userSession.getUserDetails().get(KEY_MOBiLE);
-            fetchMySubjects.execute(userSession.getUserDetails().get(KEY_EMAIL),phone).get();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     @NonNull
@@ -190,9 +202,16 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 try {
-                    Intent intent=new Intent(v.getContext(), nextActiviti);
-                    intent.putExtra("sId",list.get(position));
-                    v.getContext().startActivity(intent);
+                    if(list.get(position).getPurchaseMode()!=null &&
+                            list.get(position).getPurchaseMode().equalsIgnoreCase("online")
+                    ){
+                        Intent intent=new Intent(v.getContext(), nextActiviti);
+                        intent.putExtra("sId",list.get(position));
+                        v.getContext().startActivity(intent);
+                    }else{
+                        Toasty.error(holder.itemView.getContext(),"Selected Course doesn't contain any Lecture Content.").show();
+                    }
+
                 }catch (Throwable e){
                     e.printStackTrace();
                 }
@@ -202,6 +221,8 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
         holder.name.setText(String.valueOf(list.get(position).getName()));
         holder.currentPosition.setText(String.valueOf(list.get(position).getLanguage()));
         holder.teacherName.setText(String.valueOf(list.get(position).getFacultyId()));
+        holder.mode.setText(list.get(position).getPurchaseMode());
+        holder.expiry.setText("Your Course will expire on "+list.get(position).getPurchaseExpiry());
         Picasso.with(holder.url.getContext()).load(list.get(position).getUrlImage()).into(holder.url);
         Float coveredVideos= Integer.valueOf(userSession.getUserSubjectInfo().getSubjectById(list.get(position).getId()).getCoveredVideos().size()).floatValue();
         Float totalVideos=Integer.valueOf(userSession.getUserSubjectInfo().getSubjectById(list.get(position).getId()).getTotalVideos()).floatValue();

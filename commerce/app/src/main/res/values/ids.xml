@@ -208,6 +208,9 @@
     <item name="mark_free" type="id" />
     <item name="resourcetype" type="id" />
     <item name="toolbarIdName" type="id" />
+    <item name="modecourse" type="id" />
+    <item name="expiry" type="id" />
+    <item name="mycoursesview" type="id" />
 
 
 </resources>

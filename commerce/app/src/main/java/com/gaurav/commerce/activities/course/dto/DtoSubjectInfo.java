@@ -49,6 +49,10 @@ public class DtoSubjectInfo  implements Serializable {
 
     private DtoCart dtoCart;
 
+    private String purchaseMode;
+
+    private String purchaseExpiry;
+
     public Integer getId() {
         return id;
     }
@@ -233,6 +237,22 @@ public class DtoSubjectInfo  implements Serializable {
 
     public void setDtoCart(DtoCart dtoCart) {
         this.dtoCart = dtoCart;
+    }
+
+    public String getPurchaseMode() {
+        return purchaseMode;
+    }
+
+    public void setPurchaseMode(String purchaseMode) {
+        this.purchaseMode = purchaseMode;
+    }
+
+    public String getPurchaseExpiry() {
+        return purchaseExpiry;
+    }
+
+    public void setPurchaseExpiry(String purchaseExpiry) {
+        this.purchaseExpiry = purchaseExpiry;
     }
 
     @Override

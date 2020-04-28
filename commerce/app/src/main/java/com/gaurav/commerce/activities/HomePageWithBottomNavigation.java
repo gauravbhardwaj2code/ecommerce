@@ -1,5 +1,7 @@
 package com.gaurav.commerce.activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.gaurav.commerce.Profile;
 import com.gaurav.commerce.R;
 import com.gaurav.commerce.WelcomeActivity;
 import com.gaurav.commerce.Wishlist;
+import com.gaurav.commerce.activities.ui.home.HomeFragment;
 import com.gaurav.commerce.database.util.MockDatabaseUtil;
 import com.gaurav.commerce.routehandler.security.GoogleSecurity;
 import com.gaurav.commerce.usersession.UserSession;
@@ -139,17 +142,16 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                 .build();
 
         //Adding nav drawer items ------------------------------------------------------------------
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName(R.string.home).withIcon(R.drawable.home);
-        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2).withName(R.string.myprofile).withIcon(R.drawable.profile);
-        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName(R.string.wishlist).withIcon(R.drawable.wishlist);
-        PrimaryDrawerItem item4 = new PrimaryDrawerItem().withIdentifier(4).withName(R.string.cart).withIcon(R.drawable.cart);
-        PrimaryDrawerItem item5 = new PrimaryDrawerItem().withIdentifier(5).withName(R.string.logout).withIcon(R.drawable.logout);
+        SecondaryDrawerItem item1 = new SecondaryDrawerItem().withIdentifier(2).withName("Live Classes").withIcon(R.drawable.profile);
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(3).withName(R.string.wishlist).withIcon(R.drawable.wishlist);
+        SecondaryDrawerItem item4 = new SecondaryDrawerItem().withIdentifier(4).withName(R.string.cart).withIcon(R.drawable.cart);
+        SecondaryDrawerItem item5 = new SecondaryDrawerItem().withIdentifier(5).withName(R.string.logout).withIcon(R.drawable.logout);
 
 /*
         SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName("Offers").withIcon(R.drawable.tag);
 */
-        SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName(R.string.aboutapp).withIcon(R.drawable.credits);
-        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.feedback).withIcon(R.drawable.feedback);
+       // SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName(R.string.aboutapp).withIcon(R.drawable.credits);
+        //SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.feedback).withIcon(R.drawable.feedback);
         SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName(R.string.helpcentre).withIcon(R.drawable.helpccenter);
 
         SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Terms And Condtions");
@@ -170,7 +172,7 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                 .withTranslucentStatusBar(true)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-                        item1, item2, item3, item4, item5, new DividerDrawerItem(), item8, item9, item10,new DividerDrawerItem(),item12,item13,item14
+                        item1, item3, item4, item5, new DividerDrawerItem(), item10,new DividerDrawerItem(),item12,item13,item14
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -181,13 +183,12 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
 
                         switch (value) {
 
-                            case 1:
-                                if (result != null && result.isDrawerOpen()) {
-                                    result.closeDrawer();
-                                }
-                                break;
                             case 2:
-                                startActivity(new Intent(HomePageWithBottomNavigation.this, Profile.class));
+                                Intent liveclasses = new Intent(HomePageWithBottomNavigation.this, AppWebView.class
+                                        //Uri.parse("https://www.examonline.org/events-news-list")
+                                );
+                                liveclasses.putExtra("url","https://www.examonline.org/liveclass-schedule");
+                                HomePageWithBottomNavigation.this.startActivity(liveclasses);
                                 break;
                             case 3:
                                 startActivity(new Intent(HomePageWithBottomNavigation.this, Wishlist.class));
@@ -206,32 +207,6 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                                 startActivity(new Intent(HomePageWithBottomNavigation.this, NotificationActivity.class));
                                 break;*/
 
-                            case 8:
-                                new LibsBuilder()
-                                        .withFields(R.string.class.getFields())
-                                        .withActivityTitle(getString(R.string.about_activity_title))
-                                        .withAboutIconShown(true)
-                                        .withAboutAppName(getString(R.string.app_name))
-                                        .withAboutVersionShown(true)
-                                        .withLicenseShown(true)
-                                        .withAboutSpecial1(getString(R.string.domain))
-                                        .withAboutSpecial1Description(getString(R.string.website))
-                                        .withAboutSpecial2(getString(R.string.licence))
-                                        .withAboutSpecial2Description(getString(R.string.licencedesc))
-                                        .withAboutSpecial3(getString(R.string.changelog))
-                                        .withAboutSpecial3Description(getString(R.string.changes))
-                                        .withShowLoadingProgress(true)
-                                        .withAboutDescription(getString(R.string.about_activity_description))
-                                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                                        .start(HomePageWithBottomNavigation.this);
-                                break;
-                            case 9:
-                                new EasyFeedback.Builder(HomePageWithBottomNavigation.this)
-                                        .withEmail("gaurav@gmail.com")
-                                        .withSystemInfo()
-                                        .build()
-                                        .start();
-                                break;
                             case 10:
                                 startActivity(new Intent(HomePageWithBottomNavigation.this, HelpCenter.class));
                                 break;

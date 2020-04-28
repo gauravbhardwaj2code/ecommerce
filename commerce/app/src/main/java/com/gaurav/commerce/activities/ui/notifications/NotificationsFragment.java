@@ -84,6 +84,12 @@ public class NotificationsFragment extends Fragment {
         namebutton=root.findViewById(R.id.name_button);
         updateDetails=root.findViewById(R.id.updatedetails);
 
+        addressview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(NotificationsFragment.this.getActivity(),Wishlist.class));
+            }
+        });
     }
 
 

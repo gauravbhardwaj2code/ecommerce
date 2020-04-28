@@ -37,6 +37,22 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5.0dip"
                         android:text="Section 5: Lecture 8 How to def… " />
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+                        android:textSize="11.699982dip"
+                        android:id="@id/modecourse"
+                        android:textColor="@color/md_blue_700"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="Offline" />
+                    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+                        android:textSize="11.699982dip"
+                        android:id="@id/expiry"
+                        android:textColor="@color/md_red_600"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5.0dip"
+                        android:text="20-19-2000" />
                 </LinearLayout>
                 <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
                     <com.mikhaellopez.circularprogressbar.CircularProgressBar

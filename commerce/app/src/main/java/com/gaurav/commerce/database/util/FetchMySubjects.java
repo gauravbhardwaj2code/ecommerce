@@ -34,8 +34,10 @@ public class FetchMySubjects extends AsyncTask<String, Void, String> {
     public static final String URL = "https://www.examonline.org/api/mycourse";
 
     private UpdateList updateList;
+    List<DtoSubjectInfo> list;
     public FetchMySubjects(UpdateList updateList) {
         this.updateList=updateList;
+        list=new ArrayList<>();
     }
 
 
@@ -58,8 +60,6 @@ public class FetchMySubjects extends AsyncTask<String, Void, String> {
             Response response = client.newCall(request).execute();
             data=response.body().string();
 
-            List<Long> ids=new ArrayList<>();
-            List<DtoSubjectInfo> list=new ArrayList<>();
             try {
                 System.out.println(data);
                 if(null!=data && !data.trim().isEmpty()){
@@ -69,20 +69,19 @@ public class FetchMySubjects extends AsyncTask<String, Void, String> {
                             gson.fromJson(data, listType);
                     for(HashMap<String, Object> map:listOfSubject){
                         Double id=Double.parseDouble(String.valueOf(map.get("id")));
-                        ids.add(id.longValue());
+                        DtoSubjectInfo dtoSubjectInfo=MockDatabaseUtil.getSubjectInfoById(id.longValue());
+                        if(dtoSubjectInfo!=null){
+                            dtoSubjectInfo.setPurchaseMode(String.valueOf(map.get("mode")));
+                            dtoSubjectInfo.setPurchaseExpiry(String.valueOf(map.get("expiry")));
+                            list.add(dtoSubjectInfo);
+                        }
+
                     }
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            for(Long id:ids){
-                list.add(MockDatabaseUtil.getSubjectInfoById(id));
-            }
-
-            updateList.updateData(list);
-
         }
         catch(Exception e){
             e.printStackTrace();
@@ -91,7 +90,8 @@ public class FetchMySubjects extends AsyncTask<String, Void, String> {
         return data;
     }
 
+    @Override
     protected void onPostExecute(String result){
-        super.onPostExecute(result);
+        updateList.updateData(list);
     }
 }

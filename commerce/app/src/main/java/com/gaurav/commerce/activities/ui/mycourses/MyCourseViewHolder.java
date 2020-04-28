@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gaurav.commerce.R;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
+import org.w3c.dom.Text;
+
 public class MyCourseViewHolder extends RecyclerView.ViewHolder{
 
     public TextView name;
@@ -17,6 +19,8 @@ public class MyCourseViewHolder extends RecyclerView.ViewHolder{
     public ImageView url;
     public TextView currentPosition;
     public CircularProgressBar circularProgressBar;
+    public TextView mode;
+    public TextView expiry;
 
     private View mView;
 
@@ -29,5 +33,7 @@ public class MyCourseViewHolder extends RecyclerView.ViewHolder{
         currentPosition=v.findViewById(R.id.currentPosition);
         circularProgressBar=v.findViewById(R.id.circle_progress);
         circle_progress_text=v.findViewById(R.id.circle_progress_text);
+        mode=v.findViewById(R.id.modecourse);
+        expiry=v.findViewById(R.id.expiry);
     }
 }
