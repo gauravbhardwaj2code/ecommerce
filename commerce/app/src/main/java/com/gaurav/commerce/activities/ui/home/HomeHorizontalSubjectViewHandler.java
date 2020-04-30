@@ -1,14 +1,9 @@
 package com.gaurav.commerce.activities.ui.home;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.gaurav.commerce.activities.course.detail.CourseDetail;
 import com.gaurav.commerce.activities.ui.home.view.HomeCoursesRecyclerView;
 
 import com.google.firebase.database.FirebaseDatabase;

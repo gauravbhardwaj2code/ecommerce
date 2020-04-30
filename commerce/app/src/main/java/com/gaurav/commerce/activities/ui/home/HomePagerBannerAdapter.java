@@ -1,18 +1,16 @@
 package com.gaurav.commerce.activities.ui.home;
 
-import android.graphics.Color;
-import android.view.Gravity;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
+
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.gaurav.commerce.activities.ui.home.dto.DtoHomePageBanner;
-import com.gaurav.commerce.database.util.MockDatabaseUtil;
-import com.gaurav.commerce.models.GenericProductModel;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,7 +79,7 @@ public class HomePagerBannerAdapter extends PagerAdapter {
     @NonNull @Override public Object instantiateItem(@NonNull ViewGroup view, int position) {
 
         ImageView imageView=new ImageView(view.getContext());
-        Picasso.with(view.getContext()).load(list.get(position).getUrl())
+        Picasso.get().load(list.get(position).getImage())
                 .fit().into(imageView);
         view.addView(imageView,ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

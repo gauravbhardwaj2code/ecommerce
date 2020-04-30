@@ -51,22 +51,22 @@ public class MockDatabaseUtil {
         Map<String,Object> productModelMap=new HashMap<>();
         productModelMap.put("1",new DtoHomePageBanner()
                 .setName("First")
-                .setUrl("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
+                .setImage("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
                 .setCategory("1"));
 
         productModelMap.put("2",new DtoHomePageBanner()
                 .setName("First")
-                .setUrl("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
+                .setImage("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
                 .setCategory("1"));
 
         productModelMap.put("3",new DtoHomePageBanner()
                 .setName("First")
-                .setUrl("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
+                .setImage("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
                 .setCategory("1"));
 
         productModelMap.put("4",new DtoHomePageBanner()
                 .setName("First")
-                .setUrl("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
+                .setImage("https://www.examonline.org/estatic/homeimages/cma-inter-group-2.webp")
                 .setCategory("1"));
 
         myRef.child(BANNER_DATA_BASE_NAME).updateChildren(productModelMap);

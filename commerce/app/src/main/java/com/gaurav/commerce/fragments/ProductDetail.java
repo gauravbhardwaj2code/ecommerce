@@ -102,7 +102,7 @@ public class ProductDetail extends Fragment {
         rating.setText(String.valueOf(subjectInfo.getAverageRating()));
 
         ImageView roundedImageView=root.findViewById(R.id.imageurl);
-        Picasso.with(getContext()).load(MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId()).getUrlImage()).into(roundedImageView);
+        Picasso.get().load(MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId()).getUrlImage()).into(roundedImageView);
 
         TextView teacher_description =root.findViewById(R.id.teacher_description);        ;
         teacher_description.setText(String.valueOf(MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId()).getDescription()));

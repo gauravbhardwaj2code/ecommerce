@@ -1,22 +1,15 @@
 package com.gaurav.commerce.activities;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.gaurav.commerce.Cart;
 import com.gaurav.commerce.HelpCenter;
-import com.gaurav.commerce.MainActivity;
-import com.gaurav.commerce.NotificationActivity;
 import com.gaurav.commerce.Profile;
 import com.gaurav.commerce.R;
-import com.gaurav.commerce.WelcomeActivity;
 import com.gaurav.commerce.Wishlist;
-import com.gaurav.commerce.activities.ui.home.HomeFragment;
 import com.gaurav.commerce.database.util.MockDatabaseUtil;
 import com.gaurav.commerce.routehandler.security.GoogleSecurity;
 import com.gaurav.commerce.usersession.UserSession;
@@ -34,11 +27,11 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.webianks.easy_feedback.EasyFeedback;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -55,7 +48,6 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
     private UserSession session;
     private HashMap<String, String> user;
     private String name, email, photo, mobile;
-    private String  first_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +76,12 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
 
     public void viewCart(View view){
         startActivity(new Intent(HomePageWithBottomNavigation.this, Cart.class));
-        finish();
+       // finish();
     }
 
     public void viewProfile(View view){
         startActivity(new Intent(HomePageWithBottomNavigation.this, Profile.class));
-        finish();
+        //finish();
     }
 
     private void getValues() {
@@ -141,7 +133,7 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
         SecondaryDrawerItem item7 = new SecondaryDrawerItem().withIdentifier(7).withName("Offers").withIcon(R.drawable.tag);
 */
        // SecondaryDrawerItem item8 = new SecondaryDrawerItem().withIdentifier(8).withName(R.string.aboutapp).withIcon(R.drawable.credits);
-        //SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.feedback).withIcon(R.drawable.feedback);
+        SecondaryDrawerItem item9 = new SecondaryDrawerItem().withIdentifier(9).withName(R.string.feedback).withIcon(R.drawable.feedback);
         SecondaryDrawerItem item10 = new SecondaryDrawerItem().withIdentifier(10).withName(R.string.helpcentre).withIcon(R.drawable.helpccenter);
 
         SecondaryDrawerItem item12 = new SecondaryDrawerItem().withIdentifier(12).withName("Terms And Condtions");
@@ -162,7 +154,7 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                 //.withTranslucentStatusBar(true)
                 //.withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-                        item1, item3, item4, item5, new DividerDrawerItem(), item10,new DividerDrawerItem(),item12,item13,item14
+                        item1, item3, item4, item5,item9, new DividerDrawerItem(), item10,new DividerDrawerItem(),item12,item13,item14
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -196,7 +188,13 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                             /*case 7:
                                 startActivity(new Intent(HomePageWithBottomNavigation.this, NotificationActivity.class));
                                 break;*/
-
+                            case 9:
+                                new EasyFeedback.Builder(HomePageWithBottomNavigation.this)
+                                        .withEmail("lms.examonline@gmail.com")
+                                        .withSystemInfo()
+                                        .build()
+                                        .start();
+                                break;
                             case 10:
                                 startActivity(new Intent(HomePageWithBottomNavigation.this, HelpCenter.class));
                                 break;
@@ -230,41 +228,6 @@ public class HomePageWithBottomNavigation extends AppCompatActivity {
                 })
                 .build();
 
-        //Setting crossfader drawer------------------------------------------------------------
-
-
-        //define maxDrawerWidth
-
-        //add second view (which is the miniDrawer)
-        /*final MiniDrawer miniResult = result.getMiniDrawer();
-
-        //build the view for the MiniDrawer
-        View view = miniResult.build(this);
-
-        //set the background of the MiniDrawer as this would be transparent
-        view.setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(this, com.mikepenz.materialdrawer.R.attr.material_drawer_background, com.mikepenz.materialdrawer.R.color.material_drawer_background));
-
-        //we do not have the MiniDrawer view during CrossfadeDrawerLayout creation so we will add it here
-        crossfadeDrawerLayout.getSmallView().addView(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-        //define the crossfader to be used with the miniDrawer. This is required to be able to automatically toggle open / close
-        miniResult.withCrossFader(new ICrossfader() {
-            @Override
-            public void crossfade() {
-                boolean isFaded = isCrossfaded();
-                crossfadeDrawerLayout.crossfade(400);
-
-                //only close the drawer if we were already faded and want to close it now
-                if (isFaded) {
-                    result.getDrawerLayout().closeDrawer(GravityCompat.START);
-                }
-            }
-
-            @Override
-            public boolean isCrossfaded() {
-                return crossfadeDrawerLayout.isCrossfaded();
-            }
-        });*/
     }
 
     private void tapview() {

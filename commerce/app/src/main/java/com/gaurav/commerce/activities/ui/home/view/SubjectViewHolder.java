@@ -14,6 +14,7 @@ public class SubjectViewHolder extends RecyclerView.ViewHolder{
     public TextView selling_price;
     public TextView rating;
     public ImageView url;
+    public TextView categoryName;
     public TextView language;
 
     private View mView;
@@ -28,5 +29,6 @@ public class SubjectViewHolder extends RecyclerView.ViewHolder{
         rating=v.findViewById(R.id.rating);
         url=v.findViewById(R.id.imageurl);
         language=v.findViewById(R.id.language);
+        categoryName=v.findViewById(R.id.category_name);
     }
 }

@@ -29,13 +29,22 @@
                 android:text="Sketch from A to Z: Become an App Desi…." />
             <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
                 android:textSize="11.699982sp"
-                android:textColor="#ff828282"
+                android:textColor="@color/md_orange_800"
                 android:id="@id/teacher_name"
                 android:paddingLeft="8.299988dip"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5.0dip"
-                android:text="xxxx" />
+                android:text="John Doe" />
+            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+                android:textSize="11.699982sp"
+                android:textColor="@color/md_blue_600"
+                android:id="@id/category_name"
+                android:paddingLeft="8.299988dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:text="John Doe" />
             <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
                 android:textSize="11.699982sp"
                 android:textColor="#ff828282"

@@ -128,7 +128,7 @@ public class Wishlist extends AppCompatActivity {
                 viewHolder.cardprice.setText("₹ "+cartcollect.get(position).getPrice());
                 viewHolder.cardcount.setText("Quantity : "+1);
                 viewHolder.language.setText("Language: "+subjectInfo.getLanguage());
-                Picasso.with(Wishlist.this).load(subjectInfo.getUrlImage()).into(viewHolder.cardimage);
+                Picasso.get().load(subjectInfo.getUrlImage()).into(viewHolder.cardimage);
 
                 viewHolder.delete.setOnClickListener(new View.OnClickListener() {
                     @Override

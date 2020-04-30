@@ -108,7 +108,11 @@ public class HomeCoursesRecyclerView extends RecyclerView.Adapter<SubjectViewHol
         holder.teacherName.setText(String.valueOf(list.get(position).getFacultyId()));
         holder.selling_price.setText("₹"+String.valueOf(list.get(position).getCostPrice()));
         holder.rating.setText(String.valueOf(list.get(position).getAverageRating()));
-        Picasso.with(holder.url.getContext()).load(list.get(position).getUrlImage()).into(holder.url);
+        holder.categoryName.setText(list.get(position).getExamName());
+        Picasso.get().
+                load(list.get(position).getUrlImage())
+                .fit()
+                .into(holder.url);
     }
 
     @Override

@@ -211,6 +211,7 @@
     <item name="modecourse" type="id" />
     <item name="expiry" type="id" />
     <item name="mycoursesview" type="id" />
+    <item name="category_name" type="id" />
 
 
 </resources>

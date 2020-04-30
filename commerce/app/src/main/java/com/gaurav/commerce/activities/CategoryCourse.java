@@ -121,7 +121,7 @@ class CategoryCourseRecyclerView extends RecyclerView.Adapter<SubjectViewHolder>
         holder.teacherName.setText(String.valueOf(list.get(position).getFacultyId()));
         holder.selling_price.setText("₹"+String.valueOf(list.get(position).getCostPrice()));
         holder.rating.setText(String.valueOf(list.get(position).getAverageRating()));
-        Picasso.with(holder.url.getContext()).load(list.get(position).getUrlImage()).into(holder.url);
+        Picasso.get().load(list.get(position).getUrlImage()).into(holder.url);
     }
 
     @Override

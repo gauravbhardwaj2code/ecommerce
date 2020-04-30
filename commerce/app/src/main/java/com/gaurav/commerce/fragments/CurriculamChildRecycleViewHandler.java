@@ -26,6 +26,7 @@ import com.gaurav.commerce.activities.course.dto.LectureContentType;
 import com.gaurav.commerce.fonts.MyTextView_Roboto_Regular;
 import com.gaurav.commerce.usersession.UserSession;
 import com.gaurav.commerce.usersession.UserSubjectInfo;
+import com.gaurav.commerce.usersession.UserSubjectProgress;
 import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
@@ -121,11 +122,14 @@ class CurriculamChildRecycleView extends RecyclerView.Adapter<CurriculamChildHol
                     }else{
                         System.out.println(url);
                         try{
-                            UserSubjectInfo userSubjectInfo=new UserSession(v.getContext()).getUserSubjectInfo();
+                            /*UserSubjectInfo userSubjectInfo=new UserSession(v.getContext()).getUserSubjectInfo();
+                            if(userSubjectInfo.getSubjectById(subjectId)==null){
+                                userSubjectInfo.setSubject(subjectId.toString(),new UserSubjectProgress());
+                            }
                             userSubjectInfo.getSubjectById(subjectId).coveredVideo(list.get(position).getTitle());
                             userSubjectInfo.getSubjectById(subjectId).setCurrentLectureContent(list.get(position).getTitle());
                             userSubjectInfo.getSubjectById(subjectId).setCurrentSubjectId(subjectId.toString());
-                            new UserSession(v.getContext()).setUserSubjectInfo(userSubjectInfo);
+                            new UserSession(v.getContext()).setUserSubjectInfo(userSubjectInfo);*/
                             if(type.equals(LectureContentType.VIDEO)){
                                 if(currentLectureView!=null){
                                     currentLectureView.setBackgroundColor(v.getResources().getColor(R.color.white,null));

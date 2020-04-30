@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class DtoHomePageBanner implements Serializable {
 
-    private String url;
+    private String image;
     private String name;
     private String link;
     private String category;
 
-    public String getUrl() {
-        return url;
+    public String getImage() {
+        return image;
     }
 
-    public DtoHomePageBanner setUrl(String url) {
-        this.url = url;
+    public DtoHomePageBanner setImage(String image) {
+        this.image = image;
         return this;
     }
 
@@ -48,7 +48,7 @@ public class DtoHomePageBanner implements Serializable {
     @Override
     public String toString() {
         return "DtoHomePageBanner{" +
-                "url='" + url + '\'' +
+                "image='" + image + '\'' +
                 ", name='" + name + '\'' +
                 ", link='" + link + '\'' +
                 ", category='" + category + '\'' +

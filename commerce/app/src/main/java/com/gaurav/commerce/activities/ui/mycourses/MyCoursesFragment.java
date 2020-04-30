@@ -223,12 +223,21 @@ class MyCourseCourseRecyclerView extends RecyclerView.Adapter<MyCourseViewHolder
         holder.teacherName.setText(String.valueOf(list.get(position).getFacultyId()));
         holder.mode.setText(list.get(position).getPurchaseMode());
         holder.expiry.setText("Your Course will expire on "+list.get(position).getPurchaseExpiry());
-        Picasso.with(holder.url.getContext()).load(list.get(position).getUrlImage()).into(holder.url);
-        Float coveredVideos= Integer.valueOf(userSession.getUserSubjectInfo().getSubjectById(list.get(position).getId()).getCoveredVideos().size()).floatValue();
-        Float totalVideos=Integer.valueOf(userSession.getUserSubjectInfo().getSubjectById(list.get(position).getId()).getTotalVideos()).floatValue();
+        Picasso.get().load(list.get(position).getUrlImage()).into(holder.url);
+        UserSubjectProgress userSubjectProgress=userSession.getUserSubjectInfo().getSubjectById(list.get(position).getId());
+        Integer coveredVideos=0;
+        Integer totalVideos=0;
+        Float percentage=0f;
+        /*if(userSubjectProgress!=null){
+            coveredVideos= userSubjectProgress.getCoveredVideos().size();
+            totalVideos=userSubjectProgress.getTotalVideos();
+            if(coveredVideos>0 && totalVideos>0){
+                percentage=new Integer(Math.round((coveredVideos.floatValue()/totalVideos.floatValue())*100)).floatValue();
+            }
+        }*/
 
-        holder.circularProgressBar.setProgressWithAnimation(Math.round((coveredVideos/totalVideos)*100), 3000l);
-        holder.circle_progress_text.setText(String.valueOf(Math.round((coveredVideos/totalVideos)*100)));
+        holder.circularProgressBar.setProgressWithAnimation(percentage, 3000l);
+        holder.circle_progress_text.setText(percentage.toString());
 
         holder.circularProgressBar.setProgressBarColor(Color.BLACK);
         // Set Progress Max

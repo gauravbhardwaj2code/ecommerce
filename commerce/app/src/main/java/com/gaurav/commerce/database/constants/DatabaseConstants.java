@@ -2,7 +2,7 @@ package com.gaurav.commerce.database.constants;
 
 public interface DatabaseConstants {
 
-    String BANNER_DATA_BASE_NAME="home_page_banner";
+    String BANNER_DATA_BASE_NAME="homebanner";
 
     String HOME_CATEGORY_DATA_BASE_NAME="home_categories";
 

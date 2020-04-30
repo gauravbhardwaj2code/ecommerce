@@ -109,7 +109,7 @@ public class Profile extends AppCompatActivity {
         tvphone.setText(mobile);
         namebutton.setText(name);
 
-        Picasso.with(Profile.this).load(photo).into(primage);
+        Picasso.get().load(photo).into(primage);
 
 
     }

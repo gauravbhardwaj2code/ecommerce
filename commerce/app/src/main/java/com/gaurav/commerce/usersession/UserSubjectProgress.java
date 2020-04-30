@@ -10,9 +10,9 @@ public class UserSubjectProgress implements Serializable {
 
     private String currentSubjectId;
 
-    private Integer lectureId;
+    private Integer lectureId=0;
 
-    private Integer totalVideos;
+    private Integer totalVideos=0;
 
     private Set<String> coveredVideos=new HashSet<>();
 

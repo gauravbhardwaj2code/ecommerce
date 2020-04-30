@@ -112,7 +112,7 @@ public class NotificationsFragment extends Fragment {
         tvphone.setText(mobile);
         namebutton.setText(name);
 
-        Picasso.with(getContext()).load(photo).into(primage);
+        Picasso.get().load(photo).into(primage);
 
 
     }
