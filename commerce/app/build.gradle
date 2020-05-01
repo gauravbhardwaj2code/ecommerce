@@ -5,7 +5,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.gaurav.commerce"
+        applicationId "com.lms.exam"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
@@ -82,6 +82,4 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "com.squareup.okhttp3:okhttp:4.4.0"
-    implementation 'com.instamojo:android-sdk:3.3.0'
-
 }

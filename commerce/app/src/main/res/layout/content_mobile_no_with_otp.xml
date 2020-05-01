@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_mobile_no_with_otp"
-    tools:context=".activities.MobileNoWithOtp">
+    tools:context=".activities.MobileNoWithOtp"
+    tools:showIn="@layout/activity_mobile_no_with_otp">
 
 
     <com.rengwuxian.materialedittext.MaterialEditText
@@ -24,8 +23,7 @@
         app:met_clearButton="true"
         app:met_errorColor="@color/darkWhite"
         app:met_floatingLabel="highlight"
-        app:met_iconLeft="@android:drawable/stat_sys_phone_call"
-        />
+        app:met_iconLeft="@android:drawable/stat_sys_phone_call" />
 
     <Button
         android:id="@+id/sendotp"
@@ -102,9 +100,6 @@
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="@+id/pinView"
         app:layout_constraintTop_toBottomOf="@+id/pinView" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

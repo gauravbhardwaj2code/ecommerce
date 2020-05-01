@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
             <solid android:color="@android:color/transparent" />
@@ -8,6 +7,8 @@
         </shape>
     </item>
     <item>
-        <bitmap android:gravity="right" android:src="@drawable/ic_down_arrow_2" />
+        <bitmap
+            android:gravity="right"
+            android:src="@drawable/ic_down_arrow_2" />
     </item>
 </layer-list>

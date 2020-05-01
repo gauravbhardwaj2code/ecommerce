@@ -8,7 +8,11 @@
     tools:context=".activities.course.detail.BuyCourse"
     tools:showIn="@layout/activity_buy_course">
 
-    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
         <include layout="@layout/toolbarcoursedetail1" />
 
         <!--<bg.devlabs.fullscreenvideoview.FullscreenVideoView
@@ -23,13 +27,12 @@
             android:layout_height="wrap_content" />
 
 
-
         <com.google.android.material.tabs.TabLayout
-            android:layout_gravity="center_horizontal"
             android:id="@id/tab_layout"
-            android:background="@color/white"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
             android:elevation="2.0dip"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/red"
@@ -37,7 +40,7 @@
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/txt_color"
             app:tabTextAppearance="@style/MyMenuTextAppearance1"
-            app:tabTextColor="@color/tab_txt_color" >
+            app:tabTextColor="@color/tab_txt_color">
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -45,9 +48,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@id/pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-
+            android:layout_height="match_parent">
 
 
         </androidx.viewpager.widget.ViewPager>

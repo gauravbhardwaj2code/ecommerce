@@ -1,65 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="10.0sp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10.0sp">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.lms.exam.fonts.MyTextView_Roboto_Regular
             android:id="@id/index"
-            android:textSize="15.0sp" android:textColor="@color/txt_color" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" />
-        <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="15.0sp" android:layout_weight="1.0">
-            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
-                android:textSize="14.0sp"
-                android:textColor="@color/txt_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="1"
+            android:textColor="@color/txt_color"
+            android:textSize="15.0sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0sp"
+            android:layout_weight="1.0"
+            android:orientation="vertical">
+
+            <com.lms.exam.fonts.MyTextView_Roboto_Regular
                 android:id="@id/lecture_content_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contrary to popular belief" />
-            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
-                android:textSize="10.0sp"
-                android:textColor="#ff828282"
+                android:text="Contrary to popular belief"
+                android:textColor="@color/txt_color"
+                android:textSize="14.0sp" />
+
+            <com.lms.exam.fonts.MyTextView_Roboto_Regular
                 android:id="@id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4:20 mins" />
-            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
-                android:textSize="10.0sp"
-                android:textColor="@color/red"
+                android:text="4:20 mins"
+                android:textColor="#ff828282"
+                android:textSize="10.0sp" />
+
+            <com.lms.exam.fonts.MyTextView_Roboto_Regular
                 android:id="@id/resourcetype"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PDF" />
-
+                android:text="PDF"
+                android:textColor="@color/red"
+                android:textSize="10.0sp"
+                android:visibility="gone" />
 
 
         </LinearLayout>
 
-        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
-            android:textSize="11.699982sp"
+        <com.lms.exam.fonts.MyTextView_Roboto_Regular
             android:id="@id/mark_free"
-            android:textColor="@color/green"
-            android:visibility="gone"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Preview" />
+            android:layout_gravity="center"
+            android:text="Preview"
+            android:textColor="@color/green"
+            android:textSize="11.699982sp"
+            android:visibility="gone" />
 
 
     </LinearLayout>
-    <View android:background="@color/view_line"
+
+    <View
         android:layout_width="fill_parent"
         android:layout_height="1.0dip"
-        android:layout_marginTop="9.0dip"
         android:layout_marginLeft="10.0dip"
-        android:layout_marginRight="10.0dip" />
-
+        android:layout_marginTop="9.0dip"
+        android:layout_marginRight="10.0dip"
+        android:background="@color/view_line" />
 
 
 </LinearLayout>

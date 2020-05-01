@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:239671581172:android:4d3878773689066f5241a1",
+        "mobilesdk_app_id": "1:239671581172:android:689f1feaa1bd7eeb5241a1",
         "android_client_info": {
-          "package_name": "com.gaurav.commerce"
+          "package_name": "com.lms.exam"
         }
       },
       "oauth_client": [

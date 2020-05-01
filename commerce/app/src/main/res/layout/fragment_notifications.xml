@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -24,139 +24,143 @@
                     android:id="@+id/profilepic"
                     android:layout_width="160dp"
                     android:layout_height="160dp"
-                    android:elevation="5dp"
-                    android:layout_marginTop="120dp"
                     android:layout_marginLeft="30dp"
-                    app:civ_border_color="@color/md_white_1000"
-                    app:civ_border_width="2dp"
-                    android:src="@drawable/user"
+                    android:layout_marginTop="120dp"
                     android:layout_marginBottom="10dp"
-                    android:visibility="visible"/>
+                    android:elevation="5dp"
+                    android:src="@drawable/user"
+                    android:visibility="visible"
+                    app:civ_border_color="@color/md_white_1000"
+                    app:civ_border_width="2dp" />
 
                 <TextView
                     android:id="@+id/name_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/profilepic"
-                    android:elevation="5dp"
-                    android:layout_marginTop="180dp"
-                    android:paddingBottom="10dp"
-                    android:background="@color/colorAccent"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="180dp"
+                    android:layout_toRightOf="@+id/profilepic"
+                    android:background="@color/colorAccent"
+                    android:elevation="5dp"
                     android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
                     android:paddingRight="20dp"
-                    android:paddingTop="10dp"/>
+                    android:paddingBottom="10dp" />
 
             </RelativeLayout>
 
-            <View android:layout_width="match_parent"
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/view_width_small"
-                android:background="@color/grey_light"
-                android:layout_marginTop="30dp"/>
+                android:layout_marginTop="30dp"
+                android:background="@color/grey_light" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
 
                 <ImageView
-                    android:layout_gravity="center"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/mail"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/mail" />
 
                 <TextView
                     android:id="@+id/emailview"
+                    style="@style/fonts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="30dp"
-                    style="@style/fonts"
-                    android:textColor="#424242"/>
+                    android:textColor="#424242" />
 
             </LinearLayout>
 
-            <View android:layout_width="match_parent"
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/view_width_small"
-                android:background="@color/grey_light"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:background="@color/grey_light" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
 
                 <ImageView
-                    android:layout_gravity="center"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/smartphone"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/smartphone" />
 
                 <TextView
                     android:id="@+id/mobileview"
+                    style="@style/fonts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:paddingLeft="30dp"
-                    style="@style/fonts"
-                    android:textColor="#424242"/>
+                    android:textColor="#424242" />
 
             </LinearLayout>
 
-            <View android:layout_width="match_parent"
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/view_width_small"
-                android:background="@color/grey_light"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:background="@color/grey_light" />
 
             <LinearLayout
                 android:id="@+id/addressview"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:orientation="horizontal"
                 android:paddingLeft="20dp"
-                android:paddingRight="20dp">
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp">
 
                 <ImageView
-                    android:layout_gravity="center"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/agenda"/>
+                    android:layout_gravity="center"
+                    android:src="@drawable/agenda" />
 
                 <TextView
+                    style="@style/fonts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.9"
                     android:gravity="center_vertical"
                     android:paddingLeft="30dp"
-                    style="@style/fonts"
-                    android:layout_weight="0.9"
                     android:text="My Wishlist"
-                    android:textColor="#424242"/>
+                    android:textColor="#424242" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:gravity="right"
                     android:layout_weight="0.1"
-                    android:src="@drawable/rightarrow"/>
+                    android:gravity="right"
+                    android:src="@drawable/rightarrow" />
 
             </LinearLayout>
 
-            <View android:layout_width="match_parent"
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/view_width_small"
-                android:background="@color/grey_light"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:background="@color/grey_light" />
 
             <!--Update User Details-->
-
 
 
         </LinearLayout>

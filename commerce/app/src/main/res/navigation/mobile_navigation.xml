@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.gaurav.commerce.activities.ui.home.HomeFragment"
+        android:name="com.lms.exam.activities.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.gaurav.commerce.activities.ui.dashboard.DashboardFragment"
+        android:name="com.lms.exam.activities.ui.dashboard.DashboardFragment"
         android:label="@string/title_my_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_my_courses"
-        android:name="com.gaurav.commerce.activities.ui.mycourses.MyCoursesFragment"
+        android:name="com.lms.exam.activities.ui.mycourses.MyCoursesFragment"
         android:label="@string/title_my_courses"
         tools:layout="@layout/fragment_mycourse" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.gaurav.commerce.activities.ui.notifications.NotificationsFragment"
+        android:name="com.lms.exam.activities.ui.notifications.NotificationsFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

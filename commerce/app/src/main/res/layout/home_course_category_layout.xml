@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10.0dip"
     android:background="@color/md_blue_900"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
-    <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
+    <com.lms.exam.fonts.MyTextView_Roboto_Regular
         android:id="@id/name"
         android:layout_width="97dp"
-        android:padding="8dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:padding="8dp"
         android:text="Development \n fff"
         android:textColor="@color/white"
         android:textSize="12.699982sp" />

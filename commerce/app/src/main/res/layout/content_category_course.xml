@@ -9,29 +9,44 @@
     tools:context=".activities.CategoryCourse"
     tools:showIn="@layout/activity_category_course">
 
-        <androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="1.0dip" app:cardBackgroundColor="@color/white">
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="fill_parent" android:layout_height="wrap_content"
-                xmlns:android="http://schemas.android.com/apk/res/android">
-                <com.gaurav.commerce.fonts.MyTextView_Roboto_Medium
-                    android:textSize="15.0sp"
-                    android:textColor="@color/txt_color"
-                    android:layout_gravity="center"
-                    android:id="@id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All Courses" />
-            </androidx.appcompat.widget.Toolbar>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView android:layout_width="fill_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/white">
-            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@id/recyclerview2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:nestedScrollingEnabled="false" />
+    <androidx.cardview.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1.0dip"
+        app:cardBackgroundColor="@color/white">
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <com.lms.exam.fonts.MyTextView_Roboto_Medium
+                android:id="@id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="All Courses"
+                android:textColor="@color/txt_color"
+                android:textSize="15.0sp" />
+        </androidx.appcompat.widget.Toolbar>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@id/recyclerview2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

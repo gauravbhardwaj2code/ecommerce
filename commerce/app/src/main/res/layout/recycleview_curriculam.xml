@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="15dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -10,24 +11,27 @@
 
         app:cardBackgroundColor="@color/white">
 
-        <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content"
-            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:padding="10.0sp"
-                android:layout_width="fill_parent"
                 android:id="@id/cardView"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4.0dip">
-                <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular
-                    android:textSize="11.699982sp"
-                    android:textColor="#ff828282"
+                android:layout_marginBottom="4.0dip"
+                android:orientation="horizontal"
+                android:padding="10.0sp">
+
+                <com.lms.exam.fonts.MyTextView_Roboto_Regular
                     android:id="@id/name"
                     android:layout_width="0.0dip"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
                     android:text="Section 1: Where does it come from?"
-                    android:layout_weight="1.0" />
+                    android:textColor="#ff828282"
+                    android:textSize="11.699982sp" />
 
                 <Button
                     android:id="@+id/arrowBtn"
@@ -43,41 +47,21 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@id/lecturecontentcard"
-                android:layout_width="match_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/white">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white">
 
 
-                <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:footerDividersEnabled="false"
-                        />
-                    <!--<LinearLayout android:orientation="horizontal" android:padding="10.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="@color/txt_color" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" />
-                        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="15.0sp" android:layout_weight="1.0">
-                            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="14.0sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Contrary to popular belief" />
-                            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="10.0sp" android:textColor="#ff828282" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4:20 mins" />
-                        </LinearLayout>
-                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="11.699982sp" android:textColor="@color/green" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="View Preview" />
-                    </LinearLayout>
-                    <View android:background="@color/view_line" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
-                    <LinearLayout android:orientation="horizontal" android:padding="10.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="@color/txt_color" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2" />
-                        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="15.0sp" android:layout_weight="1.0">
-                            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="14.0sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Standard chunk of Lorem Ipsum" />
-                            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="10.0sp" android:textColor="#ff828282" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30:20 mins" />
-                        </LinearLayout>
-                    </LinearLayout>
-                    <View android:background="@color/view_line" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" />
-                    <LinearLayout android:orientation="horizontal" android:padding="10.0sp" android:layout_width="fill_parent" android:layout_height="wrap_content">
-                        <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="15.0sp" android:textColor="@color/txt_color" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" />
-                        <LinearLayout android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="15.0sp" android:layout_weight="1.0">
-                            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="14.0sp" android:textColor="@color/txt_color" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Letraset sheets containing Lorem Ipsum" />
-                            <com.gaurav.commerce.fonts.MyTextView_Roboto_Regular android:textSize="10.0sp" android:textColor="#ff828282" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="08:50 mins" />
-                        </LinearLayout>
-                    </LinearLayout>
-                -->
+                        android:footerDividersEnabled="false" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

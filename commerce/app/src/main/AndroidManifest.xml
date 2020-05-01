@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gaurav.commerce">
+    package="com.lms.exam">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
-        android:name=".init.CustomApplication"
+        android:name="com.lms.exam.init.CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -19,36 +19,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaymentWebView"></activity>
-        <activity android:name=".PaymentLandingPage" />
-        <activity android:name=".InstaMojoPayment" />
+        <activity android:name="com.lms.exam.PaymentWebView"></activity>
+        <activity android:name="com.lms.exam.InstaMojoPayment" />
         <activity
-            android:name=".activities.CategoryCourse"
+            android:name="com.lms.exam.activities.CategoryCourse"
             android:label="@string/title_activity_category_course"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.AppWebView"
+            android:name="com.lms.exam.activities.AppWebView"
             android:label="@string/title_activity_web_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.course.detail.BuyCourse"
+            android:name="com.lms.exam.activities.course.detail.BuyCourse"
             android:label="@string/title_activity_buy_course"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.course.detail.CourseDetail"
+            android:name="com.lms.exam.activities.course.detail.CourseDetail"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:label="@string/title_activity_course_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.HomePageWithBottomNavigation"
+            android:name="com.lms.exam.activities.HomePageWithBottomNavigation"
             android:label="@string/title_activity_home_page_with_bottom_navigation" />
         <activity
-            android:name=".activities.VideoLanding"
+            android:name="com.lms.exam.activities.VideoLanding"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:label="@string/title_activity_video_landing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MobileNoWithOtp"
+            android:name="com.lms.exam.activities.MobileNoWithOtp"
             android:label="@string/title_activity_mobile_no_with_otp"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -60,7 +59,7 @@
             android:value="5" />
         <meta-data
             android:name="AA_MODELS"
-            android:value="com.gaurav.commerce.Notification" />
+            android:value="com.lms.exam.Notification" />
         <!--
         Add the following to your AndroidManifest.xml to prevent the launching of your main Activity
         if you are calling startActivity above.
@@ -70,7 +69,7 @@
             android:value="DISABLE" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.lms.exam.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
@@ -80,59 +79,59 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Register"
+            android:name="com.lms.exam.Register"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.lms.exam.MainActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".LoginActivity"
+            android:name="com.lms.exam.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".HelpCenter"
+            android:name="com.lms.exam.HelpCenter"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".Profile"
+            android:name="com.lms.exam.Profile"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".Cart"
+            android:name="com.lms.exam.Cart"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".UpdateData"
+            android:name="com.lms.exam.UpdateData"
             android:theme="@style/WhiteTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".ForgotPassword"
+            android:name="com.lms.exam.ForgotPassword"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".NotificationActivity"
+            android:name="com.lms.exam.NotificationActivity"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".prodcutscategory.Cards"
+            android:name="com.lms.exam.prodcutscategory.Cards"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".IndividualProduct"
+            android:name="com.lms.exam.IndividualProduct"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".Wishlist"
+            android:name="com.lms.exam.Wishlist"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".OrderDetails"
+            android:name="com.lms.exam.OrderDetails"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".OrderPlaced"
+            android:name="com.lms.exam.OrderPlaced"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".prodcutscategory.Tshirts"
+            android:name="com.lms.exam.prodcutscategory.Tshirts"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".prodcutscategory.Bags"
+            android:name="com.lms.exam.prodcutscategory.Bags"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.lms.exam.WelcomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

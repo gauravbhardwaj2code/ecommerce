@@ -1,99 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:id="@+id/stats"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbarwrap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:titleTextColor="#000"
-        style="@style/CustomTheme"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="My Cart"/>
-
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="right"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/CustomTheme"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            app:titleTextColor="#000">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/notification"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="15dp"
-                android:onClick="Notifications"/>
-
-
-            <ImageView
-                android:id="@+id/view_profile"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/profile"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="15dp"
-                android:onClick="viewProfile"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Cart"
+                android:textSize="20sp" />
 
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
 
-    </androidx.appcompat.widget.Toolbar>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:onClick="Notifications"
+                    android:src="@drawable/notification" />
+
+
+                <ImageView
+                    android:id="@+id/view_profile"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="15dp"
+                    android:onClick="viewProfile"
+                    android:src="@drawable/profile" />
+
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_below="@id/toolbarwrap"
         android:id="@+id/activity_cart_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/toolbarwrap"
         android:orientation="vertical"
         android:weightSum="10">
 
         <FrameLayout
-            android:padding="5dp"
-            android:layout_marginTop="10dp"
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9.5">
+            android:layout_marginTop="10dp"
+            android:layout_weight="9.5"
+            android:padding="5dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
-                android:scrollbars="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"/>
+                android:scrollbars="vertical" />
 
         </FrameLayout>
 
-            <TextView android:id="@+id/text_action_bottom2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:background="@color/colorPrimary"
-                android:text="CHECKOUT"
-                android:elevation="40dp"
-                android:textSize="14dp"
-                android:textColor="@color/gen_white"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:onClick="checkout"/>
+        <TextView
+            android:id="@+id/text_action_bottom2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/colorPrimary"
+            android:elevation="40dp"
+            android:gravity="center"
+            android:onClick="checkout"
+            android:text="CHECKOUT"
+            android:textColor="@color/gen_white"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -101,22 +102,22 @@
         android:id="@+id/tv_no_cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lottie_fileName="loadinganim.json"
-        app:lottie_loop="true"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        app:lottie_autoPlay="true"/>
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="loadinganim.json"
+        app:lottie_loop="true" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/empty_cart"
         android:layout_width="match_parent"
-        app:lottie_fileName="empty_list.json"
         android:layout_height="match_parent"
         android:foregroundGravity="center"
         android:src="@drawable/cartempty"
         android:visibility="invisible"
-        app:lottie_loop="true"
-        app:lottie_autoPlay="true"/>
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="empty_list.json"
+        app:lottie_loop="true" />
 
 
 </RelativeLayout>

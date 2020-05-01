@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <public type="attr" name="cardBackgroundColor" id="0x7f03005b" />
-    <public type="attr" name="cardCornerRadius" id="0x7f03005c" />
-    <public type="attr" name="cardElevation" id="0x7f03005d" />
-    <public type="attr" name="cardMaxElevation" id="0x7f03005e" />
-    <public type="attr" name="cardPreventCornerOverlap" id="0x7f03005f" />
-    <public type="attr" name="cardUseCompatPadding" id="0x7f030060" />
-    <public type="attr" name="cardViewStyle" id="0x7f030061" />
+    <public name="cardBackgroundColor" id="0x7f03005b" type="attr" />
+    <public name="cardCornerRadius" id="0x7f03005c" type="attr" />
+    <public name="cardElevation" id="0x7f03005d" type="attr" />
+    <public name="cardMaxElevation" id="0x7f03005e" type="attr" />
+    <public name="cardPreventCornerOverlap" id="0x7f03005f" type="attr" />
+    <public name="cardUseCompatPadding" id="0x7f030060" type="attr" />
+    <public name="cardViewStyle" id="0x7f030061" type="attr" />
 </resources>

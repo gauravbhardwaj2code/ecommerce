@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list
-  xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <size android:height="40.0dip" android:width="100.0dip" />
+            <size
+                android:width="100.0dip"
+                android:height="40.0dip" />
             <solid android:color="#ff5eb888" />
             <corners android:radius="0.0dip" />
         </shape>
     </item>
-    <item android:top="60.0dip" android:right="0.0dip" android:bottom="-80.0dip">
+    <item
+        android:bottom="-80.0dip"
+        android:right="0.0dip"
+        android:top="60.0dip">
         <rotate android:fromDegrees="105.0">
             <shape android:shape="rectangle">
                 <solid android:color="#ffffffff" />
             </shape>
         </rotate>
     </item>
-    <item android:top="60.0dip" android:right="0.0dip" android:bottom="-40.0dip">
+    <item
+        android:bottom="-40.0dip"
+        android:right="0.0dip"
+        android:top="60.0dip">
         <rotate android:fromDegrees="55.0">
             <shape android:shape="rectangle">
                 <solid android:color="#ffffffff" />
