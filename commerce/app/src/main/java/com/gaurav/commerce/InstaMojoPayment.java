@@ -33,14 +33,14 @@ public class InstaMojoPayment extends AppCompatActivity {
     }
 
     private void createOrderOnServer() throws ExecutionException, InterruptedException {
-        String orderId=new CreateOrder(this).execute().get();
-        UserSession userSession=new UserSession(this);
-        userSession.setOrderId(orderId);
-        initiateSDKPayment(orderId);
+        new CreateOrder(this).execute();
+        //UserSession userSession=new UserSession(this);
+        //userSession.setOrderId(orderId);
+        //initiateSDKPayment(orderId);
 
     }
 
-    private void initiateSDKPayment(String orderID) {
+    public void initiateSDKPayment(String orderID) {
 
         if(orderID==null || orderID.isEmpty()){
             Toast.makeText(getBaseContext(), "Error while initiate payment! Try again Later", Toast.LENGTH_LONG).show();

@@ -3,6 +3,7 @@ package com.gaurav.commerce.http;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.gaurav.commerce.InstaMojoPayment;
 import com.gaurav.commerce.usersession.UserSession;
 import com.google.gson.Gson;
 
@@ -26,14 +27,14 @@ public class CreateOrder extends AsyncTask<String, Void, String> {
     public static final String URL = "https://www.examonline.org/api/sale";
 
 
-    private Context context;
+    private InstaMojoPayment context;
 
     private UserSession userSession;
 
     private  List<Map<String,Object>> cartItems=new ArrayList<>();
 
 
-    public CreateOrder(Context context){
+    public CreateOrder(InstaMojoPayment context){
         this.context=context;
         userSession=new UserSession(context);
         userSession.getCartWishlistItems(CART_ITEMS_KEY).forEach(cart->{
@@ -52,13 +53,6 @@ public class CreateOrder extends AsyncTask<String, Void, String> {
         String result="";
         try {
             OkHttpClient.Builder builder =  new OkHttpClient().newBuilder();
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                builder = new OkHttpClient().newBuilder()
-                        .callTimeout(Duration.ofMinutes(5L))
-                        .connectTimeout(Duration.ofMinutes(5L));
-            }
-
-            MediaType mediaType = MediaType.parse("text/plain");
             RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
                     .addFormDataPart("email", userSession.getUserDetails().get(UserSession.KEY_EMAIL))
                     .addFormDataPart("mobile", userSession.getUserDetails().get(UserSession.KEY_MOBiLE))
@@ -77,5 +71,12 @@ public class CreateOrder extends AsyncTask<String, Void, String> {
             result = null;
         }
         return result;
+    }
+
+
+    protected  void onPostExecute(String result) {
+        UserSession userSession=new UserSession(context);
+        userSession.setOrderId(result);
+        context.initiateSDKPayment(result);
     }
 }
