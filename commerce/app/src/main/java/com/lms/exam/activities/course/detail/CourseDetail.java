@@ -19,6 +19,7 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lms.exam.R;
 import com.lms.exam.activities.course.dto.AllPlayersWrapper;
 import com.lms.exam.activities.course.dto.DtoSubjectInfo;
@@ -41,6 +42,7 @@ public class CourseDetail extends YouTubeBaseActivity implements YouTubePlayer.O
 
     private FullscreenVideoView fullscreenVideoView;
 
+    static FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     private YouTubePlayer mPlayer;
     SeekBar.OnSeekBarChangeListener mVideoSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
@@ -149,9 +151,15 @@ public class CourseDetail extends YouTubeBaseActivity implements YouTubePlayer.O
 
         LayoutInflater li = LayoutInflater.from(getBaseContext());
 
-        new CurriculamRecycleViewHandler(findViewById(R.id.lectures_list), R.layout.recycleview_curriculam,
-                subjectInfo.getLectures(), li, true, fullscreenVideoView, playersWrapper, subjectInfo.getId());
+        //new CurriculamRecycleViewHandler(findViewById(R.id.lectures_list), R.layout.recycleview_curriculam,
+          //      subjectInfo.getLectures(), li, true, fullscreenVideoView, playersWrapper, subjectInfo.getId());
 
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpagercourse);
+        viewPager.setAdapter(new CourseDetailPagerAdapter(this,subjectInfo,fullscreenVideoView, playersWrapper, subjectInfo.getId(),database));
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabcourse);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override

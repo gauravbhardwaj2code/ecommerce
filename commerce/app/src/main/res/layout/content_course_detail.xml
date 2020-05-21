@@ -117,10 +117,28 @@
 
         </androidx.viewpager.widget.ViewPager>
 -->
-        <androidx.recyclerview.widget.RecyclerView
+
+
+
+
+        <!--<androidx.recyclerview.widget.RecyclerView
             android:id="@id/lectures_list"
+            android:visibility="gone"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" />-->
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tabcourse"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:id="@+id/viewpagercourse"
+            android:layout_height="wrap_content"
+            />
 
 
     </LinearLayout>

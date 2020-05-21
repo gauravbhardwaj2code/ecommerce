@@ -19,20 +19,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.lms.exam.PaymentWebView"></activity>
+        <activity android:name="com.lms.exam.PaymentWebView"
+            android:screenOrientation="portrait"></activity>
         <activity android:name="com.lms.exam.InstaMojoPayment" />
         <activity
             android:name="com.lms.exam.activities.CategoryCourse"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_category_course"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.lms.exam.activities.AppWebView"
             android:label="@string/title_activity_web_view"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.lms.exam.activities.course.detail.BuyCourse"
             android:label="@string/title_activity_buy_course"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.lms.exam.activities.course.detail.CourseDetail"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
@@ -40,15 +44,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.lms.exam.activities.HomePageWithBottomNavigation"
-            android:label="@string/title_activity_home_page_with_bottom_navigation" />
+            android:label="@string/title_activity_home_page_with_bottom_navigation"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.lms.exam.activities.VideoLanding"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_video_landing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.lms.exam.activities.MobileNoWithOtp"
             android:label="@string/title_activity_mobile_no_with_otp"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
@@ -81,58 +87,75 @@
         <activity
             android:name="com.lms.exam.Register"
             android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.lms.exam.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.lms.exam.HelpCenter"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.Profile"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.Cart"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.UpdateData"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.lms.exam.ForgotPassword"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.lms.exam.NotificationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.prodcutscategory.Cards"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.IndividualProduct"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.Wishlist"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.OrderDetails"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.OrderPlaced"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.prodcutscategory.Tshirts"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.prodcutscategory.Bags"
+            android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
             android:name="com.lms.exam.WelcomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
+    ChatBoxActivity
 </manifest>

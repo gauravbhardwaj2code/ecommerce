@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
                 String personEmail = acct.getEmail();
                 String personId = acct.getId();
                 Uri personPhoto = acct.getPhotoUrl();
-                String photoUrl = "https://iconorbit.com/icons/256-watermark/2203201617274056402-Rounded%20Book%20Clip%20Art.jpg";
+                String photoUrl = "https://image.shutterstock.com/image-vector/businessman-icon-260nw-561625345.jpg";
                 if (personPhoto != null) {
                     Log.i("Google SignIn", acct.getPhotoUrl().toString());
                     photoUrl = acct.getPhotoUrl().toString();
