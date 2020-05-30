@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.lms.exam.R;
 import com.lms.exam.init.SingleTonClasses;
 import com.lms.exam.messagereader.GauravMessageListener;
+import com.lms.exam.routehandler.security.RouteHandler;
 import com.lms.exam.usersession.UserSession;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -119,9 +120,7 @@ public class MobileNoWithOtp extends AppCompatActivity {
                 if (text != null && text.length() == 4
                         && fourDigitRandomNumber.equalsIgnoreCase(text)) {
                     userSession.setMobileNo(phoneNumber);
-                    Intent loginSuccess = new Intent(MobileNoWithOtp.this, HomePageWithBottomNavigation.class);
-                    startActivity(loginSuccess);
-                    finish();
+                    RouteHandler.launchHomeScreen(MobileNoWithOtp.this);
                 } else {
                     Toast.makeText(MobileNoWithOtp.this, "Invalid Otp Code Please Resend OTP", Toast.LENGTH_LONG).show();
                 }
