@@ -14,6 +14,8 @@ public class DtoLectureContents implements Serializable {
 
     private String free = "false";
 
+    private String downloadable;
+
     public String getTitle() {
         return title;
     }
@@ -52,5 +54,13 @@ public class DtoLectureContents implements Serializable {
 
     public void setFree(String free) {
         this.free = free;
+    }
+
+    public String getDownloadable() {
+        return downloadable;
+    }
+
+    public void setDownloadable(String downloadable) {
+        this.downloadable = downloadable;
     }
 }

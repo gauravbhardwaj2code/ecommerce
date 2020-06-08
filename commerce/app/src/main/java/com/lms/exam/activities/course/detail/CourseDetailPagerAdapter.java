@@ -25,9 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lms.exam.R;
 import com.lms.exam.activities.course.dto.AllPlayersWrapper;
+import com.lms.exam.activities.course.dto.DtoFaculty;
 import com.lms.exam.activities.course.dto.DtoSubjectInfo;
 import com.lms.exam.chatbox.Comment;
 import com.lms.exam.chatbox.CommentAdapter;
+import com.lms.exam.database.util.MockDatabaseUtil;
 import com.lms.exam.fragments.CurriculamRecycleViewHandler;
 import com.lms.exam.usersession.UserSession;
 
@@ -77,7 +79,7 @@ public class CourseDetailPagerAdapter extends PagerAdapter {
             return layout;
         }else{
             ViewGroup layout = (ViewGroup) inflater.inflate(R.layout.activity_post_detail, collection, false);
-            initCommentLayout(layout);
+            initCommentLayout(layout,playersWrapper,subjectInfo);
             collection.addView(layout);
             return layout;
         }
@@ -106,7 +108,7 @@ public class CourseDetailPagerAdapter extends PagerAdapter {
     }
 
 
-    private void initCommentLayout(ViewGroup viewGroup){
+    private void initCommentLayout(ViewGroup viewGroup, AllPlayersWrapper playersWrapper, DtoSubjectInfo subjectInfo){
         ImageView imgPost,imgUserPost,imgCurrentUser;
         TextView txtPostDesc,txtPostDateName,txtPostTitle;
         EditText editTextComment;
@@ -133,22 +135,33 @@ public class CourseDetailPagerAdapter extends PagerAdapter {
                 String comment_content = editTextComment.getText().toString();
                 String uid = "uuid";
                 String uname = userSession.getUserDetails().get(UserSession.KEY_NAME);
+                String email = userSession.getUserDetails().get(UserSession.KEY_EMAIL);
+                DtoFaculty faculty= MockDatabaseUtil.getFacultyById(subjectInfo.getFacultyId());
                 String uimg = userSession.getUserDetails().get(UserSession.KEY_PHOTO)==null?"https://image.shutterstock.com/image-vector/businessman-icon-260nw-561625345.jpg":userSession.getUserDetails().get(UserSession.KEY_PHOTO);
-                Comment comment = new Comment(comment_content,uid,uimg,uname);
+                Comment comment = new Comment(comment_content,uid,uimg,uname,email,faculty.getEmail(),playersWrapper.getCurrentVideoId());
 
-                commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        showMessage("comment added",viewGroup.getContext());
-                        editTextComment.setText("");
-                        btnAddComment.setVisibility(View.VISIBLE);
+                SendCommentToSystem sendCommentToSystem=new SendCommentToSystem(comment);
+                try {
+                    String response = sendCommentToSystem.execute().get();
+                    if (response.equalsIgnoreCase("success")) {
+                        commentReference.setValue(comment).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                showMessage("comment added", viewGroup.getContext());
+                                editTextComment.setText("");
+                                btnAddComment.setVisibility(View.VISIBLE);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                showMessage("fail to add comment : " + e.getMessage(), viewGroup.getContext());
+                            }
+                        });
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        showMessage("fail to add comment : "+e.getMessage(),viewGroup.getContext());
-                    }
-                });
+                }catch (Exception e){
+
+                }
+
 
 
 

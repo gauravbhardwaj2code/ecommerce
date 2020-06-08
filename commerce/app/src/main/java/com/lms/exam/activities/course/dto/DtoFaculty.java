@@ -8,6 +8,8 @@ public class DtoFaculty implements Serializable {
 
     private String name;
 
+    private String email;
+
     private String urlimage;
 
     private String description;
@@ -46,6 +48,14 @@ public class DtoFaculty implements Serializable {
     public DtoFaculty setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override

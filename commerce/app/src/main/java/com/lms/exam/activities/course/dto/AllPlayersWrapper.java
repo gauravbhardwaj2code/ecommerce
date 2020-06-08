@@ -6,6 +6,7 @@ public class AllPlayersWrapper implements PlayersWrapper {
 
     private YouTubePlayer mPlayer;
 
+    private String currentVideoId;
 
     public AllPlayersWrapper() {
 
@@ -19,6 +20,12 @@ public class AllPlayersWrapper implements PlayersWrapper {
     @Override
     public void play(String s) {
         // mPlayer.release();
+        this.currentVideoId=s;
         mPlayer.loadVideo(s);
     }
+
+    public String getCurrentVideoId() {
+        return currentVideoId;
+    }
+
 }

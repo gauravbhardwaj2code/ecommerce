@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
-        android:name="com.lms.exam.init.CustomApplication"
+        android:name=".init.CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -19,40 +19,45 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.lms.exam.PaymentWebView"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name="com.lms.exam.InstaMojoPayment" />
         <activity
-            android:name="com.lms.exam.activities.CategoryCourse"
-            android:screenOrientation="portrait"
+            android:name=".activities.pdfviewer.PdfViewer"
+            android:label="@string/title_activity_pdf_viewer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".PaymentWebView"
+            android:screenOrientation="portrait" />
+        <activity android:name=".InstaMojoPayment" />
+        <activity
+            android:name=".activities.CategoryCourse"
             android:label="@string/title_activity_category_course"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lms.exam.activities.AppWebView"
+            android:name=".activities.AppWebView"
             android:label="@string/title_activity_web_view"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lms.exam.activities.course.detail.BuyCourse"
+            android:name=".activities.course.detail.BuyCourse"
             android:label="@string/title_activity_buy_course"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lms.exam.activities.course.detail.CourseDetail"
+            android:name=".activities.course.detail.CourseDetail"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:label="@string/title_activity_course_detail"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lms.exam.activities.HomePageWithBottomNavigation"
+            android:name=".activities.HomePageWithBottomNavigation"
             android:label="@string/title_activity_home_page_with_bottom_navigation"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.lms.exam.activities.VideoLanding"
-            android:screenOrientation="portrait"
+            android:name=".activities.VideoLanding"
             android:label="@string/title_activity_video_landing"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lms.exam.activities.MobileNoWithOtp"
+            android:name=".activities.MobileNoWithOtp"
             android:label="@string/title_activity_mobile_no_with_otp"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -75,7 +80,7 @@
             android:value="DISABLE" />
 
         <activity
-            android:name="com.lms.exam.SplashActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
@@ -85,76 +90,77 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.lms.exam.Register"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name="com.lms.exam.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteTheme" />
-        <activity
-            android:name="com.lms.exam.LoginActivity"
+            android:name=".Register"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.lms.exam.HelpCenter"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.Profile"
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".HelpCenter"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.Cart"
+            android:name=".Profile"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.UpdateData"
+            android:name=".Cart"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteTheme" />
+        <activity
+            android:name=".UpdateData"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.lms.exam.ForgotPassword"
+            android:name=".ForgotPassword"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.lms.exam.NotificationActivity"
+            android:name=".NotificationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.prodcutscategory.Cards"
+            android:name=".prodcutscategory.Cards"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.IndividualProduct"
+            android:name=".IndividualProduct"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.Wishlist"
+            android:name=".Wishlist"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.OrderDetails"
+            android:name=".OrderDetails"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.OrderPlaced"
+            android:name=".OrderPlaced"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.prodcutscategory.Tshirts"
+            android:name=".prodcutscategory.Tshirts"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.prodcutscategory.Bags"
+            android:name=".prodcutscategory.Bags"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteTheme" />
         <activity
-            android:name="com.lms.exam.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>

@@ -12,11 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.barteksc.pdfviewer.PDFView;
 import com.lms.exam.R;
 import com.lms.exam.activities.course.dto.AllPlayersWrapper;
 import com.lms.exam.activities.course.dto.DtoLectureContents;
 import com.lms.exam.activities.course.dto.DtoLectures;
 import com.lms.exam.activities.course.dto.LectureContentType;
+import com.lms.exam.activities.pdfviewer.PdfViewer;
 import com.lms.exam.fonts.MyTextView_Roboto_Regular;
 
 import java.util.ArrayList;
@@ -119,6 +121,11 @@ class CurriculamChildRecycleView extends RecyclerView.Adapter<CurriculamChildHol
                                 currentLectureView = holder.mView;
                                 currentLectureView.setBackgroundColor(v.getResources().getColor(R.color.grey, null));
                                 mPlayer.play(url);
+                            }else if(type.equals(LectureContentType.PDF) &&
+                                    list.get(position).getDownloadable()!=null && list.get(position).getDownloadable().equalsIgnoreCase("false")){
+                                Intent openPdf = new Intent(v.getContext(), PdfViewer.class);
+                                openPdf.putExtra("url",url);
+                                v.getContext().startActivity(openPdf);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                                 v.getContext().startActivity(browserIntent);
